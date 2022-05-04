@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
+  ];
+
   home = {
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
@@ -17,18 +21,24 @@
     # changes in each release.
     stateVersion = "21.11";
 
-    packages = [
-      pkgs.git
+    packages = with pkgs; [
+      git
+      wget
     ];
   };
 
-  # Let Home Manager install and manage itself.
   programs = {
+    # Let Home Manager install and manage itself.
     home-manager.enable = true;
     git = {
       enable = true;
       userName = "Kevin Fisher";
       userEmail = "kfish610@gmail.com";
+      extraConfig = {
+        pull.ff = "only";
+      };
     };
   };
+
+  services.vscode-server.enable = true;
 }
