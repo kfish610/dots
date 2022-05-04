@@ -23,19 +23,38 @@
 
     packages = with pkgs; [
       git
+      texlive.combined.scheme-full
       wget
+      zsh
     ];
   };
 
   programs = {
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
+
     git = {
       enable = true;
       userName = "Kevin Fisher";
       userEmail = "kfish610@gmail.com";
       extraConfig = {
         pull.ff = "only";
+      };
+    };
+
+    zsh = {
+      enable = true;
+      autocd = true;
+      enableAutosuggestions = true;
+      enableCompletion = true;
+      enableSyntaxHighlighting = true;
+      localVariables = {
+        PROMPT = "%B%(0?.%F{green}.%F{red}%? )> %f%b";
+        RPROMPT = "%B%F{blue}%~%f%b";
+      };
+      oh-my-zsh = {
+        enable = true;
+        plugins = [ "sudo" "history" "dirhistory" ];
       };
     };
   };
