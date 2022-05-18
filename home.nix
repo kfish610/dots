@@ -23,6 +23,7 @@
 
     packages = with pkgs; [
       git
+      gh
       texlive.combined.scheme-full
       wget
       zsh
