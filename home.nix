@@ -55,7 +55,7 @@
       };
       oh-my-zsh = {
         enable = true;
-        plugins = [ "sudo" "history" "dirhistory" ];
+        plugins = [ "sudo" "history" "dirhistory" "gh" ];
       };
     };
   };
