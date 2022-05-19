@@ -24,6 +24,7 @@
     packages = with pkgs; [
       git
       gh
+      nodePackages.npm
       texlive.combined.scheme-full
       wget
       zsh
@@ -55,7 +56,7 @@
       };
       oh-my-zsh = {
         enable = true;
-        plugins = [ "sudo" "history" "dirhistory" "gh" ];
+        plugins = [ "sudo" "history" "dirhistory" "gh" "npm" ];
       };
     };
   };
