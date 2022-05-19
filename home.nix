@@ -24,6 +24,7 @@
     packages = with pkgs; [
       git
       gh
+      nodejs
       nodePackages.npm
       texlive.combined.scheme-full
       wget
