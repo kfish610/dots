@@ -48,15 +48,19 @@
     zsh = {
       enable = true;
       autocd = true;
+      dirHashes = {
+        win = "/mnt/c/Users/kfish";
+      };
       enableAutosuggestions = true;
       enableCompletion = true;
       enableSyntaxHighlighting = true;
-      initExtra = ''
-      hash -d win=/mnt/c/Users/kfish
+      profileExtra = ''
+      npm set prefix /home/kfish/.npm-global
       '';
       localVariables = {
         PROMPT = "%B%(0?.%F{green}.%F{red}%? )> %f%b";
         RPROMPT = "%B%F{blue}%5~%f%b";
+        PATH = "$PATH:/home/kfish/.npm-global/bin";
       };
       oh-my-zsh = {
         enable = true;
