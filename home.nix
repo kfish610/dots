@@ -51,6 +51,9 @@
       enableAutosuggestions = true;
       enableCompletion = true;
       enableSyntaxHighlighting = true;
+      initExtra = ''
+      hash -d win=/mnt/c/Users/kfish
+      '';
       localVariables = {
         PROMPT = "%B%(0?.%F{green}.%F{red}%? )> %f%b";
         RPROMPT = "%B%F{blue}%5~%f%b";
