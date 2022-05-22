@@ -53,7 +53,7 @@
       enableSyntaxHighlighting = true;
       localVariables = {
         PROMPT = "%B%(0?.%F{green}.%F{red}%? )> %f%b";
-        RPROMPT = "%B%F{blue}%~%f%b";
+        RPROMPT = "%B%F{blue}%5~%f%b";
       };
       oh-my-zsh = {
         enable = true;
