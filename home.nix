@@ -24,9 +24,15 @@
     packages = with pkgs; [
       git
       gh
+
+      jdk11
+      sbt
+
       nodejs
       nodePackages.npm
+      
       texlive.combined.scheme-full
+      
       wget
       zsh
     ];
