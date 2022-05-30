@@ -31,6 +31,8 @@
       nodejs
       nodePackages.npm
       
+      stack
+
       texlive.combined.scheme-full
       
       wget
