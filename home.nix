@@ -32,6 +32,7 @@
       nodePackages.npm
       
       stack
+      haskell-language-server
 
       texlive.combined.scheme-full
       
