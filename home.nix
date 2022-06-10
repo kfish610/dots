@@ -22,6 +22,8 @@
     stateVersion = "21.11";
 
     packages = with pkgs; [
+      coq
+
       git
       gh
 
