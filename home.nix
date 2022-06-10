@@ -28,6 +28,8 @@
       jdk11
       sbt
 
+      neofetch
+
       nodejs
       nodePackages.npm
       
