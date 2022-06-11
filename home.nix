@@ -5,47 +5,46 @@
     "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
   ];
 
+  nixpkgs.config.allowUnfree = true;
+
   home = {
-    # Home Manager needs a bit of information about you and the
-    # paths it should manage.
     username = "kfish";
     homeDirectory = "/home/kfish";
 
-    # This value determines the Home Manager release that your
-    # configuration is compatible with. This helps avoid breakage
-    # when a new Home Manager release introduces backwards
-    # incompatible changes.
-    #
-    # You can update Home Manager without changing this value. See
-    # the Home Manager release notes for a list of state version
-    # changes in each release.
-    stateVersion = "21.11";
+    stateVersion = "22.05";
 
     packages = with pkgs; [
-      coq
-
+      # Utilities
       dconf
-
+      google-chrome
+      gnome.nautilus
       git
       gh
+      neofetch
+      wget
+      zsh
+      
+      # Coq
+      coq
 
+      # Java/Scala
       jdk11
       sbt
 
-      neofetch
-
+      # Node
       nodejs
       nodePackages.npm
       
+      # Haskell
       stack
       haskell-language-server
 
+      # LaTeX
       texlive.combined.scheme-full
-      
-      wget
-      zsh
     ];
   };
+
+  services.vscode-server.enable = true;
 
   gtk = {
     enable = true;
@@ -60,7 +59,6 @@
   };
 
   programs = {
-    # Let Home Manager install and manage itself.
     home-manager.enable = true;
 
     git = {
@@ -89,12 +87,13 @@
         RPROMPT = "%B%F{blue}%5~%f%b";
         PATH = "$PATH:/home/kfish/.npm-global/bin";
       };
+      shellAliases = {
+        "link-desktop-files" = "sudo ln -s /home/kfish/.nix-profile/share/applications/*.desktop /usr/share/applications/";
+      };
       oh-my-zsh = {
         enable = true;
         plugins = [ "sudo" "history" "dirhistory" "gh" "npm" ];
       };
     };
   };
-
-  services.vscode-server.enable = true;
 }
