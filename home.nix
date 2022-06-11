@@ -24,6 +24,8 @@
     packages = with pkgs; [
       coq
 
+      dconf
+
       git
       gh
 
@@ -43,6 +45,18 @@
       wget
       zsh
     ];
+  };
+
+  gtk = {
+    enable = true;
+    iconTheme = {
+      package = pkgs.arc-theme;
+      name = "Arc-Dark";
+    };
+    theme = {
+      package = pkgs.arc-theme;
+      name = "Arc-Dark";
+    };
   };
 
   programs = {
