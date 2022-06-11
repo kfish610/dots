@@ -21,6 +21,7 @@
       git
       gh
       neofetch
+      gnumake
       wget
       zsh
       
