@@ -68,6 +68,7 @@
       userEmail = "kfish610@gmail.com";
       extraConfig = {
         pull.ff = "only";
+        core.autocrlf = "false";
       };
     };
 
