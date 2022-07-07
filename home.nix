@@ -16,6 +16,7 @@
     packages = with pkgs; [
       # Utilities
       dconf
+      dig
       google-chrome
       gnome.nautilus
       git
