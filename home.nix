@@ -23,6 +23,7 @@
       git
       gh
       neofetch
+      nixos-option
       gnumake
       wget
       zsh
