@@ -17,6 +17,7 @@
       # Utilities
       avahi
       dconf
+      dig
       google-chrome
       gnome.nautilus
       git
