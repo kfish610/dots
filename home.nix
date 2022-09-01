@@ -15,6 +15,7 @@
 
     packages = with pkgs; [
       # Utilities
+      avahi
       dconf
       google-chrome
       gnome.nautilus
