@@ -40,7 +40,15 @@
       nodePackages.npm
 
       # Python
-      python39
+      (let 
+        pythonDatasciPackages = python-packages: with python-packages; [
+          pandas
+          pip
+          ipykernel
+        ];
+        pythonWithPackages = python310.withPackages pythonDatasciPackages;
+      in
+      pythonWithPackages)
       
       # Haskell
       stack
