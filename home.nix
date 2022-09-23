@@ -38,6 +38,9 @@
       # Node
       nodejs
       nodePackages.npm
+
+      # Python
+      python39
       
       # Haskell
       stack
