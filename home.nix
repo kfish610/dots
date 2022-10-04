@@ -15,6 +15,7 @@
 
     packages = with pkgs; [
       # Utilities
+      android-tools
       avahi
       dconf
       dig
