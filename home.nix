@@ -46,6 +46,18 @@
       nodejs
       nodePackages.npm
 
+      # Python
+      (let 
+        pythonDatasciPackages = python-packages: with python-packages; [
+          pandas
+          pip
+          ipykernel
+        ];
+        pythonWithPackages = python310.withPackages pythonDatasciPackages;
+      in
+      pythonWithPackages)
+      
+
       # LaTeX
       texlive.combined.scheme-full
     ];
