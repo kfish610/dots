@@ -30,6 +30,13 @@
       
       # Coq
       coq
+      
+      # Dart
+      flutter
+
+      # Haskell
+      stack
+      haskell-language-server
 
       # Java/Scala
       jdk11
@@ -38,10 +45,6 @@
       # Node
       nodejs
       nodePackages.npm
-      
-      # Haskell
-      stack
-      haskell-language-server
 
       # LaTeX
       texlive.combined.scheme-full
