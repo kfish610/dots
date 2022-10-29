@@ -54,6 +54,7 @@
           pandas
           pip
           ipykernel
+          beautifulsoup4
         ];
         pythonWithPackages = python310.withPackages pythonDatasciPackages;
       in
@@ -84,6 +85,7 @@
 
     git = {
       enable = true;
+      lfs.enable = true;
       userName = "Kevin Fisher";
       userEmail = "kfish610@gmail.com";
       extraConfig = {
