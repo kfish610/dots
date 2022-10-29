@@ -51,9 +51,12 @@
       # Python
       (let 
         pythonDatasciPackages = python-packages: with python-packages; [
-          pandas
           pip
           ipykernel
+          pandas
+          matplotlib
+          seaborn
+          requests
           beautifulsoup4
         ];
         pythonWithPackages = python310.withPackages pythonDatasciPackages;
