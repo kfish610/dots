@@ -49,7 +49,7 @@
       nodePackages.npm
 
       # Python
-      (let 
+      (let
         pythonDatasciPackages = python-packages: with python-packages; [
           pip
           ipykernel
@@ -58,10 +58,10 @@
           seaborn
           requests
           beautifulsoup4
+          kaggle
         ];
         pythonWithPackages = python310.withPackages pythonDatasciPackages;
-      in
-      pythonWithPackages)
+      in pythonWithPackages)
       
 
       # LaTeX
