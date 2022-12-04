@@ -59,6 +59,8 @@
           requests
           beautifulsoup4
           kaggle
+          selenium
+          statsmodels
         ];
         pythonWithPackages = python310.withPackages pythonDatasciPackages;
       in pythonWithPackages)
