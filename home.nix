@@ -61,6 +61,9 @@
           kaggle
           selenium
           statsmodels
+          svglib
+          reportlab
+          colorama
         ];
         pythonWithPackages = python310.withPackages pythonDatasciPackages;
       in pythonWithPackages)
