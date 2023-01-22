@@ -44,6 +44,9 @@
       jdk11
       sbt
 
+      # Lean
+      elan
+
       # Node
       nodejs
       nodePackages.npm
