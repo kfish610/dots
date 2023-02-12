@@ -22,11 +22,13 @@
       dig
       google-chrome
       gnome.nautilus
+      gnumake
       git
       gh
+      inetutils
       neofetch
       nixos-option
-      gnumake
+      tcptraceroute
       wget
       zsh
       
