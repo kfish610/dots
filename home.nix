@@ -26,6 +26,7 @@
       gh
       neofetch
       nixos-option
+      ns-3
       gnumake
       wget
       zsh
