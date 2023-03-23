@@ -123,7 +123,7 @@
       localVariables = {
         PROMPT = "%B%(0?.%F{green}.%F{red}%? )> %f%b";
         RPROMPT = "%B%F{blue}%5~%f%b";
-        PATH = "$PATH:/home/kfish/.npm-global/bin";
+        PATH = "$PATH:/home/kfish/.npm-global/bin:/home/kfish/.cargo/bin";
       };
       shellAliases = {
         "link-desktop-files" = "sudo ln -s /home/kfish/.nix-profile/share/applications/*.desktop /usr/share/applications/";
