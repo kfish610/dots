@@ -104,6 +104,7 @@
       extraConfig = {
         pull.ff = "only";
         core.autocrlf = "false";
+        init.defaultBranch = "main";
       };
     };
 
