@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports = [
-    "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
-  ];
-
   nixpkgs.config.allowUnfree = true;
 
   home = {
@@ -69,6 +65,7 @@
           svglib
           reportlab
           colorama
+          notebook
         ];
         pythonWithPackages = python310.withPackages pythonDatasciPackages;
       in pythonWithPackages)
@@ -78,8 +75,6 @@
       texlive.combined.scheme-full
     ];
   };
-
-  services.vscode-server.enable = true;
 
   gtk = {
     enable = true;
