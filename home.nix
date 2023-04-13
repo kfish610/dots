@@ -24,6 +24,7 @@
       inetutils
       neofetch
       nixos-option
+      pandoc
       tcptraceroute
       wget
       zsh
