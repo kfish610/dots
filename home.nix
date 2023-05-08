@@ -62,6 +62,7 @@
           beautifulsoup4
           kaggle
           selenium
+          scikit-learn
           statsmodels
           svglib
           reportlab
