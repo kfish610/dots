@@ -26,6 +26,7 @@
       nixos-option
       pandoc
       tcptraceroute
+      xidel
       wget
       zsh
       
