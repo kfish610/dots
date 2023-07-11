@@ -16,6 +16,7 @@
       avahi
       dconf
       dig
+      expect
       google-chrome
       gnome.nautilus
       gnumake
@@ -121,7 +122,7 @@
       localVariables = {
         PROMPT = "%B%(0?.%F{green}.%F{red}%? )> %f%b";
         RPROMPT = "%B%F{blue}%5~%f%b";
-        PATH = "$PATH:/home/kfish/.npm-global/bin:/home/kfish/.cargo/bin";
+        PATH = "$PATH:/home/kfish/.npm-global/bin:/home/kfish/.cargo/bin:/bin";
       };
       shellAliases = {
         "link-desktop-files" = "sudo ln -s /home/kfish/.nix-profile/share/applications/*.desktop /usr/share/applications/";
