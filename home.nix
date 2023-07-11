@@ -26,6 +26,7 @@
       neofetch
       nixos-option
       pandoc
+      sshpass
       tcptraceroute
       xidel
       wget
