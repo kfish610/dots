@@ -7,7 +7,7 @@
     username = "kfish";
     homeDirectory = "/home/kfish";
 
-    stateVersion = "22.05";
+    stateVersion = "22.11";
 
     packages = with pkgs; [
       # Utilities
@@ -114,7 +114,7 @@
       };
       enableAutosuggestions = true;
       enableCompletion = true;
-      enableSyntaxHighlighting = true;
+      syntaxHighlighting.enable = true;
       profileExtra = ''
       npm set prefix /home/kfish/.npm-global
       '';
