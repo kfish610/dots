@@ -32,6 +32,9 @@
       wget
       zsh
       
+      # C
+      gcc
+
       # Coq
       coq
       
