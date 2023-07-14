@@ -59,6 +59,7 @@
       # Python
       (let
         pythonDatasciPackages = python-packages: with python-packages; [
+          pybluez
           pip
           ipykernel
           pandas
