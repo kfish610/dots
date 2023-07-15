@@ -23,6 +23,7 @@
       git
       gh
       inetutils
+      imagemagick
       neofetch
       nixos-option
       pandoc
