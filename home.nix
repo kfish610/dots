@@ -33,6 +33,7 @@
       sshpass
       tcptraceroute
       ubootTools
+      unzip
       xidel
       wget
       zsh
