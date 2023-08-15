@@ -17,6 +17,8 @@
       dconf
       dig
       expect
+      gcc
+      gcc-arm-embedded-6
       google-chrome
       gnome.nautilus
       gnumake
@@ -25,10 +27,12 @@
       inetutils
       imagemagick
       neofetch
+      nix-index
       nixos-option
       pandoc
       sshpass
       tcptraceroute
+      ubootTools
       xidel
       wget
       zsh
