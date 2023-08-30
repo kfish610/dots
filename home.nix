@@ -115,6 +115,8 @@
       };
 
       ".spacemacs".source = ./spacemacs.el;
+
+      ".p10k.zsh".source = ./.p10k.zsh;
     };
   };
 
@@ -158,20 +160,32 @@
       enableAutosuggestions = true;
       enableCompletion = true;
       syntaxHighlighting.enable = true;
-      profileExtra = ''
+      initExtra = ''
         npm set prefix /home/kfish/.npm-global
+        source /home/kfish/.p10k.zsh
       '';
       localVariables = {
-        PROMPT = "%B%(0?.%F{green}.%F{red}%? )> %f%b";
-        RPROMPT = "%B%F{blue}%5~%f%b";
         PATH = "$PATH:/home/kfish/.npm-global/bin:/home/kfish/.cargo/bin:/bin";
       };
       shellAliases = {
         "link-desktop-files" = "sudo ln -s /home/kfish/.nix-profile/share/applications/*.desktop /usr/share/applications/";
       };
+      antidote = {
+        enable = true;
+        plugins = [
+          "romkatv/zsh-bench kind:path"
+          "romkatv/powerlevel10k"
+        ];
+      };
       oh-my-zsh = {
         enable = true;
-        plugins = [ "sudo" "history" "dirhistory" "gh" "npm" ];
+        plugins = [
+          "sudo" 
+          "history" 
+          "dirhistory" 
+          "gh" 
+          "npm" 
+        ];
       };
     };
   };
