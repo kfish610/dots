@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   nixpkgs.config.allowUnfree = true;
@@ -27,8 +27,10 @@
       inetutils
       imagemagick
       neofetch
+      nil
       nix-index
       nixos-option
+      nixpkgs-fmt
       pandoc
       sshpass
       tcptraceroute
@@ -37,18 +39,25 @@
       xidel
       wget
       zsh
-      
+
       # Agda
-      agda
-      
+      (agda.withPackages (p: with p; [
+        standard-library
+      ]))
+
       # C
       gcc
 
       # Coq
       coq
-      
+
       # Dart
       flutter
+
+      # Fonts
+      (nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro" ]; })
+      source-code-pro
+      dejavu_fonts
 
       # Haskell
       stack
@@ -66,33 +75,50 @@
       nodePackages.npm
 
       # Python
-      (let
-        pythonDatasciPackages = python-packages: with python-packages; [
-          pybluez
-          pip
-          ipykernel
-          pandas
-          matplotlib
-          seaborn
-          requests
-          beautifulsoup4
-          kaggle
-          selenium
-          scikit-learn
-          statsmodels
-          svglib
-          reportlab
-          colorama
-          notebook
-        ];
-        pythonWithPackages = python310.withPackages pythonDatasciPackages;
-      in pythonWithPackages)
-      
+      (
+        let
+          pythonDatasciPackages = python-packages: with python-packages; [
+            pybluez
+            pip
+            ipykernel
+            pandas
+            matplotlib
+            seaborn
+            requests
+            beautifulsoup4
+            kaggle
+            selenium
+            scikit-learn
+            statsmodels
+            svglib
+            reportlab
+            colorama
+            notebook
+          ];
+          pythonWithPackages = python310.withPackages pythonDatasciPackages;
+        in
+        pythonWithPackages
+      )
+
 
       # LaTeX
       texlive.combined.scheme-full
     ];
+
+    file = {
+      ".emacs.d" = {
+        source = builtins.fetchGit {
+          url = "https://github.com/syl20bnr/spacemacs";
+          ref = "develop";
+        };
+        recursive = true;
+      };
+
+      ".spacemacs".source = ./spacemacs.el;
+    };
   };
+
+  fonts.fontconfig.enable = true;
 
   gtk = {
     enable = true;
@@ -108,6 +134,8 @@
 
   programs = {
     home-manager.enable = true;
+
+    emacs.enable = true;
 
     git = {
       enable = true;
@@ -131,7 +159,7 @@
       enableCompletion = true;
       syntaxHighlighting.enable = true;
       profileExtra = ''
-      npm set prefix /home/kfish/.npm-global
+        npm set prefix /home/kfish/.npm-global
       '';
       localVariables = {
         PROMPT = "%B%(0?.%F{green}.%F{red}%? )> %f%b";
