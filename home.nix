@@ -14,6 +14,7 @@
       android-tools
       android-studio
       avahi
+      cmake
       dconf
       dig
       expect
