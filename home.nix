@@ -38,6 +38,9 @@
       wget
       zsh
       
+      # Agda
+      agda
+      
       # C
       gcc
 
