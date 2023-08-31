@@ -138,7 +138,10 @@
   programs = {
     home-manager.enable = true;
 
-    emacs.enable = true;
+    emacs = {
+      enable = true;
+      package = pkgs.emacs-gtk;
+    };
 
     git = {
       enable = true;
