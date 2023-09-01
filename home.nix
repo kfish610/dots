@@ -107,16 +107,6 @@
     ];
 
     file = {
-      ".emacs.d" = {
-        source = builtins.fetchGit {
-          url = "https://github.com/syl20bnr/spacemacs";
-          ref = "develop";
-        };
-        recursive = true;
-      };
-
-      ".spacemacs".source = ./spacemacs.el;
-
       ".p10k.zsh".source = ./.p10k.zsh;
     };
   };
@@ -138,9 +128,10 @@
   programs = {
     home-manager.enable = true;
 
-    emacs = {
+    direnv = {
       enable = true;
-      package = pkgs.emacs-gtk;
+      enableZshIntegration = true;  
+      nix-direnv.enable = true;
     };
 
     git = {
