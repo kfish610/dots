@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   home.packages = [ pkgs.polkit_gnome ];
