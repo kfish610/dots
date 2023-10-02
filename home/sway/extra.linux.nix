@@ -1,6 +1,8 @@
 { ... }:
 
 {
+  home.packages = [ pkgs.polkit_gnome ];
+
   services.swayidle = {
     enable = true;
     events = [
