@@ -28,8 +28,6 @@
 
   home.packages = with pkgs; [
     expect
-    git
-    gh
     imagemagick
     neofetch
     pandoc

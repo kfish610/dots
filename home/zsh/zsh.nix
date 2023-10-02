@@ -10,6 +10,7 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     initExtra = ''
+      unsetopt EXTENDED_GLOB
       npm set prefix ~/.npm-global
       if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
         source ~/.p10k.zsh
@@ -17,13 +18,12 @@
         exec bash
       fi
     '';
-    localVariables = {
+    sessionVariables = {
       PATH = "$PATH:~/.npm-global/bin:~/.cargo/bin";
     };
     antidote = {
       enable = true;
       plugins = [
-        "romkatv/zsh-bench kind:path"
         "romkatv/powerlevel10k"
       ];
     };
