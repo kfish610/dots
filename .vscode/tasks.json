@@ -4,9 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "home-manager switch",
+            "label": "nixos-rebuild switch",
             "type": "shell",
-            "command": "home-manager switch",
+            "command": "sudo nixos-rebuild switch",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
