@@ -23,11 +23,11 @@
         init.defaultBranch = "main";
       };
     };
-    gh.enable = true;
   };
 
   home.packages = with pkgs; [
     expect
+    gh
     imagemagick
     neofetch
     pandoc
