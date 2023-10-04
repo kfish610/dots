@@ -4,6 +4,8 @@
 {
   networking.hostName = "klaptop";
 
+  virtualisation.docker.enable = true;
+
   # To mirror installer/scan/not-detected.nix
   hardware.enableRedistributableFirmware = true;
 
