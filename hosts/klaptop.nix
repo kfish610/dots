@@ -5,6 +5,7 @@
   networking.hostName = "klaptop";
 
   virtualisation.docker.enable = true;
+  users.groups.docker.members = [ "kfish" ];
 
   # To mirror installer/scan/not-detected.nix
   hardware.enableRedistributableFirmware = true;
