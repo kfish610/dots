@@ -46,7 +46,7 @@
     # Python
     (
       let
-        pythonDatasciPackages = python-packages: with python-packages; [
+        pythonDatasciPackages = ps: with ps; [
           pybluez
           pip
           ipykernel

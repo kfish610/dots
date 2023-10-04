@@ -5,5 +5,6 @@
     musescore
     vscode
     gparted
+    docker
   ];
 }
