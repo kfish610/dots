@@ -6,4 +6,8 @@
     vscode
     gparted
   ];
+
+  programs.discocss = {
+    enable = true;
+  };
 }
