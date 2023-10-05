@@ -44,29 +44,6 @@
     nodePackages.npm
 
     # Python
-    (
-      let
-        pythonDatasciPackages = ps: with ps; [
-          pybluez
-          pip
-          ipykernel
-          pandas
-          matplotlib
-          seaborn
-          requests
-          beautifulsoup4
-          kaggle
-          selenium
-          scikit-learn
-          statsmodels
-          svglib
-          reportlab
-          colorama
-          notebook
-        ];
-        pythonWithPackages = python310.withPackages pythonDatasciPackages;
-      in
-      pythonWithPackages
-    )
+    virtualenv
   ];
 }
