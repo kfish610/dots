@@ -1,7 +1,8 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   home.file.".p10k.zsh".source = ./.p10k.zsh;
+  home.packages = with pkgs; [ pywal ];
 
   programs.zsh = {
     enable = true;
@@ -9,14 +10,17 @@
     enableAutosuggestions = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
-    initExtra = ''
-      unsetopt EXTENDED_GLOB
-      npm set prefix ~/.npm-global
+    initExtraFirst = ''
       if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
         source ~/.p10k.zsh
       else
         exec bash
       fi
+    '';
+    initExtra = ''
+      unsetopt EXTENDED_GLOB
+      npm set prefix ~/.npm-global
+      (cat ~/.cache/wal/sequences &)
     '';
     sessionVariables = {
       PATH = "$PATH:~/.npm-global/bin:~/.cargo/bin";

@@ -5,9 +5,10 @@
     musescore
     vscode
     gparted
+    discord
   ];
 
-  programs.discocss = {
-    enable = true;
-  };
+  # programs.discocss = {
+  #   enable = true;
+  # };
 }
