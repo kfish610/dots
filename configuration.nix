@@ -23,6 +23,8 @@
   hardware.logitech.wireless.enable = true;
   hardware.logitech.wireless.enableGraphical = true;
 
+  security.pki.certificateFiles = [ ./ucsd-ca.cer ];
+
   # Required for sway
   security.polkit.enable = true;
 
@@ -57,13 +59,16 @@
   programs.sway.enable = true;
   programs.sway.package = null;
 
+  programs.wireshark.enable = true;
+  programs.wireshark.package = pkgs.wireshark;
+
   # Set up user with zsh
   programs.zsh.enable = true;
   users.users.kfish = {
     isNormalUser = true;
     uid = 1000;
     home = "/home/kfish";
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "wheel" "wireshark" ];
     shell = pkgs.zsh;
   };
 
