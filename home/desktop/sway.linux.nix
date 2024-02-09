@@ -23,6 +23,7 @@
         { command = "${pkgs.swaylock}/bin/swaylock"; }
       ];
       terminal = "${pkgs.kitty}/bin/kitty";
+      # extraConfig = "blur enable";
     };
   };
 }

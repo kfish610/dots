@@ -3,8 +3,6 @@
 {
   nixpkgs.config.allowUnfree = true;
 
-  fonts.fontconfig.enable = true;
-
   programs = {
     direnv = {
       enable = true;
@@ -37,11 +35,6 @@
     # Applications
     google-chrome
     gnome.nautilus
-
-    # Fonts
-    dejavu_fonts
-    (nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro" ]; })
-    source-code-pro
 
     # Networking
     avahi

@@ -21,6 +21,7 @@
       unsetopt EXTENDED_GLOB
       npm set prefix ~/.npm-global
       (cat ~/.cache/wal/sequences &)
+      eval "$(micromamba shell hook --shell=zsh)"
     '';
     sessionVariables = {
       PATH = "$PATH:~/.npm-global/bin:~/.cargo/bin";

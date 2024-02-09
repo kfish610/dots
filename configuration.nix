@@ -11,21 +11,13 @@
     '';
   };
 
-  # Use iwd for networking
-  networking.wireless.iwd.enable = true;
-
   # Localization
   time.timeZone = "America/Los_Angeles";
+  time.hardwareClockInLocalTime = true;
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "us";
 
-  # Logitech/Solaar
-  hardware.logitech.wireless.enable = true;
-  hardware.logitech.wireless.enableGraphical = true;
-
-  security.pki.certificateFiles = [ ./ucsd-ca.cer ];
-
-  # Required for sway
+  # Required for sway. Also generally useful
   security.polkit.enable = true;
 
   # Use Pipewire for audio  
@@ -41,26 +33,9 @@
   services.printing.enable = true;
   services.openssh.enable = true;
 
-  # Autologin with greetd
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = "${pkgs.greetd.greetd}/bin/agreety --cmd sway";
-      };
-      initial_session = {
-        user = "kfish";
-        command = "sway";
-      };
-    };
-  };
-
-  # Enable sway and let home-manager manager it
-  programs.sway.enable = true;
-  programs.sway.package = null;
-
-  programs.wireshark.enable = true;
-  programs.wireshark.package = pkgs.wireshark;
+  # Needed for lots of compatibility things!
+  # Namely conda/mamba
+  programs.nix-ld.enable = true;
 
   # Set up user with zsh
   programs.zsh.enable = true;

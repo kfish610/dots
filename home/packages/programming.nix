@@ -44,6 +44,7 @@
     nodePackages.npm
 
     # Python
-    virtualenv
+    micromamba
+    python312
   ];
 }
