@@ -5,6 +5,8 @@
     nixos-wsl.nixosModules.wsl
   ];
 
+  networking.hostName = "wsl";
+
   wsl = {
     enable = true;
     wslConf.automount.root = "/mnt";
