@@ -14,6 +14,4 @@
     startMenuLaunchers = true;
     nativeSystemd = true;
   };
-
-  system.stateVersion = "22.11";
 }
