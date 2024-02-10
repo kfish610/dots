@@ -2,8 +2,8 @@
 
 {
   home.file.".p10k.zsh".source = ./.p10k.zsh;
-  home.packages = with pkgs; [ pywal ];
 
+  programs.pywal.enable = true;
   programs.zsh = {
     enable = true;
     autocd = true;
