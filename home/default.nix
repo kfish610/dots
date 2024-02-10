@@ -41,7 +41,7 @@ in
     username = "kfish";
     homeDirectory = "/home/kfish";
 
-    stateVersion = "22.11";
+    stateVersion = "23.11";
   };
 
   programs.home-manager.enable = true;
