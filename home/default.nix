@@ -1,5 +1,7 @@
 { lib, systemInfo, ... }:
 
+# Inspired by infinisil's configuration 
+# https://github.com/infinisil/system/blob/master/config/new-modules/default.nix
 let
   # Take the flat directory from readDir, and dig further into directories
   readDirRec = path:

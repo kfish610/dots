@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration";
+  description = "kfish610's NixOS configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -14,7 +14,7 @@
       klaptop = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./modules/base.nix
           ./modules/klaptop.nix
           home-manager.nixosModules.home-manager # Not a function call!
           {
@@ -31,7 +31,7 @@
         system = "x86_64-linux";
         specialArgs.nixos-wsl = nixos-wsl;
         modules = [
-          ./configuration.nix
+          ./modules/base.nix
           ./modules/wsl.nix
           home-manager.nixosModules.home-manager # Not a function call!
           {
