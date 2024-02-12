@@ -8,7 +8,7 @@
     vscode
     gparted
     discord
-    zoom
+    zoom-us
 
     # Fonts
     dejavu_fonts
