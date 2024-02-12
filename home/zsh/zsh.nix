@@ -3,7 +3,6 @@
 {
   home.file.".p10k.zsh".source = ./.p10k.zsh;
 
-  programs.pywal.enable = true;
   programs.zsh = {
     enable = true;
     autocd = true;
@@ -20,7 +19,6 @@
     initExtra = ''
       unsetopt EXTENDED_GLOB
       npm set prefix ~/.npm-global
-      (cat ~/.cache/wal/sequences &)
       eval "$(micromamba shell hook --shell=zsh)"
     '';
     sessionVariables = {
