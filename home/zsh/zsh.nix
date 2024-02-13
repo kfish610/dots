@@ -28,14 +28,8 @@
       fi
     '';
     initExtra = ''
-      # Turn of extended glob, it is mostly useless and clashes with flakes
+      # Turn off extended glob, it is mostly useless and clashes with flakes
       unsetopt EXTENDED_GLOB
-
-      # Set NPM global in the user directory so it doesn't clash with Nix
-      npm set prefix ~/.npm-global
-
-      # Set up micromamba
-      eval "$(micromamba shell hook --shell=zsh)"
     '';
   };
 }
