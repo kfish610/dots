@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, lib, ... }:
 
 {
   gtk = rec {
@@ -24,6 +24,13 @@
         inner = 10;
         outer = 7;
       };
+      keybindings =
+        let
+          modifier = config.wayland.windowManager.sway.config.modifier;
+        in
+        lib.mkOptionDefault {
+          "${modifier}+Shift+s" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
+        };
       output = {
         "*".bg = "~/.config/background/bg.png fill";
       };
