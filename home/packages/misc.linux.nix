@@ -8,6 +8,7 @@
     vscode
     gparted
     discord
+    slack
     zoom-us
 
     # Fonts
