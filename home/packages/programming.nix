@@ -15,6 +15,9 @@
     gnumake
     cmake
 
+    # Clojure
+    clojure
+
     # Coq
     coq
 

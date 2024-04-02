@@ -11,6 +11,7 @@
     syntaxHighlighting.enable = true;
     sessionVariables = {
       PATH = "$PATH:~/.npm-global/bin:~/.cargo/bin";
+      WLR_DRM_NO_MODIFIERS = 1;
     };
     antidote = {
       enable = true;

@@ -4,7 +4,7 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    musescore
+    # musescore
     vscode
     gparted
     discord
