@@ -17,6 +17,7 @@
 
     # Clojure
     clojure
+    leiningen
 
     # Coq
     coq
