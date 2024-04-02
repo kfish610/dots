@@ -24,6 +24,9 @@
     # Dart
     flutter
 
+    # Exercism
+    exercism
+
     # Haskell
     stack
     haskell-language-server
