@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   home.file.".p10k.zsh".source = ./.p10k.zsh;
@@ -12,6 +12,7 @@
     sessionVariables = {
       PATH = "$PATH:~/.npm-global/bin:~/.cargo/bin";
       WLR_DRM_NO_MODIFIERS = 1;
+      CHROME_EXECUTABLE = "${pkgs.google-chrome}/bin/google-chrome-stable";
     };
     antidote = {
       enable = true;
