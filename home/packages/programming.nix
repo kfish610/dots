@@ -18,6 +18,7 @@
     # Clojure
     clojure
     leiningen
+    babashka
 
     # Coq
     coq
