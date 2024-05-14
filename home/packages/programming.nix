@@ -23,6 +23,7 @@
     # Coq
     coq
     coqPackages.vscoq-language-server
+    coqPackages.coq-lsp
 
     # Dart
     flutter
