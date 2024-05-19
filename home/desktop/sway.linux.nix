@@ -30,6 +30,8 @@
         in
         lib.mkOptionDefault {
           "${modifier}+Shift+s" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
+          "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl -e set +10%";
+          "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl -e set 10%-";
         };
       output = {
         "*".bg = "~/.config/background/bg.png fill";

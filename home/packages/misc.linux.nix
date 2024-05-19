@@ -4,11 +4,13 @@
   fonts.fontconfig.enable = true;
 
   home.packages = with pkgs; [
-    # musescore
-    vscode
-    gparted
+    brightnessctl
     discord
+    gparted
+    # musescore
     slack
+    sway-contrib.grimshot
+    vscode
     zoom-us
 
     # Fonts
