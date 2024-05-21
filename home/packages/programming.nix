@@ -14,6 +14,7 @@
     # C/C++
     gnumake
     cmake
+    gcc
 
     # Clojure
     clojure
