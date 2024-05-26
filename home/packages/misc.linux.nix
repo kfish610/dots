@@ -8,6 +8,7 @@
     discord
     gparted
     # musescore
+    openconnect
     slack
     sway-contrib.grimshot
     vscode
