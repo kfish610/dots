@@ -21,7 +21,27 @@
         init.defaultBranch = "main";
       };
     };
+
+    ssh = {
+      enable = true;
+      matchBlocks = {
+        "unity" = {
+          hostname = "unity.rc.umass.edu";
+          user = "kfisher_access-ci_org";
+        };
+        "south" = {
+          hostname = "south.ucsd.edu";
+          user = "ubuntu";
+          identityFile = "~/.ssh/ucsd";
+          identitiesOnly = true;
+          forwardAgent = true;
+          port = 17400;
+        };
+      };
+    };
   };
+
+  services.ssh-agent.enable = true;
 
   home.packages = with pkgs; [
     expect
