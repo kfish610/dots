@@ -28,6 +28,7 @@
         "unity" = {
           hostname = "unity.rc.umass.edu";
           user = "kfisher_access-ci_org";
+          forwardAgent = true;
         };
         "south" = {
           hostname = "south.ucsd.edu";
