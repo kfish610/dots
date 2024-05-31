@@ -1,6 +1,10 @@
 { pkgs, config, lib, ... }:
 
 {
+  home.packages = [
+    pkgs.pavucontrol
+  ];
+
   gtk = rec {
     enable = true;
     theme = {
@@ -11,6 +15,11 @@
   };
 
   home.file.".config/background/bg.png".source = ./CelesteCh8.png;
+
+  services = {
+    avizo.enable = true;
+    mako.enable = true;
+  };
 
   wayland.windowManager.sway = {
     enable = true;
