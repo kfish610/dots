@@ -7,6 +7,9 @@
   # Use iwd for networking
   networking.wireless.iwd.enable = true;
 
+  # Fix mute LED
+  boot.extraModprobeConfig = "options snd-hda-intel model=mute-led-gpio";
+
   # security.pki.certificateFiles = [ ./ucsd-ca.cer ];
 
   # Bluetooth (obviously)
