@@ -3,6 +3,7 @@
 {
   home.packages = [
     pkgs.pavucontrol
+    pkgs.brightnessctl
   ];
 
   gtk = rec {
@@ -39,8 +40,14 @@
         in
         lib.mkOptionDefault {
           "${modifier}+Shift+s" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
-          "XF86MonBrightnessUp" = "exec ${pkgs.brightnessctl}/bin/brightnessctl -e set +10%";
-          "XF86MonBrightnessDown" = "exec ${pkgs.brightnessctl}/bin/brightnessctl -e set 10%-";
+
+          "XF86MonBrightnessUp" = "exec ${pkgs.avizo}/bin/lightctl up";
+          "XF86MonBrightnessDown" = "exec ${pkgs.avizo}/bin/lightctl down";
+
+          "XF86AudioRaiseVolume" = "exec ${pkgs.avizo}/bin/volumectl -u up";
+          "XF86AudioLowerVolume" = "exec ${pkgs.avizo}/bin/volumectl -u down";
+          "XF86AudioMute" = "exec ${pkgs.avizo}/bin/volumectl toggle-mute";
+          "XF86AudioMicMute" = "exec ${pkgs.avizo}/bin/volumectl -m toggle-mute";
         };
       output = {
         "*".bg = "~/.config/background/bg.png fill";
