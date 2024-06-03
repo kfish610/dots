@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   home.packages = [
@@ -11,10 +11,11 @@
   gtk = rec {
     enable = true;
     theme = {
-      package = pkgs.arc-theme;
-      name = "Arc-Dark";
+      package = pkgs.nordic;
+      name = "Nordic";
     };
     iconTheme = theme;
+    cursorTheme = theme;
   };
 
   systemd = {
@@ -76,7 +77,7 @@
       settings = {
         background_opacity = "0.8";
         background = "#101010";
-        font_family = "FiraCode Nerd Font Mono";
+        font_family = config.constants.sway.code_font;
       };
     };
   };

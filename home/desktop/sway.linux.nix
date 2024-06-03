@@ -15,7 +15,7 @@
       bars = [ ];
       defaultWorkspace = "workspace number 1";
       fonts = {
-        names = [ "FiraMono Nerd Font Mono" ];
+        names = [ config.constants.sway.disp_font ];
         size = 10.0;
       };
       gaps = {
@@ -27,7 +27,8 @@
           modifier = config.wayland.windowManager.sway.config.modifier;
         in
         lib.mkOptionDefault {
-          "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will shut down the computer.' -b 'Yes, exit sway' 'systemctl poweroff'";
+          "${modifier}+Shift+e" = "exec ${config.constants.sway.exit_cmd}";
+          "${modifier}+Shift+r" = "exec ${config.constants.sway.restart_cmd}";
 
           "${modifier}+Shift+s" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
 
