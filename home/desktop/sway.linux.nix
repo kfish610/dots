@@ -14,6 +14,10 @@
       };
       bars = [ ];
       defaultWorkspace = "workspace number 1";
+      fonts = {
+        names = [ "FiraMono Nerd Font Mono" ];
+        size = 10.0;
+      };
       gaps = {
         inner = 10;
         outer = 7;

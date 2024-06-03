@@ -11,11 +11,11 @@
         {
           location = "top";
 
-          height = 26;
-          spacing = 10;
-          margin = 15;
+          height = 32;
+          spacing = 12;
+          margin = 16;
 
-          font = "Adobe Helvetica:pixelsize=12";
+          font = "FiraMono Nerd Font Mono:pixelsize=16";
           background = "00000066";
 
           left = [
@@ -26,16 +26,14 @@
                   let
                     workspace = n: {
                       name = n;
-                      value = {
+                      value = let s = { text = if n == "10" then "0" else n; margin = 6; }; in {
                         map = {
-                          default.string = {
-                            text = if n == "10" then "0" else n;
-                            margin = 5;
-                          };
+                          default.string = s;
                           conditions = {
-                            focused.string = {
-                              text = if n == "10" then "0" else n;
-                              margin = 5;
+                            empty.string = s // {
+                              foreground = "666666ff";
+                            };
+                            focused.string = s // {
                               deco = {
                                 underline = {
                                   size = 2;
@@ -43,19 +41,12 @@
                                 };
                               };
                             };
-                            urgent.string = {
-                              text = if n == "10" then "0" else n;
-                              margin = 5;
+                            urgent.string = s // {
                               deco = {
                                 background = {
                                   color = "ff0000ff";
                                 };
                               };
-                            };
-                            empty.string = {
-                              text = if n == "10" then "0" else n;
-                              margin = 5;
-                              foreground = "666666ff";
                             };
                           };
                         };
@@ -71,6 +62,7 @@
           center = [
             {
               clock = {
+                date-format = "%a, %x";
                 content = [
                   { string = { text = ""; font = awesome; }; }
                   { string = { text = " {date}"; }; }
@@ -102,21 +94,20 @@
                           tag = "capacity";
                           items = [
                             { string = { text = ""; foreground = "ff0000ff"; font = awesome; }; }
-                            { string = { text = ""; foreground = "ff0000ff"; font = awesome; }; }
+                            { string = { text = ""; foreground = "ffa600ff"; font = awesome; }; }
+                            { string = { text = ""; font = awesome; }; }
                             { string = { text = ""; font = awesome; }; }
                             { string = { text = ""; font = awesome; }; }
                             { string = { text = ""; font = awesome; }; }
                             { string = { text = ""; font = awesome; }; }
                             { string = { text = ""; font = awesome; }; }
                             { string = { text = ""; font = awesome; }; }
-                            { string = { text = ""; font = awesome; }; }
-                            { string = { text = ""; font = awesome; }; }
-                            { string = { text = ""; foreground = "00ff00ff"; font = awesome; }; }
+                            { string = { text = ""; foreground = "00ff00ff"; font = awesome; }; }
                           ];
                         };
                       }
                       {
-                        string = { text = " {capacity}%  {estimate}"; };
+                        string = { text = " {capacity}% {estimate}"; };
                       }
                     ];
                   in
@@ -128,11 +119,11 @@
                         "state == \"not charging\"" = discharging;
                         "state == charging" = [
                           { string = { text = ""; foreground = "00ff00ff"; font = awesome; }; }
-                          { string = { text = " {capacity}%  {estimate}"; }; }
+                          { string = { text = " {capacity}% {estimate}"; }; }
                         ];
                         "state == full" = [
                           { string = { text = ""; foreground = "00ff00ff"; font = awesome; }; }
-                          { string = { text = " {capacity}%  full"; }; }
+                          { string = { text = " {capacity}% full"; }; }
                         ];
                       };
                     };

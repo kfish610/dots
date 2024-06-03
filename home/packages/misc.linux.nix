@@ -16,7 +16,7 @@
 
     # Fonts
     dejavu_fonts
-    (nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "SourceCodePro" ]; })
     source-code-pro
     font-awesome
   ];

@@ -37,8 +37,6 @@
     };
   };
 
-
-
   services = {
     avizo.enable = true;
     mako.enable = true;
@@ -78,6 +76,7 @@
       settings = {
         background_opacity = "0.8";
         background = "#101010";
+        font_family = "FiraCode Nerd Font Mono";
       };
     };
   };
