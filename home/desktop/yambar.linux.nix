@@ -21,28 +21,26 @@
 
             left = [
               {
-                label = {
-                  content = [
-                    {
-                      string = {
-                        on-click = config.constants.sway.exit_cmd;
-                        text = "";
-                        font = awesome;
-                        foreground = "dd5555ff";
-                        right-margin = 16;
-                      };
-                    }
+                label.content = [
+                  {
+                    string = {
+                      on-click = config.constants.sway.exit_cmd;
+                      text = "";
+                      font = awesome;
+                      foreground = "dd5555ff";
+                      right-margin = 16;
+                    };
+                  }
 
-                    {
-                      string = {
-                        on-click = config.constants.sway.restart_cmd;
-                        text = "";
-                        font = awesome;
-                        foreground = "dd5555ff";
-                      };
-                    }
-                  ];
-                };
+                  {
+                    string = {
+                      on-click = config.constants.sway.restart_cmd;
+                      text = "";
+                      font = awesome;
+                      foreground = "dd5555ff";
+                    };
+                  }
+                ];
               }
 
               {
@@ -102,11 +100,21 @@
 
             right = [
               {
+                cpu = {
+                  poll-interval = 2500;
+                  content.map.conditions."id == -1" = [
+                    { string = { text = ""; font = awesome; }; }
+                    { string.text = " {cpu}%"; }
+                  ];
+                };
+              }
+
+              {
                 mem = {
                   poll-interval = 2500;
                   content = [
                     { string = { text = ""; font = awesome; }; }
-                    { string.text = " {used:gb}/{total:gb} GB"; }
+                    { string.text = " {percent_used}%"; }
                   ];
                 };
               }

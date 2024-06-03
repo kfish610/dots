@@ -47,7 +47,6 @@
         { command = "${config.programs.swaylock.package}/bin/swaylock"; always = true; }
         { command = "sh -c 'pkill yambar; ${config.programs.yambar.package}/bin/yambar &'"; always = true; }
         { command = "${pkgs.discord}/bin/discord"; }
-        { command = "${config.programs.kitty.package}/bin/kitty"; }
       ];
       terminal = "${config.programs.kitty.package}/bin/kitty";
       window = {
