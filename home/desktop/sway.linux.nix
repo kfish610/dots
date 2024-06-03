@@ -24,6 +24,8 @@
 
   wayland.windowManager.sway = {
     enable = true;
+    # Fix until nix-community/home-manager#5379 is resolved.
+    checkConfig = false;
     package = pkgs.swayfx;
     config = {
       assigns = {
