@@ -1,26 +1,7 @@
 { pkgs, config, lib, ... }:
 
 {
-  home.packages = [
-    pkgs.pavucontrol
-    pkgs.brightnessctl
-  ];
-
-  gtk = rec {
-    enable = true;
-    theme = {
-      package = pkgs.arc-theme;
-      name = "Arc-Dark";
-    };
-    iconTheme = theme;
-  };
-
   home.file.".config/background/bg.png".source = ./CelesteCh8.png;
-
-  services = {
-    avizo.enable = true;
-    mako.enable = true;
-  };
 
   wayland.windowManager.sway = {
     enable = true;
@@ -46,24 +27,24 @@
 
           "${modifier}+Shift+s" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
 
-          "XF86MonBrightnessUp" = "exec ${pkgs.avizo}/bin/lightctl up";
-          "XF86MonBrightnessDown" = "exec ${pkgs.avizo}/bin/lightctl down";
+          "XF86MonBrightnessUp" = "exec ${config.services.avizo.package}/bin/lightctl up";
+          "XF86MonBrightnessDown" = "exec ${config.services.avizo.package}/bin/lightctl down";
 
-          "XF86AudioRaiseVolume" = "exec ${pkgs.avizo}/bin/volumectl -u up";
-          "XF86AudioLowerVolume" = "exec ${pkgs.avizo}/bin/volumectl -u down";
-          "XF86AudioMute" = "exec ${pkgs.avizo}/bin/volumectl toggle-mute";
-          "XF86AudioMicMute" = "exec ${pkgs.avizo}/bin/volumectl -m toggle-mute";
+          "XF86AudioRaiseVolume" = "exec ${config.services.avizo.package}/bin/volumectl -u up";
+          "XF86AudioLowerVolume" = "exec ${config.services.avizo.package}/bin/volumectl -u down";
+          "XF86AudioMute" = "exec ${config.services.avizo.package}/bin/volumectl toggle-mute";
+          "XF86AudioMicMute" = "exec ${config.services.avizo.package}/bin/volumectl -m toggle-mute";
         };
       output = {
         "*".bg = "~/.config/background/bg.png fill";
       };
       startup = [
-        { command = "${pkgs.swaylock}/bin/swaylock"; always = true; }
-        { command = "sh -c 'pkill yambar; ${pkgs.yambar}/bin/yambar &'"; always = true; }
+        { command = "${config.programs.swaylock.package}/bin/swaylock"; always = true; }
+        { command = "sh -c 'pkill yambar; ${config.programs.yambar.package}/bin/yambar &'"; always = true; }
         { command = "${pkgs.discord}/bin/discord"; }
-        { command = "${pkgs.kitty}/bin/kitty"; }
+        { command = "${config.programs.kitty.package}/bin/kitty"; }
       ];
-      terminal = "${pkgs.kitty}/bin/kitty";
+      terminal = "${config.programs.kitty.package}/bin/kitty";
       window = {
         border = 0;
         commands = [
