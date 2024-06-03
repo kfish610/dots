@@ -18,6 +18,7 @@
     dejavu_fonts
     (nerdfonts.override { fonts = [ "FiraCode" "SourceCodePro" ]; })
     source-code-pro
+    font-awesome
   ];
 
   # programs.discocss = {

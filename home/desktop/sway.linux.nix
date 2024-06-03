@@ -31,6 +31,7 @@
       assigns = {
         "10" = [{ class = "discord"; }];
       };
+      bars = [ ];
       defaultWorkspace = "workspace number 1";
       gaps = {
         inner = 10;
@@ -41,6 +42,8 @@
           modifier = config.wayland.windowManager.sway.config.modifier;
         in
         lib.mkOptionDefault {
+          "${modifier}+Shift+e" = "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will shut down the computer.' -b 'Yes, exit sway' 'systemctl poweroff'";
+
           "${modifier}+Shift+s" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
 
           "XF86MonBrightnessUp" = "exec ${pkgs.avizo}/bin/lightctl up";
@@ -56,6 +59,7 @@
       };
       startup = [
         { command = "${pkgs.swaylock}/bin/swaylock"; always = true; }
+        { command = "sh -c 'pkill yambar; ${pkgs.yambar}/bin/yambar &'"; always = true; }
         { command = "${pkgs.discord}/bin/discord"; }
         { command = "${pkgs.kitty}/bin/kitty"; }
       ];
