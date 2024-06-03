@@ -56,7 +56,7 @@
                             default.string = s;
                             conditions = {
                               empty.string = s // {
-                                foreground = "777777ff";
+                                foreground = "ffffff66";
                               };
                               focused.string = s // {
                                 deco.underline = {
@@ -100,11 +100,34 @@
 
             right = [
               {
+                network = {
+                  poll-interval = 2500;
+                  content.map = {
+                    default.empty = { };
+                    conditions."name == wlan0".map = {
+                      default.string = {
+                        text = "";
+                        font = awesome;
+                        foreground = "ffffff66";
+                      };
+                      conditions = {
+                        "state == down".string = { text = ""; font = awesome; foreground = "ff0000ff"; };
+                        "state == up" = [
+                          { string = { text = ""; font = awesome; }; }
+                          { string.text = " {ssid} ↑{ul-speed:mb} ↓{dl-speed:mb} Mb/s"; }
+                        ];
+                      };
+                    };
+                  };
+                };
+              }
+
+              {
                 cpu = {
                   poll-interval = 2500;
                   content.map.conditions."id == -1" = [
                     { string = { text = ""; font = awesome; }; }
-                    { string.text = " {cpu}%"; }
+                    { string.text = " {cpu:02}%"; }
                   ];
                 };
               }
@@ -114,7 +137,7 @@
                   poll-interval = 2500;
                   content = [
                     { string = { text = ""; font = awesome; }; }
-                    { string.text = " {percent_used}%"; }
+                    { string.text = " {percent_used:02}%"; }
                   ];
                 };
               }
@@ -145,7 +168,7 @@
                           };
                         }
                         {
-                          string = { text = " {capacity}% {estimate}"; };
+                          string = { text = " {capacity:02}% {estimate}"; };
                         }
                       ];
                     in
@@ -157,11 +180,11 @@
                           "state == \"not charging\"" = discharging;
                           "state == charging" = [
                             { string = { text = ""; foreground = "00ff00ff"; font = awesome; }; }
-                            { string = { text = " {capacity}% {estimate}"; }; }
+                            { string = { text = " {capacity:02}% {estimate}"; }; }
                           ];
                           "state == full" = [
                             { string = { text = ""; foreground = "00ff00ff"; font = awesome; }; }
-                            { string = { text = " {capacity}% full"; }; }
+                            { string = { text = " {capacity:02}% full"; }; }
                           ];
                         };
                       };
