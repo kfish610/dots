@@ -18,6 +18,7 @@
     dejavu_fonts
     (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "SourceCodePro" ]; })
     source-code-pro
+    material-design-icons
     font-awesome
   ];
 

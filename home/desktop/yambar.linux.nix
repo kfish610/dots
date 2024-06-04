@@ -7,7 +7,7 @@
       {
         bar =
           let
-            awesome = "Font Awesome 6 Free:style=solid:pixelsize=14";
+            mdi = "Material Design Icons:style=solid:pixelsize=16";
           in
           {
             location = "top";
@@ -25,8 +25,8 @@
                   {
                     string = {
                       on-click = config.constants.sway.exit_cmd;
-                      text = "";
-                      font = awesome;
+                      text = "󰐥";
+                      font = mdi;
                       foreground = "dd5555ff";
                       right-margin = 16;
                     };
@@ -35,8 +35,8 @@
                   {
                     string = {
                       on-click = config.constants.sway.restart_cmd;
-                      text = "";
-                      font = awesome;
+                      text = "󰜉";
+                      font = mdi;
                       foreground = "dd5555ff";
                     };
                   }
@@ -56,7 +56,7 @@
                             default.string = s;
                             conditions = {
                               empty.string = s // {
-                                foreground = "ffffff66";
+                                foreground = "ffffff77";
                               };
                               focused.string = s // {
                                 deco.underline = {
@@ -82,7 +82,7 @@
                 clock = {
                   date-format = "%a, %x";
                   content = [
-                    { string = { text = ""; font = awesome; }; }
+                    { string = { text = "󰃭"; font = mdi; }; }
                     { string = { text = " {date}"; }; }
                   ];
                 };
@@ -91,7 +91,7 @@
                 clock = {
                   time-format = "%r %Z";
                   content = [
-                    { string = { text = ""; font = awesome; }; }
+                    { string = { text = "󰥔"; font = mdi; }; }
                     { string = { text = " {time}"; }; }
                   ];
                 };
@@ -105,16 +105,23 @@
                   content.map = {
                     default.empty = { };
                     conditions."name == wlan0".map = {
-                      default.string = {
-                        text = "";
-                        font = awesome;
-                        foreground = "ffffff66";
-                      };
+                      default.string = { text = "󰤮"; font = mdi; };
                       conditions = {
-                        "state == down".string = { text = ""; font = awesome; foreground = "ff0000ff"; };
+                        "state == down".string = { text = ""; font = mdi; foreground = "ff0000ff"; };
                         "state == up" = [
-                          { string = { text = ""; font = awesome; }; }
-                          { string.text = " {ssid} ↑{ul-speed:mb} ↓{dl-speed:mb} Mb/s"; }
+                          {
+                            ramp = {
+                              tag = "quality";
+                              items = [
+                                { string = { text = "󰤯"; font = mdi; }; }
+                                { string = { text = "󰤟"; font = mdi; }; }
+                                { string = { text = "󰤢"; font = mdi; }; }
+                                { string = { text = "󰤥"; font = mdi; }; }
+                                { string = { text = "󰤨"; font = mdi; }; }
+                              ];
+                            };
+                          }
+                          { string.text = " {ssid} ↑{ul-speed:mb} ↓{dl-speed:mb}"; }
                         ];
                       };
                     };
@@ -126,7 +133,7 @@
                 cpu = {
                   poll-interval = 2500;
                   content.map.conditions."id == -1" = [
-                    { string = { text = ""; font = awesome; }; }
+                    { string = { text = ""; font = "Font Awesome 6 Free:style=solid:pixelsize=16"; }; }
                     { string.text = " {cpu:02}%"; }
                   ];
                 };
@@ -136,7 +143,7 @@
                 mem = {
                   poll-interval = 2500;
                   content = [
-                    { string = { text = ""; font = awesome; }; }
+                    { string = { text = ""; font = "Font Awesome 6 Free:style=solid:pixelsize=16"; }; }
                     { string.text = " {percent_used:02}%"; }
                   ];
                 };
@@ -147,23 +154,23 @@
                   name = "BAT1";
                   poll-interval = 30000;
 
-                  content =
-                    let
-                      discharging = [
+                  content = {
+                    map = {
+                      default = [
                         {
                           ramp = {
                             tag = "capacity";
                             items = [
-                              { string = { text = ""; foreground = "ff0000ff"; font = awesome; }; }
-                              { string = { text = ""; foreground = "ffa600ff"; font = awesome; }; }
-                              { string = { text = ""; font = awesome; }; }
-                              { string = { text = ""; font = awesome; }; }
-                              { string = { text = ""; font = awesome; }; }
-                              { string = { text = ""; font = awesome; }; }
-                              { string = { text = ""; font = awesome; }; }
-                              { string = { text = ""; font = awesome; }; }
-                              { string = { text = ""; font = awesome; }; }
-                              { string = { text = ""; foreground = "00ff00ff"; font = awesome; }; }
+                              { string = { text = "󰁺"; foreground = "ff0000ff"; font = mdi; }; }
+                              { string = { text = "󰁻"; foreground = "ffa600ff"; font = mdi; }; }
+                              { string = { text = "󰁼"; font = mdi; }; }
+                              { string = { text = "󰁽"; font = mdi; }; }
+                              { string = { text = "󰁾"; font = mdi; }; }
+                              { string = { text = "󰁿"; font = mdi; }; }
+                              { string = { text = "󰂀"; font = mdi; }; }
+                              { string = { text = "󰂁"; font = mdi; }; }
+                              { string = { text = "󰂂"; font = mdi; }; }
+                              { string = { text = "󰁹"; foreground = "00ff00ff"; font = mdi; }; }
                             ];
                           };
                         }
@@ -171,24 +178,35 @@
                           string = { text = " {capacity:02}% {estimate}"; };
                         }
                       ];
-                    in
-                    {
-                      map = {
-                        conditions = {
-                          "state == unknown" = discharging;
-                          "state == discharging" = discharging;
-                          "state == \"not charging\"" = discharging;
-                          "state == charging" = [
-                            { string = { text = ""; foreground = "00ff00ff"; font = awesome; }; }
-                            { string = { text = " {capacity:02}% {estimate}"; }; }
-                          ];
-                          "state == full" = [
-                            { string = { text = ""; foreground = "00ff00ff"; font = awesome; }; }
-                            { string = { text = " {capacity:02}% full"; }; }
-                          ];
-                        };
+                      conditions = {
+                        "state == charging" = [
+                          {
+                            ramp = {
+                              tag = "capacity";
+                              foreground = "00ff00ff";
+                              items = [
+                                { string = { text = "󰢜"; font = mdi; }; }
+                                { string = { text = "󰂆"; font = mdi; }; }
+                                { string = { text = "󰂇"; font = mdi; }; }
+                                { string = { text = "󰂈"; font = mdi; }; }
+                                { string = { text = "󰢝"; font = mdi; }; }
+                                { string = { text = "󰂉"; font = mdi; }; }
+                                { string = { text = "󰢞"; font = mdi; }; }
+                                { string = { text = "󰂊"; font = mdi; }; }
+                                { string = { text = "󰂋"; font = mdi; }; }
+                                { string = { text = "󰂅"; font = mdi; }; }
+                              ];
+                            };
+                          }
+                          { string = { text = " {capacity:02}% {estimate}"; }; }
+                        ];
+                        "state == full" = [
+                          { string = { text = "󰁹"; foreground = "00ff00ff"; font = mdi; }; }
+                          { string = { text = " {capacity:02}% full"; }; }
+                        ];
                       };
                     };
+                  };
                 };
               }
             ];
