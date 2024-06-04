@@ -39,9 +39,12 @@
         };
       };
     };
-  };
 
-  services.ssh-agent.enable = true;
+    keychain = {
+      enable = true;
+      keys = [ "id_ed25519" ];
+    };
+  };
 
   home.packages = with pkgs; [
     expect
