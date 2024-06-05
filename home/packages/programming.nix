@@ -56,6 +56,7 @@
 
     # Python
     micromamba
+    python312
   ];
 
   programs.zsh.initExtra = ''
