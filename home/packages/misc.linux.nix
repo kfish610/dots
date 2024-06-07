@@ -13,6 +13,7 @@
     sway-contrib.grimshot
     vscode
     zoom-us
+    postman
 
     # Fonts
     dejavu_fonts
