@@ -57,7 +57,7 @@
 
     # Applications
     google-chrome
-    gnome.nautilus
+    nautilus
 
     # Networking
     avahi
