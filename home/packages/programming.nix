@@ -51,7 +51,7 @@
     nixpkgs-fmt
 
     # Node
-    nodePackages_latest.npm
+    nodejs_latest
 
     # Python
     micromamba
