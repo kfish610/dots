@@ -51,8 +51,8 @@
     nixpkgs-fmt
 
     # Node
-    nodejs_22
-    nodePackages.npm
+    nodePackages_latest.nodejs
+    nodePackages_latest.npm
 
     # Python
     micromamba
