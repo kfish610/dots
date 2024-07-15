@@ -51,7 +51,6 @@
     nixpkgs-fmt
 
     # Node
-    nodePackages_latest.nodejs
     nodePackages_latest.npm
 
     # Python
