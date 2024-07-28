@@ -29,6 +29,15 @@
           user = "kfisher_access-ci_org";
           forwardAgent = true;
         };
+        "unity-alloc" = rec {
+          hostname = "unity.rc.umass.edu";
+          user = "kfisher_access-ci_org";
+          forwardAgent = true;
+          extraOptions = {
+            RemoteCommand = "salloc -p cpu -t 2:00:00 -N 1 -D ~";
+            RequestTTY = "yes";
+          };
+        };
         "south" = {
           hostname = "south.ucsd.edu";
           user = "ubuntu";
