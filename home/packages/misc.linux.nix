@@ -9,11 +9,13 @@
     gparted
     # musescore
     openconnect
+    remmina
     slack
     sway-contrib.grimshot
     vscode
     zoom-us
     postman
+    networkmanager-openconnect
 
     # Fonts
     dejavu_fonts
