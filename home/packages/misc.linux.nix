@@ -15,7 +15,7 @@
     vscode
     zoom-us
     postman
-    teams
+    teams-for-linux
     networkmanager-openconnect
 
     # Fonts
