@@ -71,8 +71,8 @@
     # Networking
     avahi
     dig
-    inetutils
     sshpass
+    traceroute
     tcptraceroute
     wget
   ];
