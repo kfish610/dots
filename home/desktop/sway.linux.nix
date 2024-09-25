@@ -32,6 +32,8 @@
 
           "${modifier}+Shift+s" = "exec ${pkgs.sway-contrib.grimshot}/bin/grimshot copy area";
 
+          "${modifier}+L" = "swaylock";
+
           "XF86MonBrightnessUp" = "exec ${config.services.avizo.package}/bin/lightctl up";
           "XF86MonBrightnessDown" = "exec ${config.services.avizo.package}/bin/lightctl down";
 
