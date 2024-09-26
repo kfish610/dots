@@ -56,6 +56,11 @@
     # Python
     micromamba
     python312
+
+    # R
+    python311Packages.radian
+    R
+    rPackages.languageserver
   ];
 
   programs.zsh.initExtra = ''
