@@ -58,9 +58,10 @@
     python312
 
     # R
-    python311Packages.radian
+    python312Packages.radian
     R
     rPackages.languageserver
+    rPackages.jsonlite
   ];
 
   programs.zsh.initExtra = ''
