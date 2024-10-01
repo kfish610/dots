@@ -56,11 +56,16 @@
     # Python
     micromamba
     python312
-
-    # R
-    python312Packages.radian
-    (rWrapper.override { packages = with rPackages; [ languageserver httpgd rmarkdown ]; })
-  ];
+  ] ++ (
+    let
+      R = rWrapper.override { packages = with rPackages; [ languageserver httpgd rmarkdown ]; };
+    in
+    [
+      # R
+      R
+      (python312Packages.radian.override { R = R; })
+    ]
+  );
 
   programs.zsh.initExtra = ''
     # Set NPM global in the user directory so it doesn't clash with Nix
