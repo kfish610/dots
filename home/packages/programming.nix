@@ -59,9 +59,7 @@
 
     # R
     python312Packages.radian
-    R
-    rPackages.languageserver
-    rPackages.httpgd
+    (rWrapper.override { packages = with rPackages; [ languageserver httpgd ]; })
   ];
 
   programs.zsh.initExtra = ''
