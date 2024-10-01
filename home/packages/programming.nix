@@ -59,7 +59,7 @@
 
     # R
     python312Packages.radian
-    (rWrapper.override { packages = with rPackages; [ languageserver httpgd ]; })
+    (rWrapper.override { packages = with rPackages; [ languageserver httpgd rmarkdown ]; })
   ];
 
   programs.zsh.initExtra = ''
