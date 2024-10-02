@@ -58,7 +58,7 @@
     python312
   ] ++ (
     let
-      rOverride = { packages = with pkgs.rPackages; [ languageserver httpgd rmarkdown ]; };
+      rOverride = { packages = with pkgs.rPackages; [ languageserver httpgd rmarkdown tidyverse datasauRus ]; };
     in
     [
       (rWrapper.override rOverride)
