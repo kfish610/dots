@@ -58,12 +58,11 @@
     python312
   ] ++ (
     let
-      R = rWrapper.override { packages = with rPackages; [ languageserver httpgd rmarkdown ]; };
+      rOverride = { packages = with pkgs.rPackages; [ languageserver httpgd rmarkdown ]; };
     in
     [
-      # R
-      R
-      (python312Packages.radian.override { R = R; })
+      (rWrapper.override rOverride)
+      (radianWrapper.override rOverride)
     ]
   );
 
