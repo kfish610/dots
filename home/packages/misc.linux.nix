@@ -18,6 +18,11 @@
     teams-for-linux
     networkmanager-openconnect
 
+    godot_4
+    gimp
+
+    rnote
+
     # Fonts
     dejavu_fonts
     (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "SourceCodePro" ]; })

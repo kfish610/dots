@@ -56,12 +56,6 @@
     # Python
     micromamba
     python312
-
-    # Godot
-    godot_4
-
-    # Gimp
-    gimp
   ] ++ (
     let
       rOverride = { packages = with pkgs.rPackages; [ languageserver httpgd rmarkdown tidyverse datasauRus ]; };
