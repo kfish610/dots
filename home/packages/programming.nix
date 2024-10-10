@@ -56,6 +56,7 @@
     # Python
     micromamba
     python312
+    poetry
   ] ++ (
     let
       rOverride = { packages = with pkgs.rPackages; [ languageserver httpgd rmarkdown tidyverse datasauRus ]; };
