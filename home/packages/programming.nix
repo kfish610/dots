@@ -59,7 +59,7 @@
     poetry
   ] ++ (
     let
-      rOverride = { packages = with pkgs.rPackages; [ languageserver httpgd rmarkdown tidyverse datasauRus testthat ]; };
+      rOverride = { packages = with pkgs.rPackages; [ languageserver httpgd rmarkdown tidyverse datasauRus testthat janitor ]; };
     in
     [
       (rWrapper.override rOverride)
