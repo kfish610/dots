@@ -34,8 +34,27 @@
   services.openssh.enable = true;
 
   # Needed for lots of compatibility things!
-  # Namely conda/mamba
-  programs.nix-ld.enable = true;
+  # Namely conda/mamba/poetry
+  programs.nix-ld = {
+    enable = true;
+    libraries = with pkgs; [
+      zlib
+      zstd
+      stdenv.cc.cc
+      stdenv.cc.cc.lib
+      curl
+      openssl
+      attr
+      libssh
+      bzip2
+      libxml2
+      acl
+      libsodium
+      util-linux
+      xz
+      systemd
+    ];
+  };
 
   # Set up user with zsh
   programs.zsh.enable = true;
