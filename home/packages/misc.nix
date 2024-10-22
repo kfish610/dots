@@ -29,14 +29,16 @@
           user = "kfisher_access-ci_org";
           forwardAgent = true;
         };
-        "unity-alloc" = rec {
-          hostname = "unity.rc.umass.edu";
+        "*.unity.rc.umass.edu" = rec {
           user = "kfisher_access-ci_org";
           forwardAgent = true;
-          extraOptions = {
-            RemoteCommand = "salloc -p cpu -t 2:00:00 -N 1 -D ~";
-            RequestTTY = "yes";
-          };
+          proxyJump = "unity";
+        };
+        "unity-alloc" = {
+          hostname = "*.unity.rc.umass.edu";
+          user = "kfisher_access-ci_org";
+          forwardAgent = true;
+          proxyCommand = "ssh unity -W \$(squeue --me --name=vscode --states=R -h -O NodeList):2222";
         };
         "south" = {
           hostname = "south.ucsd.edu";
