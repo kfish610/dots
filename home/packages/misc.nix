@@ -58,17 +58,17 @@
   };
 
   home.packages = with pkgs; [
-    expect
+    # Applications
+    google-chrome
+    nautilus
+
+    # Tools
     gh
     imagemagick
     neofetch
     pandoc
     unzip
     xidel
-
-    # Applications
-    google-chrome
-    nautilus
 
     # Networking
     avahi

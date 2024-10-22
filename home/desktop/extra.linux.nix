@@ -1,11 +1,10 @@
 { pkgs, config, ... }:
 
 {
-  home.packages = [
-    pkgs.pavucontrol
-    pkgs.brightnessctl
-    # Set up a polkit agent for GUI apps
-    pkgs.polkit_gnome
+  home.packages = with pkgs; [
+    brightnessctl
+    pavucontrol
+    polkit_gnome
   ];
 
   gtk = rec {
