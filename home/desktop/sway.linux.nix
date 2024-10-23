@@ -48,7 +48,7 @@
       startup = [
         { command = "${config.programs.swaylock.package}/bin/swaylock"; always = true; }
         { command = "sh -c 'pkill yambar; ${config.programs.yambar.package}/bin/yambar &'"; always = true; }
-        { command = "${pkgs.rot8}/bin/rot8 --keyboard"; always = true; }
+        { command = "${pkgs.rot8}/bin/rot8 -k"; always = true; }
         { command = "${pkgs.discord}/bin/discord"; }
       ];
       terminal = "${config.programs.kitty.package}/bin/kitty";
