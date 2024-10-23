@@ -65,6 +65,7 @@
     # Tools
     gh
     imagemagick
+    jq
     neofetch
     pandoc
     unzip
