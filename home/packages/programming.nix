@@ -8,7 +8,6 @@
     ]))
 
     # Android
-    android-tools
     android-studio
 
     # C/C++
