@@ -38,15 +38,13 @@
           hostname = "*.unity.rc.umass.edu";
           user = "kfisher_access-ci_org";
           forwardAgent = true;
-          proxyCommand = "ssh unity './vscode.sh'";
-          extraOptions.StrictHostKeyChecking = "no";
+          proxyCommand = "ssh -o StrictHostKeyChecking=no unity './vscode.sh'";
         };
         "unity-gpu" = {
           hostname = "*.unity.rc.umass.edu";
           user = "kfisher_access-ci_org";
           forwardAgent = true;
-          proxyCommand = "ssh unity './vscode.sh gpu'";
-          extraOptions.StrictHostKeyChecking = "no";
+          proxyCommand = "ssh -o StrictHostKeyChecking=no unity './vscode.sh gpu'";
         };
         "south" = {
           hostname = "south.ucsd.edu";
