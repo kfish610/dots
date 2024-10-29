@@ -34,11 +34,17 @@
           forwardAgent = true;
           proxyJump = "unity";
         };
-        "unity-alloc" = {
+        "unity-cpu" = {
           hostname = "*.unity.rc.umass.edu";
           user = "kfisher_access-ci_org";
           forwardAgent = true;
-          proxyCommand = "ssh unity -W \$(squeue --me --name=vscode --states=R -h -O NodeList):2222";
+          proxyCommand = "ssh unity './vscode'";
+        };
+        "unity-gpu" = {
+          hostname = "*.unity.rc.umass.edu";
+          user = "kfisher_access-ci_org";
+          forwardAgent = true;
+          proxyCommand = "ssh unity './vscode gpu'";
         };
         "south" = {
           hostname = "south.ucsd.edu";
