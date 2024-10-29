@@ -35,16 +35,16 @@
           proxyJump = "unity";
         };
         "unity-cpu" = {
-          hostname = "*.unity.rc.umass.edu";
           user = "kfisher_access-ci_org";
           forwardAgent = true;
-          proxyCommand = "ssh -o StrictHostKeyChecking=no unity './vscode.sh'";
+          proxyCommand = "ssh unity './vscode.sh'";
+          extraOptions.StrictHostKeyChecking = "no";
         };
         "unity-gpu" = {
-          hostname = "*.unity.rc.umass.edu";
           user = "kfisher_access-ci_org";
           forwardAgent = true;
-          proxyCommand = "ssh -o StrictHostKeyChecking=no unity './vscode.sh gpu'";
+          proxyCommand = "ssh unity './vscode.sh gpu'";
+          extraOptions.StrictHostKeyChecking = "no";
         };
         "south" = {
           hostname = "south.ucsd.edu";
