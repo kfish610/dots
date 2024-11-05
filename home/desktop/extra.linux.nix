@@ -17,8 +17,16 @@
     cursorTheme = theme;
   };
 
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
+  dconf.settings = {
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
+    };
+  };
+
+  systemd.user = {
+    sessionVariables = config.home.sessionVariables;
+
+    services.polkit-gnome-authentication-agent-1 = {
       Unit = {
         Description = "polkit-gnome-authentication-agent-1";
         Wants = [ "graphical-session.target" ];
