@@ -23,6 +23,8 @@
 
     rnote
 
+    obsidian
+
     # Fonts
     dejavu_fonts
     (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "SourceCodePro" ]; })
