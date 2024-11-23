@@ -75,6 +75,15 @@
           patchwork
           GGally
           janitor
+          skimr
+          sf
+          maps
+          rnaturalearth
+          rnaturalearthdata
+          vip
+          doParallel
+          randomForest
+          xgboost
         ];
       };
     in
