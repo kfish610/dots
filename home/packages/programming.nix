@@ -84,6 +84,7 @@
           doParallel
           randomForest
           xgboost
+          corrplot
         ];
       };
     in
