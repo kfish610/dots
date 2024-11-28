@@ -25,6 +25,9 @@
 
     obsidian
 
+    # nix store add --hash-algo sha256 --mode flat ~/Downloads/Wonderdraft-1.1.8.2b-Linux64.deb 
+    wonderdraft
+
     # Fonts
     dejavu_fonts
     (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "SourceCodePro" ]; })
