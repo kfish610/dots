@@ -85,6 +85,7 @@
           randomForest
           xgboost
           corrplot
+          moments
         ];
       };
     in
