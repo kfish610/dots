@@ -30,7 +30,9 @@
 
     # Fonts
     dejavu_fonts
-    (nerdfonts.override { fonts = [ "FiraCode" "FiraMono" "SourceCodePro" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.fira-mono
+    nerd-fonts.sauce-code-pro
     source-code-pro
     material-design-icons
     font-awesome
