@@ -76,10 +76,10 @@
           GGally
           janitor
           skimr
-          sf
-          maps
-          rnaturalearth
-          rnaturalearthdata
+          #   sf
+          #   maps
+          #   rnaturalearth
+          #   rnaturalearthdata
           vip
           doParallel
           randomForest
