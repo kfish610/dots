@@ -18,7 +18,6 @@
           ./modules/klaptop.nix
           home-manager.nixosModules.home-manager # Not a function call!
           {
-            home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             # Loads default.nix, which then recursively 
             # loads the contents of the home folder
@@ -35,7 +34,6 @@
           ./modules/wsl.nix
           home-manager.nixosModules.home-manager # Not a function call!
           {
-            home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             # Loads default.nix, which then recursively 
             # loads the contents of the home folder
