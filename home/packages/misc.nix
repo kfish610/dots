@@ -37,13 +37,19 @@
         "unity-cpu" = {
           user = "kfisher_access-ci_org";
           forwardAgent = true;
-          proxyCommand = "ssh unity './vscode.sh'";
+          proxyCommand = "ssh unity './vscode.sh cpu'";
           extraOptions.StrictHostKeyChecking = "no";
         };
         "unity-gpu" = {
           user = "kfisher_access-ci_org";
           forwardAgent = true;
           proxyCommand = "ssh unity './vscode.sh gpu'";
+          extraOptions.StrictHostKeyChecking = "no";
+        };
+        "unity-gpu-preempt" = {
+          user = "kfisher_access-ci_org";
+          forwardAgent = true;
+          proxyCommand = "ssh unity './vscode.sh gpu-preempt'";
           extraOptions.StrictHostKeyChecking = "no";
         };
         "south" = {

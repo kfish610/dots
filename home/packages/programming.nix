@@ -47,7 +47,7 @@
 
     # Nix
     nil
-    nixpkgs-fmt
+    nixfmt-rfc-style
 
     # Node
     nodejs_latest
