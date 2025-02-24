@@ -1,4 +1,9 @@
-{ pkgs, config, lib, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 {
   home.file.".config/background/bg.png".source = ./CelesteCh8.png;
@@ -10,7 +15,7 @@
     package = pkgs.swayfx;
     config = {
       assigns = {
-        "10" = [{ class = "discord"; }];
+        "10" = [ { class = "discord"; } ];
       };
       bars = [ ];
       defaultWorkspace = "workspace number 1";
@@ -47,9 +52,18 @@
         "*".bg = "~/.config/background/bg.png fill";
       };
       startup = [
-        { command = "${config.programs.swaylock.package}/bin/swaylock"; always = true; }
-        { command = "sh -c 'pkill yambar; ${config.programs.yambar.package}/bin/yambar &'"; always = true; }
-        { command = "${pkgs.rot8}/bin/rot8 -k "; always = true; }
+        {
+          command = "${config.programs.swaylock.package}/bin/swaylock";
+          always = true;
+        }
+        {
+          command = "sh -c 'pkill yambar; ${config.programs.yambar.package}/bin/yambar &'";
+          always = true;
+        }
+        {
+          command = "${pkgs.rot8}/bin/rot8 -k ";
+          always = true;
+        }
         { command = "${pkgs.discord}/bin/discord"; }
       ];
       terminal = "${config.programs.kitty.package}/bin/kitty";

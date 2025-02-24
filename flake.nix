@@ -9,39 +9,50 @@
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, home-manager, nixos-wsl, ... }: {
-    nixosConfigurations = {
-      klaptop = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./modules/base.nix
-          ./modules/klaptop.nix
-          home-manager.nixosModules.home-manager # Not a function call!
-          {
-            home-manager.useUserPackages = true;
-            # Loads default.nix, which then recursively 
-            # loads the contents of the home folder
-            home-manager.users.kfish = import ./home;
-            home-manager.extraSpecialArgs = { systemInfo = [ "linux" ]; };
-          }
-        ];
-      };
-      wsl = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        specialArgs.nixos-wsl = nixos-wsl;
-        modules = [
-          ./modules/base.nix
-          ./modules/wsl.nix
-          home-manager.nixosModules.home-manager # Not a function call!
-          {
-            home-manager.useUserPackages = true;
-            # Loads default.nix, which then recursively 
-            # loads the contents of the home folder
-            home-manager.users.kfish = import ./home;
-            home-manager.extraSpecialArgs = { systemInfo = [ "wsl" ]; };
-          }
-        ];
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      nixos-wsl,
+      ...
+    }:
+    {
+      nixosConfigurations = {
+        klaptop = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./modules/base.nix
+            ./modules/klaptop.nix
+            home-manager.nixosModules.home-manager # Not a function call!
+            {
+              home-manager.useUserPackages = true;
+              # Loads default.nix, which then recursively
+              # loads the contents of the home folder
+              home-manager.users.kfish = import ./home;
+              home-manager.extraSpecialArgs = {
+                systemInfo = [ "linux" ];
+              };
+            }
+          ];
+        };
+        wsl = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs.nixos-wsl = nixos-wsl;
+          modules = [
+            ./modules/base.nix
+            ./modules/wsl.nix
+            home-manager.nixosModules.home-manager # Not a function call!
+            {
+              home-manager.useUserPackages = true;
+              # Loads default.nix, which then recursively
+              # loads the contents of the home folder
+              home-manager.users.kfish = import ./home;
+              home-manager.extraSpecialArgs = {
+                systemInfo = [ "wsl" ];
+              };
+            }
+          ];
+        };
       };
     };
-  };
 }

@@ -20,7 +20,7 @@
   # Required for sway. Also generally useful
   security.polkit.enable = true;
 
-  # Use Pipewire for audio  
+  # Use Pipewire for audio
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -62,7 +62,10 @@
     isNormalUser = true;
     uid = 1000;
     home = "/home/kfish";
-    extraGroups = [ "wheel" "wireshark" ];
+    extraGroups = [
+      "wheel"
+      "wireshark"
+    ];
     shell = pkgs.zsh;
   };
 
@@ -74,4 +77,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
 }
-

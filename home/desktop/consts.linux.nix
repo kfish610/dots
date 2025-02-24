@@ -3,10 +3,12 @@
 {
   options.constants.sway =
     let
-      mkConst = value: lib.mkOption {
-        type = lib.types.str;
-        default = value;
-      };
+      mkConst =
+        value:
+        lib.mkOption {
+          type = lib.types.str;
+          default = value;
+        };
     in
     {
       disp_font = mkConst "FiraMono Nerd Font Mono";

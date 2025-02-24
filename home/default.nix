@@ -1,20 +1,22 @@
 { lib, systemInfo, ... }:
 
-# Inspired by infinisil's configuration 
+# Inspired by infinisil's configuration
 # https://github.com/infinisil/system/blob/master/config/new-modules/default.nix
 let
   # Take the flat directory from readDir, and dig further into directories
-  readDirRec = path:
+  readDirRec =
+    path:
     let
-      recurseIfDir = name: type:
-        if type == "directory" then readDirRec "${path}/${name}" else type;
+      recurseIfDir = name: type: if type == "directory" then readDirRec "${path}/${name}" else type;
     in
     lib.mapAttrs recurseIfDir (builtins.readDir path);
 
   # Take a file tree (as an attrset), and remove files with the wrong system
-  filterBySystem = set:
+  filterBySystem =
+    set:
     let
-      isCorrectSystem = name: type:
+      isCorrectSystem =
+        name: type:
         let
           components = (lib.splitString "." name);
           # Is not this file
@@ -32,7 +34,9 @@ let
     lib.filterAttrsRecursive isCorrectSystem set;
 
   # Make the remaining attributes have value equal to their path
-  moduleSet = lib.mapAttrsRecursive (path: type: lib.concatStringsSep "/" path) (filterBySystem (readDirRec ./.));
+  moduleSet = lib.mapAttrsRecursive (path: type: lib.concatStringsSep "/" path) (
+    filterBySystem (readDirRec ./.)
+  );
 
   moduleFiles = builtins.map (path: ./${path}) (lib.collect lib.isString moduleSet);
 in

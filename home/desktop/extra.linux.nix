@@ -58,7 +58,10 @@
         }
       ];
       timeouts = [
-        { timeout = 300; command = "swaylock"; }
+        {
+          timeout = 300;
+          command = "swaylock";
+        }
         {
           timeout = 270;
           command = "swaymsg 'output * dpms off'";
