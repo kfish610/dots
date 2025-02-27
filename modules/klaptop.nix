@@ -26,18 +26,20 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.greetd}/bin/agreety --cmd sway";
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd hyprland";
       };
       initial_session = {
         user = "kfish";
-        command = "sway";
+        command = "hyprland";
       };
     };
   };
 
   # Enable sway and let home-manager manager it
-  programs.sway.enable = true;
-  programs.sway.package = null;
+  # programs.sway.enable = true;
+  # programs.sway.package = null;
+
+  programs.hyprland.enable = true;
 
   # Set up Wireshark along with permissions
   programs.wireshark.enable = true;

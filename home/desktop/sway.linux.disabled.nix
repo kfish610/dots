@@ -8,6 +8,32 @@
 {
   home.file.".config/background/bg.png".source = ./CelesteCh8.png;
 
+  services = {
+    avizo.enable = true;
+    mako.enable = true;
+
+    swayidle = {
+      enable = true;
+      events = [
+        {
+          event = "before-sleep";
+          command = "swaylock";
+        }
+      ];
+      timeouts = [
+        {
+          timeout = 300;
+          command = "swaylock";
+        }
+        {
+          timeout = 270;
+          command = "swaymsg 'output * dpms off'";
+          resumeCommand = "swaymsg 'output * dpms on'";
+        }
+      ];
+    };
+  };
+
   wayland.windowManager.sway = {
     enable = true;
     # Fix until nix-community/home-manager#5379 is resolved.
