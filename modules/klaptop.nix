@@ -39,6 +39,8 @@
   programs.sway.enable = true;
   programs.sway.package = null;
 
+  programs.hyprland.enable = true;
+
   # Set up Wireshark along with permissions
   programs.wireshark.enable = true;
   # Default module has an incorrect package name
