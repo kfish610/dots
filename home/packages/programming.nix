@@ -57,9 +57,7 @@
       nodejs_latest
 
       # Python
-      micromamba
       python312
-      poetry
     ]
     ++ (
       let

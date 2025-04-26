@@ -29,15 +29,17 @@
         exec-once = [
           "${swayosd}/swayosd-server"
         ];
-        bind = [
-          ", XF86AudioMute, exec, ${swayosd}/swayosd-client --output-volume mute-toggle"
-          ", XF86AudioMicMute, exec, ${swayosd}/swayosd-client --input-volume mute-toggle"
-        ];
-        binde = [
-          ", XF86AudioRaiseVolume, exec, ${swayosd}/swayosd-client --output-volume raise"
-          ", XF86AudioRaiseVolume, exec, ${swayosd}/swayosd-client --output-volume lower"
+
+        bindel = [
+          ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
+          ", XF86AudioLowerVolume, exec, ${swayosd}/swayosd-client --output-volume lower"
           ", XF86MonBrightnessUp, exec, ${swayosd}/swayosd-client --brightness up"
           ", XF86MonBrightnessDown, exec, ${swayosd}/swayosd-client --brightness down"
+        ];
+
+        bindl = [
+          ", XF86AudioMute, exec, ${swayosd}/swayosd-client --output-volume mute-toggle"
+          ", XF86AudioMicMute, exec, ${swayosd}/swayosd-client --input-volume mute-toggle"
         ];
       };
   };
