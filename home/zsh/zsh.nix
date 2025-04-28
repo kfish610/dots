@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   home.file.".p10k.zsh".source = ./.p10k.zsh;
@@ -20,7 +20,7 @@
         "romkatv/powerlevel10k"
       ];
     };
-    initExtraFirst = ''
+    initContent = lib.mkBefore ''
       # Load powerline10k only if the terminal supports it
       # Otherwise just use bash
       if zmodload zsh/terminfo && (( terminfo[colors] >= 256 )); then
@@ -28,10 +28,12 @@
       else
         exec bash
       fi
-    '';
-    initExtra = ''
+
       # Turn off extended glob, it is mostly useless and clashes with flakes
       unsetopt EXTENDED_GLOB
+
+      # Set NPM global in the user directory so it doesn't clash with Nix
+      npm set prefix ~/.npm-global
     '';
   };
 }

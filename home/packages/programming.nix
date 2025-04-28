@@ -97,9 +97,4 @@
         (radianWrapper.override rOverride)
       ]
     );
-
-  programs.zsh.initExtra = ''
-    # Set NPM global in the user directory so it doesn't clash with Nix
-    npm set prefix ~/.npm-global
-  '';
 }
