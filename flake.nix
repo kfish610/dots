@@ -40,7 +40,17 @@
           specialArgs.nixos-wsl = nixos-wsl;
           modules = [
             ./modules/base.nix
-            ./modules/wsl.nix
+            nixos-wsl.nixosModules.default
+            {
+              networking.hostName = "wsl";
+
+              wsl = {
+                enable = true;
+                defaultUser = "kfish";
+                startMenuLaunchers = true;
+                docker-desktop.enable = true;
+              };
+            }
             home-manager.nixosModules.home-manager # Not a function call!
             {
               home-manager.useUserPackages = true;

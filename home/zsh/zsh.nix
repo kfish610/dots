@@ -13,6 +13,7 @@
       PATH = "$PATH:~/.npm-global/bin:~/.cargo/bin";
       WLR_DRM_NO_MODIFIERS = 1;
       CHROME_EXECUTABLE = "${pkgs.google-chrome}/bin/google-chrome-stable";
+      MAMBA_ROOT_PREFIX = "/home/kfish/micromamba";
     };
     antidote = {
       enable = true;

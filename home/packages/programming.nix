@@ -58,6 +58,7 @@
 
       # Python
       python312
+      micromamba
     ]
     ++ (
       let
@@ -71,24 +72,6 @@
             # Tidyverse
             tidyverse
             tidymodels
-
-            # Other
-            datasauRus
-            testthat
-            patchwork
-            GGally
-            janitor
-            skimr
-            #   sf
-            #   maps
-            #   rnaturalearth
-            #   rnaturalearthdata
-            vip
-            doParallel
-            randomForest
-            xgboost
-            corrplot
-            moments
           ];
         };
       in
