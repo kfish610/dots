@@ -1,0 +1,120 @@
+(defwindow bar
+  :geometry (geometry
+    :x "0%"
+    :y "15px"
+    :width "1890px"
+    :height "40px"
+    :anchor "top center"
+  )
+  
+  :monitor 0
+  :stacking "fg"
+  :exclusive true
+  :focusable "none"
+  
+  (box
+    :class "bar"
+    :orientation "h"
+    (left)
+    (center)
+    (right)
+  )
+)
+
+
+(defwidget left []
+  (workspaces)
+)
+
+(defwidget center []
+  "Center"
+)
+
+(defwidget right []
+  (box
+    :halign "end"
+    :valign "fill"
+    (temp)
+    (cpu)
+    (memory)
+    (disk)
+    (battery)
+  )
+)
+
+
+(defwidget workspaces []
+  (eventbox :onscroll "hyprctl dispatch workspace `echo {} | sed 's/up/+/' | sed 's/down/-/'`1"
+    (box :class "workspaces" :space-evenly false
+      (for i in `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
+        (button
+          :onclick "hyprctl dispatch workspace ${i}"
+          :class "workspace-base ${workspaces-json?.[i]?.class}"
+          {(workspaces-json?.[i]?.active ?: false) ? "" : ""}
+        )
+      )
+    )
+  )
+)
+(deflisten workspaces-json "hyprland-workspaces ALL | jq --unbuffered -c \". | map({ (.id|tostring): . }) | add\"")
+
+(defwidget temp []
+  (circular
+    :value {EWW_TEMPS.CORETEMP_PACKAGE_ID_0}
+    :icon ""
+    :class "temp"
+    :tooltip "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}°C"
+  )
+)
+
+(defwidget cpu []
+  (circular
+    :value {EWW_CPU.avg}
+    :icon ""
+    :class "cpu"
+    :tooltip "${EWW_CPU.avg}%"
+  )
+)
+
+(defwidget memory []
+  (circular
+    :value {EWW_RAM.used_mem_perc}
+    :icon ""
+    :class "memory"
+    :tooltip "${EWW_RAM.used_mem}/${EWW_RAM.total_mem}"
+  )
+)
+
+(defwidget disk []
+  (circular
+    :value {EWW_DISK["/"].used_perc}
+    :icon ""
+    :class "disk"
+    :tooltip "${EWW_DISK['/'].used}/${EWW_DISK['/'].total}"
+  )
+)
+
+(defwidget battery []
+  (circular
+    :value {EWW_BATTERY.BAT1.capacity}
+    :icon "󰂎"
+    :class "battery"
+    :tooltip "${EWW_BATTERY.BAT1.capacity}%"
+  )
+)
+
+(defwidget circular [?value ?icon ?class ?tooltip]
+  (box :vexpand true
+    (circular-progress
+      :value {value}
+      :class "progress-circle ${class}"
+      :thickness 3
+      
+      (button
+        :class "progress-icon ${class}"
+        :tooltip {tooltip}
+        {icon}
+      )
+    )
+  )
+)

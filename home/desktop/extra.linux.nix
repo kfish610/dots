@@ -1,30 +1,27 @@
 { pkgs, config, ... }:
 
 {
-  gtk = rec {
-    enable = true;
-    theme = {
-      package = pkgs.nordic;
-      name = "Nordic";
-    };
-    iconTheme = theme;
-    cursorTheme = theme;
-  };
-
-  dconf.settings = {
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
-  };
-
   services.mako.enable = true;
 
   programs.kitty = {
     enable = true;
     settings = {
-      background_opacity = "0.8";
-      background = "#101010";
-      font_family = config.constants.sway.code_font;
+      confirm_os_window_close = 0;
+    };
+  };
+
+  programs.eww = {
+    enable = true;
+    configDir = ./eww;
+  };
+
+  programs.swaylock = {
+    enable = true;
+    settings = {
+      daemonize = true;
+      ignore-empty-password = true;
+      scaling = "fill";
+      image = "~/.config/background/bg.png";
     };
   };
 }

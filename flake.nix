@@ -3,10 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     nixos-wsl.url = "github:nix-community/NixOS-WSL";
     nixos-wsl.inputs.nixpkgs.follows = "nixpkgs";
+
+    stylix.url = "github:nix-community/stylix";
+    stylix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -14,6 +19,7 @@
       nixpkgs,
       home-manager,
       nixos-wsl,
+      stylix,
       ...
     }:
     {
@@ -23,6 +29,7 @@
           modules = [
             ./modules/base.nix
             ./modules/klaptop.nix
+
             home-manager.nixosModules.home-manager # Not a function call!
             {
               home-manager.useUserPackages = true;
@@ -31,6 +38,7 @@
               home-manager.users.kfish = import ./home;
               home-manager.extraSpecialArgs = {
                 systemInfo = [ "linux" ];
+                extraModules = [ stylix.homeModules.stylix ];
               };
             }
           ];
@@ -40,6 +48,7 @@
           specialArgs.nixos-wsl = nixos-wsl;
           modules = [
             ./modules/base.nix
+
             nixos-wsl.nixosModules.default
             {
               networking.hostName = "wsl";
@@ -51,6 +60,7 @@
                 docker-desktop.enable = true;
               };
             }
+
             home-manager.nixosModules.home-manager # Not a function call!
             {
               home-manager.useUserPackages = true;

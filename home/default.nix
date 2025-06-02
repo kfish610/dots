@@ -1,4 +1,9 @@
-{ lib, systemInfo, ... }:
+{
+  lib,
+  systemInfo,
+  extraModules,
+  ...
+}:
 
 # Inspired by infinisil's configuration
 # https://github.com/infinisil/system/blob/master/config/new-modules/default.nix
@@ -41,7 +46,7 @@ let
   moduleFiles = builtins.map (path: ./${path}) (lib.collect lib.isString moduleSet);
 in
 {
-  imports = moduleFiles;
+  imports = extraModules ++ moduleFiles;
 
   home = {
     username = "kfish";

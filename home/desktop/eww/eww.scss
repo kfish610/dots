@@ -1,0 +1,65 @@
+$height: 40px;
+
+* {
+	all: unset;
+	font-family: "FiraCode Nerd Font";
+    font-size: 20px;
+}
+
+.bar {
+    background-color: rgba(16, 16, 16, 0.8);
+    border-radius: 10px;
+}
+
+.battery {
+    color: #72c09f;
+}
+
+.cpu {
+    color: #5998c0
+}
+
+.temp {
+    color: #c88da2
+}
+
+.memory {
+    color: #eab464
+}
+
+.disk {
+    color: #7068b1
+}
+
+.wifi {
+    color: #5998c0;
+}
+
+.box {
+    margin: 0;
+}
+
+/* Workspaces */
+.workspaces {
+    font-weight: normal;
+    margin: 0 0 0 1em;
+}
+    
+.workspace-base {
+    margin: 0 1em 0 0;
+    color: #3e424f;
+}
+
+.workspace-button {
+    color: #bfc9db;
+}
+
+/* Circle Indicators */
+.progress-circle {
+    margin: 5px;
+    background-color: #38384d;
+}
+
+.progress-circle * {
+    font-size: 16px;
+}

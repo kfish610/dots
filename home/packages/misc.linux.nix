@@ -14,7 +14,7 @@
     sway-contrib.grimshot
     vscode
     zoom-us
-    postman
+    # postman
     teams-for-linux
     networkmanager-openconnect
 

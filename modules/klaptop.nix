@@ -7,44 +7,70 @@
 }:
 
 {
-  networking.hostName = "klaptop";
+  networking = {
+    hostName = "klaptop";
 
-  # Use iwd for networking
-  networking.wireless.iwd.enable = true;
+    # Use iwd for networking
+    wireless.iwd.enable = true;
+  };
 
-  # security.pki.certificateFiles = [ ./ucsd-ca.cer ];
+  hardware = {
+    bluetooth.enable = true;
 
-  # Bluetooth (obviously)
-  hardware.bluetooth.enable = true;
-
-  # Logitech/Solaar
-  hardware.logitech.wireless.enable = true;
-  hardware.logitech.wireless.enableGraphical = true;
+    # Logitech/Solaar
+    logitech.wireless = {
+      enable = true;
+      enableGraphical = true;
+    };
+  };
 
   # Autologin with greetd
   services.greetd = {
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.greetd}/bin/agreety --cmd sway";
+        command = "${pkgs.greetd.greetd}/bin/agreety --cmd Hyprland";
       };
       initial_session = {
         user = "kfish";
-        command = "sway";
+        command = "Hyprland";
       };
     };
   };
 
-  # Enable sway and let home-manager manager it
-  programs.sway.enable = true;
-  programs.sway.package = null;
+  programs = {
+    # Enable sway and let home-manager manager it
+    sway = {
+      enable = true;
+      package = null;
+    };
 
-  programs.hyprland.enable = true;
+    hyprland.enable = true;
 
-  # Set up Wireshark along with permissions
-  programs.wireshark.enable = true;
-  # Default module has an incorrect package name
-  programs.wireshark.package = pkgs.wireshark;
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark; # Default module has an incorrect package name
+    };
+  };
+
+  # Setup SwayOSD
+  environment.systemPackages = [ pkgs.swayosd ];
+  services.udev.packages = [ pkgs.swayosd ];
+  # Start the libinput backend for SwayOSD
+  systemd.services.swayosd-libinput-backend = {
+    description = "SwayOSD LibInput backend for listening to certain keys like CapsLock, ScrollLock, VolumeUp, etc.";
+    documentation = [ "https://github.com/ErikReider/SwayOSD" ];
+    wantedBy = [ "graphical.target" ];
+    partOf = [ "graphical.target" ];
+    after = [ "graphical.target" ];
+
+    serviceConfig = {
+      Type = "dbus";
+      BusName = "org.erikreider.swayosd";
+      ExecStart = "${pkgs.swayosd}/bin/swayosd-libinput-backend";
+      Restart = "on-failure";
+    };
+  };
 
   # Docker setup
   virtualisation.docker.enable = true;
