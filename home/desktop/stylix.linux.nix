@@ -33,7 +33,6 @@
 
     opacity.terminal = 0.8;
 
-    targets.sway.enable = false;
     targets.swaylock.enable = false;
   };
 }
