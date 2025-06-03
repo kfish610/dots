@@ -7,7 +7,6 @@
 
 {
   home = {
-    sessionVariables.NIXOS_OZONE_WL = "1";
     packages = with pkgs; [
       hyprland-workspaces
     ];

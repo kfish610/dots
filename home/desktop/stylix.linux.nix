@@ -34,8 +34,8 @@
     opacity.terminal = 0.8;
 
     cursor = {
-      package = pkgs.rose-pine-hyprcursor;
-      name = "rose-pine-hyprcursor";
+      package = pkgs.rose-pine-cursor;
+      name = "rose-pine-cursor";
       size = 24;
     };
   };
