@@ -114,7 +114,7 @@
           ) workspaces;
 
         exec-once = [
-          lock
+          "${lock}; ${config.programs.eww.package}/bin/eww daemon && ${config.programs.eww.package}/bin/eww open bar"
           "${swayosd}/swayosd-server"
           "${pkgs.discord}/bin/discord"
           "${pkgs.rot8}/bin/rot8 -k"
