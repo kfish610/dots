@@ -1,84 +1,119 @@
 * {
-	all: unset;
-	font-family: "FiraCode Nerd Font Propo";
-    font-size: 22px;
+  all: unset;
+  font-family: "FiraCode Nerd Font Propo";
+  font-size: 22px;
 }
 
 .bar {
-    background-color: rgba(16, 16, 16, 0.6);
-    border-radius: 10px;
+  background-color: rgba(16, 16, 16, 0.6);
+  border-radius: 10px;
 }
-
 
 /* Right Side */
 .right {
-    margin-right: 16px;
+  margin-right: 16px;
 }
 
 .battery {
-    color: #72c09f;
+  color: #72c09f;
 }
 
 .cpu {
-    color: #5998c0
+  color: #5998c0;
 }
 
 .temp {
-    color: #c88da2
+  color: #c88da2;
 }
 
 .memory {
-    color: #eab464
+  color: #eab464;
 }
 
 .disk {
-    color: #7068b1
+  color: #7068b1;
 }
 
 .wifi {
-    color: #5998c0;
+  color: #5998c0;
 }
 
 /* Tooltips */
 tooltip.background {
-    background-color: #0f0f17;
-    font-size: 16px;
-    border-radius: 10px;
-    color: #bfc9db;
-    border: 1px solid #bfc9db;
+  background-color: #0f0f17;
+  font-size: 16px;
+  border-radius: 10px;
+  color: #bfc9db;
+  border: 1px solid #bfc9db;
 }
 
 tooltip label {
-    margin: 6px;
+  margin: 6px;
 }
-
 
 /* Workspaces */
 .workspaces {
-    font-weight: normal;
-    margin: 0 0 0 1em;
+  font-weight: normal;
+  margin: 0 0 0 1em;
 }
-    
+
 .workspace-base {
-    margin: 0 0.75em 0 0;
-    color: #3e424f;
+  margin: 0 0.75em 0 0;
+  color: #3e424f;
 }
 
 .workspace-button {
-    color: #bfc9db;
+  color: #bfc9db;
 }
 
+.calendar {
+  border: 1px solid #bfc9db;
+  background-color: #0f0f17;
+  border-radius: 10px;
+}
+
+/* Calendar */
+calendar {
+  padding: 5px 5px 5px 5px;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+calendar:selected {
+  color: #f33e3e;
+}
+
+calendar.header {
+  color: #a1bdce;
+  font-weight: bold;
+}
+
+// Month/Year Buttons
+calendar.button {
+  color: #afbea2;
+}
+
+// Days of the Week
+calendar.highlight {
+  color: #ceb3a1;
+  font-weight: bold;
+}
+
+// Next/Past Month
+calendar:indeterminate {
+  color: #6b6b94;
+}
 
 /* Circle Indicators */
 .progress-circle {
-    margin-left: 16px;
-    background-color: #38384d;
+  margin-left: 16px;
+  background-color: #38384d;
 }
 
 .progress-circle label {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .progress-circle button {
-    margin: 8px;
+  margin: 8px;
 }

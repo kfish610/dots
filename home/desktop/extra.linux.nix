@@ -1,25 +1,37 @@
 { pkgs, config, ... }:
 
 {
-  services.mako.enable = true;
+  home = {
+    packages = with pkgs; [
+      hyprland-workspaces
+    ];
+  };
 
-  programs.kitty = {
-    enable = true;
-    settings = {
-      confirm_os_window_close = 0;
+  services = {
+    hyprpaper.enable = true;
+    hyprpolkitagent.enable = true;
+    mako.enable = true;
+  };
+
+  programs = {
+    kitty = {
+      enable = true;
+      settings = {
+        confirm_os_window_close = 0;
+      };
     };
-  };
 
-  programs.eww = {
-    enable = true;
-    configDir = ./eww;
-  };
+    eww = {
+      enable = true;
+      configDir = ./eww;
+    };
 
-  programs.swaylock = {
-    enable = true;
-    settings = {
-      daemonize = true;
-      ignore-empty-password = true;
+    swaylock = {
+      enable = true;
+      settings = {
+        daemonize = true;
+        ignore-empty-password = true;
+      };
     };
   };
 }

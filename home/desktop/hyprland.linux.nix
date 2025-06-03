@@ -6,17 +6,6 @@
 }:
 
 {
-  home = {
-    packages = with pkgs; [
-      hyprland-workspaces
-    ];
-  };
-
-  services = {
-    hyprpaper.enable = true;
-    hyprpolkitagent.enable = true;
-  };
-
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.variables = [ "--all" ];

@@ -26,22 +26,6 @@
   (workspaces)
 )
 
-(defwidget center []
-  {formattime(EWW_TIME, "%a, %x @ %I:%M %p")}
-)
-
-(defwidget right []
-  (box :class "right"
-    :halign "end"
-    (temp)
-    (memory)
-    (battery)
-    (cpu)
-    (disk)
-  )
-)
-
-
 (defwidget workspaces []
   (eventbox :onscroll "hyprctl dispatch workspace `echo {} | sed 's/up/+/' | sed 's/down/-/'`1"
     (box :class "workspaces" :space-evenly false
@@ -57,6 +41,46 @@
 )
 (deflisten workspaces-json "hyprland-workspaces ALL | jq --unbuffered -c \". | map({ (.id|tostring): . }) | add\"")
 
+
+(defwidget center []
+  (button
+    :onclick "${EWW_CMD} open --toggle calendar"
+    {formattime(EWW_TIME, "%a, %x @ %I:%M %p")}
+  )
+)
+
+
+(defwindow calendar
+  :geometry (geometry
+    :x "0px"
+    :y "15px"
+    :anchor "top center"
+    :width "270px"
+    :height "60px"
+  )
+  
+  :monitor 0
+  :stacking "overlay"
+  (box :class "calendar"
+    (calendar
+      :day {formattime(EWW_TIME, "%d")}
+      :month {formattime(EWW_TIME, "%m")}
+      :year {formattime(EWW_TIME, "%Y")}
+    )
+  )
+)
+
+
+(defwidget right []
+  (box :class "right"
+    :halign "end"
+    (temp)
+    (memory)
+    (battery)
+    (cpu)
+    (disk)
+  )
+)
 
 (defwidget temp []
   (circular
