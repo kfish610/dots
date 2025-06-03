@@ -3,7 +3,7 @@
     :x "0%"
     :y "15px"
     :width "1890px"
-    :height "40px"
+    :height "45px"
     :anchor "top center"
   )
   
@@ -12,7 +12,7 @@
   :exclusive true
   :focusable "none"
   
-  (box
+  (centerbox
     :class "bar"
     :orientation "h"
     (left)
@@ -27,18 +27,17 @@
 )
 
 (defwidget center []
-  "Center"
+  {formattime(EWW_TIME, "%a, %x @ %I:%M %p")}
 )
 
 (defwidget right []
-  (box
+  (box :class "right"
     :halign "end"
-    :valign "fill"
     (temp)
-    (cpu)
     (memory)
-    (disk)
     (battery)
+    (cpu)
+    (disk)
   )
 )
 
@@ -58,30 +57,33 @@
 )
 (deflisten workspaces-json "hyprland-workspaces ALL | jq --unbuffered -c \". | map({ (.id|tostring): . }) | add\"")
 
+
 (defwidget temp []
   (circular
     :value {EWW_TEMPS.CORETEMP_PACKAGE_ID_0}
     :icon ""
     :class "temp"
-    :tooltip "${EWW_TEMPS.CORETEMP_PACKAGE_ID_0}°C"
+    :tooltip "${round(EWW_TEMPS.CORETEMP_PACKAGE_ID_0, 0)}°C"
   )
 )
 
 (defwidget cpu []
   (circular
     :value {EWW_CPU.avg}
-    :icon ""
+    :icon ""
     :class "cpu"
-    :tooltip "${EWW_CPU.avg}%"
+    :tooltip "${round(EWW_CPU.avg, 0)}% used"
   )
 )
 
+(defvar gib 1073741824)
 (defwidget memory []
   (circular
     :value {EWW_RAM.used_mem_perc}
     :icon ""
+    :xalign 0.55
     :class "memory"
-    :tooltip "${EWW_RAM.used_mem}/${EWW_RAM.total_mem}"
+    :tooltip "${round(EWW_RAM.used_mem/gib, 1)}/${round(EWW_RAM.total_mem/gib, 1)} GiB used"
   )
 )
 
@@ -90,7 +92,7 @@
     :value {EWW_DISK["/"].used_perc}
     :icon ""
     :class "disk"
-    :tooltip "${EWW_DISK['/'].used}/${EWW_DISK['/'].total}"
+    :tooltip "${round(EWW_DISK['/'].used/gib, 0)}/${round(EWW_DISK['/'].total/gib, 0)} GiB used"
   )
 )
 
@@ -99,21 +101,21 @@
     :value {EWW_BATTERY.BAT1.capacity}
     :icon "󰂎"
     :class "battery"
-    :tooltip "${EWW_BATTERY.BAT1.capacity}%"
+    :tooltip "${EWW_BATTERY.BAT1.capacity}% charged"
   )
 )
 
-(defwidget circular [?value ?icon ?class ?tooltip]
-  (box :vexpand true
+
+(defwidget circular [?value ?icon ?class ?tooltip ?xalign]
+  (box
     (circular-progress
       :value {value}
       :class "progress-circle ${class}"
       :thickness 3
-      
       (button
         :class "progress-icon ${class}"
         :tooltip {tooltip}
-        {icon}
+        (label :xalign {xalign} :text {icon})
       )
     )
   )

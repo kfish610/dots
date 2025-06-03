@@ -13,7 +13,10 @@
     ];
   };
 
-  services.hyprpaper.enable = true;
+  services = {
+    hyprpaper.enable = true;
+    hyprpolkitagent.enable = true;
+  };
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -25,6 +28,7 @@
         fileManager = "${pkgs.nautilus}/bin/nautilus";
         browser = "${pkgs.google-chrome}/bin/google-chrome-stable";
         menu = "${pkgs.wofi}/bin/wofi";
+        lock = "${pkgs.swaylock}/bin/swaylock";
         mod = "ALT";
         directions = [
           "left"
@@ -38,6 +42,8 @@
         windowrule = [
           "workspace 10, class:discord"
         ];
+
+        debug.disable_logs = false;
 
         monitor = [
           ", preferred, auto, 1"
@@ -92,6 +98,7 @@
             "${mod}, Return, exec, ${terminal}"
             "${mod}, F, exec, ${fileManager}"
             "${mod}, B, exec, ${browser}"
+            "${mod}, L, exec, ${lock}"
 
             "${mod} SHIFT, Space, togglefloating"
             "${mod}, T, togglesplit"
@@ -108,7 +115,7 @@
           ) workspaces;
 
         exec-once = [
-          "${pkgs.swaylock}/bin/swaylock"
+          lock
           "${swayosd}/swayosd-server"
           "${pkgs.discord}/bin/discord"
           "${pkgs.rot8}/bin/rot8 -k"

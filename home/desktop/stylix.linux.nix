@@ -8,9 +8,9 @@
     base16Scheme = {
       base00 = "#0e1920";
       base01 = "#17232b";
-      base02 = "#1b2932";
+      base02 = "#384953";
       base03 = "#5e7887";
-      base04 = "#5e7887";
+      base04 = "#838f96";
       base05 = "#c5cdd3";
       base06 = "#c5cdd3";
       base07 = "#c5cdd3";
@@ -33,6 +33,10 @@
 
     opacity.terminal = 0.8;
 
-    targets.swaylock.enable = false;
+    cursor = {
+      package = pkgs.rose-pine-hyprcursor;
+      name = "rose-pine-hyprcursor";
+      size = 24;
+    };
   };
 }

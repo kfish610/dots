@@ -20,8 +20,6 @@
     settings = {
       daemonize = true;
       ignore-empty-password = true;
-      scaling = "fill";
-      image = "~/.config/background/bg.png";
     };
   };
 }

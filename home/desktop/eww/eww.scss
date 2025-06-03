@@ -1,14 +1,18 @@
-$height: 40px;
-
 * {
 	all: unset;
-	font-family: "FiraCode Nerd Font";
-    font-size: 20px;
+	font-family: "FiraCode Nerd Font Propo";
+    font-size: 22px;
 }
 
 .bar {
-    background-color: rgba(16, 16, 16, 0.8);
+    background-color: rgba(16, 16, 16, 0.6);
     border-radius: 10px;
+}
+
+
+/* Right Side */
+.right {
+    margin-right: 16px;
 }
 
 .battery {
@@ -35,9 +39,19 @@ $height: 40px;
     color: #5998c0;
 }
 
-.box {
-    margin: 0;
+/* Tooltips */
+tooltip.background {
+    background-color: #0f0f17;
+    font-size: 16px;
+    border-radius: 10px;
+    color: #bfc9db;
+    border: 1px solid #bfc9db;
 }
+
+tooltip label {
+    margin: 6px;
+}
+
 
 /* Workspaces */
 .workspaces {
@@ -46,7 +60,7 @@ $height: 40px;
 }
     
 .workspace-base {
-    margin: 0 1em 0 0;
+    margin: 0 0.75em 0 0;
     color: #3e424f;
 }
 
@@ -54,12 +68,17 @@ $height: 40px;
     color: #bfc9db;
 }
 
+
 /* Circle Indicators */
 .progress-circle {
-    margin: 5px;
+    margin-left: 16px;
     background-color: #38384d;
 }
 
-.progress-circle * {
+.progress-circle label {
     font-size: 16px;
+}
+
+.progress-circle button {
+    margin: 8px;
 }
