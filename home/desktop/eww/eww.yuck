@@ -55,30 +55,31 @@
     :x "0px"
     :y "15px"
     :anchor "top center"
-    :width "270px"
-    :height "60px"
   )
   
   :monitor 0
   :stacking "overlay"
-  (box :class "calendar"
-    (calendar
-      :day {formattime(EWW_TIME, "%d")}
-      :month {formattime(EWW_TIME, "%m")}
-      :year {formattime(EWW_TIME, "%Y")}
-    )
-  )
+  
+  (box :class "calendar" (calendar))
 )
 
 
 (defwidget right []
   (box :class "right"
+    :space-evenly false
     :halign "end"
-    (temp)
-    (memory)
-    (battery)
-    (cpu)
-    (disk)
+    
+    (box)
+    (sep)
+    (box
+      (temp)
+      (memory)
+      (battery)
+      (cpu)
+      (disk)
+    )
+    (sep)
+    (box (power))
   )
 )
 
@@ -129,18 +130,27 @@
   )
 )
 
+(defwidget power []
+  (button
+    :onclick "systemctl poweroff"
+    (label :class "power" :text "")
+  )
+)
+
+
+(defwidget sep []
+  (box :class "separator" "   ")
+)
 
 (defwidget circular [?value ?icon ?class ?tooltip ?xalign]
-  (box
-    (circular-progress
-      :value {value}
-      :class "progress-circle ${class}"
-      :thickness 3
-      (button
-        :class "progress-icon ${class}"
-        :tooltip {tooltip}
-        (label :xalign {xalign} :text {icon})
-      )
+  (circular-progress
+    :value {value}
+    :class "progress-circle ${class}"
+    :thickness 3
+    (button
+      :class "${class}"
+      :tooltip {tooltip}
+      (label :xalign {xalign} :text {icon})
     )
   )
 )

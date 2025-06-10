@@ -1,7 +1,9 @@
 {
+  pkgs,
   lib,
   systemInfo,
-  extraModules,
+  extraModules ? [ ],
+  extraPackages ? [ ],
   ...
 }:
 
@@ -49,6 +51,8 @@ in
   imports = extraModules ++ moduleFiles;
 
   home = {
+    packages = extraPackages;
+
     username = "kfish";
     homeDirectory = "/home/kfish";
 

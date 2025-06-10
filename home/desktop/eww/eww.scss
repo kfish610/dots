@@ -5,7 +5,7 @@
 }
 
 .bar {
-  background-color: rgba(16, 16, 16, 0.6);
+  background-color: rgba(18, 24, 28, 0.6);
   border-radius: 10px;
 }
 
@@ -38,9 +38,15 @@
   color: #5998c0;
 }
 
+.power {
+  color: #cf5b6b;
+  margin: 0 8px;
+  font-size: 30px;
+}
+
 /* Tooltips */
 tooltip.background {
-  background-color: #0f0f17;
+  background-color: #0e1920;
   font-size: 16px;
   border-radius: 10px;
   color: #bfc9db;
@@ -66,42 +72,49 @@ tooltip label {
   color: #bfc9db;
 }
 
+/* Calendar */
 .calendar {
   border: 1px solid #bfc9db;
-  background-color: #0f0f17;
+  background-color: #0e1920;
   border-radius: 10px;
+  padding: 10px 10px 5px 10px;
 }
 
-/* Calendar */
 calendar {
-  padding: 5px 5px 5px 5px;
-  font-size: 18px;
-  font-weight: normal;
+  padding: 2px 5px 0 5px;
+  font-size: 20px;
 }
 
 calendar:selected {
-  color: #f33e3e;
+  border-radius: 10px;
+  color: #72c09f;
+  background-color: rgba(64, 64, 64, 0.4);
 }
 
+// Month/Year Text
 calendar.header {
-  color: #a1bdce;
+  color: #eab464;
   font-weight: bold;
-}
-
-// Month/Year Buttons
-calendar.button {
-  color: #afbea2;
 }
 
 // Days of the Week
 calendar.highlight {
-  color: #ceb3a1;
+  color: #5998c0;
   font-weight: bold;
 }
 
-// Next/Past Month
+// Days in Next/Past Month
 calendar:indeterminate {
   color: #6b6b94;
+}
+
+/* Separator */
+.separator {
+  background-color: #bfc9db;
+  font-weight: bold;
+  font-size: 22px;
+  margin: 6px 10px;
+  border-radius: 10px;
 }
 
 /* Circle Indicators */
@@ -112,8 +125,5 @@ calendar:indeterminate {
 
 .progress-circle label {
   font-size: 16px;
-}
-
-.progress-circle button {
   margin: 8px;
 }

@@ -6,17 +6,55 @@
 }:
 
 {
+  home = {
+    packages = with pkgs; [
+      hyprland-workspaces
+    ];
+  };
+
+  services = {
+    hyprpaper.enable = true;
+    hyprpolkitagent.enable = true;
+    mako.enable = true;
+  };
+
+  programs = {
+    eww = {
+      enable = true;
+      configDir = ./eww;
+    };
+
+    fuzzel = {
+      enable = true;
+    };
+
+    kitty = {
+      enable = true;
+      settings = {
+        confirm_os_window_close = 0;
+      };
+    };
+
+    swaylock = {
+      enable = true;
+      settings = {
+        daemonize = true;
+        ignore-empty-password = true;
+      };
+    };
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.variables = [ "--all" ];
     settings =
       let
         swayosd = "${pkgs.swayosd}/bin";
-        terminal = "${pkgs.kitty}/bin/kitty";
+        terminal = "${config.programs.kitty.package}/bin/kitty";
         fileManager = "${pkgs.nautilus}/bin/nautilus";
         browser = "${pkgs.google-chrome}/bin/google-chrome-stable";
-        menu = "${pkgs.wofi}/bin/wofi";
-        lock = "${pkgs.swaylock}/bin/swaylock";
+        menu = "${config.programs.fuzzel.package}/bin/fuzzel";
+        lock = "${config.programs.swaylock.package}/bin/swaylock";
         mod = "ALT";
         directions = [
           "left"
@@ -81,8 +119,7 @@
         bind =
           [
             "${mod} SHIFT, Q, killactive"
-            "${mod} SHIFT, E, exit"
-            "${mod}, Space, exec, ${menu} --show drun"
+            "${mod}, Space, exec, ${menu}"
             "${mod}, Return, exec, ${terminal}"
             "${mod}, F, exec, ${fileManager}"
             "${mod}, B, exec, ${browser}"
