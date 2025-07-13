@@ -11,11 +11,6 @@
         ]
       ))
 
-      # Android
-      android-studio
-      android-tools
-      jdk
-
       # C/C++
       gnumake
       cmake
@@ -31,9 +26,6 @@
       # coqPackages.vscoq-language-server
       # coqPackages.coq-lsp
 
-      # Dart
-      flutter
-
       # Exercism
       exercism
 
@@ -42,6 +34,7 @@
       haskell-language-server
 
       # Java/Scala
+      jdk
       sbt
 
       # LaTeX
@@ -53,6 +46,7 @@
       # Nix
       nil
       nixfmt-rfc-style
+      devenv
 
       # Node
       nodejs_latest
