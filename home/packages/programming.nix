@@ -13,6 +13,8 @@
 
       # Android
       android-studio
+      android-tools
+      jdk
 
       # C/C++
       gnumake
@@ -40,7 +42,6 @@
       haskell-language-server
 
       # Java/Scala
-      jdk11
       sbt
 
       # LaTeX
@@ -59,6 +60,9 @@
       # Python
       python312
       micromamba
+
+      # Qt
+      qt6.qtdeclarative
     ]
     ++ (
       let
