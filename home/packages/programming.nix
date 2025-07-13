@@ -64,7 +64,7 @@
           packages = with pkgs.rPackages; [
             # For the editor
             languageserver
-            httpgd
+            # httpgd
             rmarkdown
 
             # Tidyverse
