@@ -1,6 +1,38 @@
 { pkgs, ... }:
 
+let
+  buildToolsVersion = "35.0.0";
+  androidComposition = pkgs.androidenv.composeAndroidPackages {
+    includeEmulator = true;
+    includeNDK = true;
+    buildToolsVersions = [ buildToolsVersion ];
+    ndkVersion = "28.1.13356709";
+    platformVersions = [ "35" ];
+    abiVersions = [
+      "x86_64"
+      "armeabi-v7a"
+      "arm64-v8a"
+    ];
+    extraLicenses = [
+      "android-googletv-license"
+      "android-sdk-arm-dbt-license"
+      "android-sdk-preview-license"
+      "google-gdk-license"
+      "mips-android-sysimage-license"
+    ];
+  };
+
+  ANDROID_HOME = "${androidComposition.androidsdk}/libexec/android-sdk";
+  ANDROID_NDK_ROOT = "${ANDROID_HOME}/ndk-bundle";
+  GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${ANDROID_HOME}/build-tools/${buildToolsVersion}/aapt2";
+in
 {
+  programs.zsh.sessionVariables = {
+    ANDROID_HOME = ANDROID_HOME;
+    ANDROID_NDK_ROOT = ANDROID_NDK_ROOT;
+    GRADLE_OPTS = GRADLE_OPTS;
+  };
+
   home.packages =
     with pkgs;
     [
@@ -28,6 +60,10 @@
 
       # Exercism
       exercism
+
+      # Flutter
+      flutter
+      androidComposition.androidsdk
 
       # Haskell
       stack
