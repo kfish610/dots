@@ -29,6 +29,7 @@ in
 {
   programs.zsh.sessionVariables = {
     ANDROID_HOME = ANDROID_HOME;
+    ANDROID_SDK_ROOT = ANDROID_HOME;
     ANDROID_NDK_ROOT = ANDROID_NDK_ROOT;
     GRADLE_OPTS = GRADLE_OPTS;
   };
