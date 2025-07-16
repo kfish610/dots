@@ -1,10 +1,11 @@
 { pkgs, ... }:
 
 let
-  buildToolsVersion = "35.0.0";
-  ndkVersion = "28.1.13356709";
+  buildToolsVersion = "34.0.0";
+  ndkVersion = "26.3.11579264";
   androidComposition = pkgs.androidenv.composeAndroidPackages {
     includeNDK = true;
+    includeCmake = true;
     includeEmulator = true;
     includeSystemImages = true;
     systemImageTypes = [
@@ -13,6 +14,7 @@ let
     ];
     buildToolsVersions = [ buildToolsVersion ];
     cmdLineToolsVersion = "8.0";
+    cmakeVersions = [ "3.22.1" ];
     ndkVersion = ndkVersion;
     platformVersions = [ "35" ];
     abiVersions = [
@@ -40,7 +42,7 @@ in
     ANDROID_HOME = ANDROID_HOME;
     ANDROID_SDK_ROOT = ANDROID_HOME;
     ANDROID_NDK_ROOT = "${ANDROID_HOME}/ndk/${ndkVersion}";
-    GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${ANDROID_HOME}/build-tools/${buildToolsVersion}/aapt2";
+    # GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${ANDROID_HOME}/build-tools/${buildToolsVersion}/aapt2";
     QT_QPA_PLATFORM = "wayland;xcb";
   };
 
