@@ -12,12 +12,6 @@
 
     stylix.url = "github:nix-community/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
-
-    iwmenu.url = "github:e-tho/iwmenu";
-    iwmenu.inputs.nixpkgs.follows = "nixpkgs";
-
-    quickshell.url = "git+https://git.outfoxxed.me/quickshell/quickshell";
-    quickshell.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -26,68 +20,50 @@
       home-manager,
       nixos-wsl,
       stylix,
-      iwmenu,
-      quickshell,
       ...
     }:
+    let
+      system = "x86_64-linux";
+      mkHmModule = info: {
+        home-manager.useUserPackages = true;
+
+        # Loads default.nix, which then recursively
+        # loads the contents of the home folder
+        home-manager.users.kfish = import ./home;
+
+        home-manager.extraSpecialArgs = {
+          systemInfo = info;
+        };
+      };
+    in
     {
       nixosConfigurations = {
-        klaptop =
-          let
-            system = "x86_64-linux";
-          in
-          nixpkgs.lib.nixosSystem {
-            system = system;
-            modules = [
-              ./modules/base.nix
-              ./modules/klaptop.nix
+        klaptop = nixpkgs.lib.nixosSystem {
+          system = system;
+          modules = [
+            ./modules/base.nix
+            ./modules/klaptop.nix
 
-              home-manager.nixosModules.home-manager # Not a function call!
-              {
-                home-manager.useUserPackages = true;
-                # Loads default.nix, which then recursively
-                # loads the contents of the home folder
-                home-manager.users.kfish = import ./home;
-                home-manager.extraSpecialArgs = {
-                  systemInfo = [ "linux" ];
-                  extraModules = [ stylix.homeModules.stylix ];
-                  extraPackages = [
-                    iwmenu.packages.${system}.default
-                    quickshell.packages.${system}.default
-                  ];
-                };
-              }
-            ];
-          };
+            home-manager.nixosModules.home-manager
+            (mkHmModule [ "linux" ])
+
+            {
+              home-manager.sharedModules = [ stylix.homeModules.stylix ];
+            }
+          ];
+        };
 
         wsl = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          system = system;
           specialArgs.nixos-wsl = nixos-wsl;
           modules = [
             ./modules/base.nix
+            ./modules/wsl.nix
 
             nixos-wsl.nixosModules.default
-            {
-              networking.hostName = "wsl";
 
-              wsl = {
-                enable = true;
-                defaultUser = "kfish";
-                startMenuLaunchers = true;
-                docker-desktop.enable = true;
-              };
-            }
-
-            home-manager.nixosModules.home-manager # Not a function call!
-            {
-              home-manager.useUserPackages = true;
-              # Loads default.nix, which then recursively
-              # loads the contents of the home folder
-              home-manager.users.kfish = import ./home;
-              home-manager.extraSpecialArgs = {
-                systemInfo = [ "wsl" ];
-              };
-            }
+            home-manager.nixosModules.home-manager
+            (mkHmModule [ "linux" ])
           ];
         };
       };

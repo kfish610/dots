@@ -2,8 +2,6 @@
   pkgs,
   lib,
   systemInfo,
-  extraModules ? [ ],
-  extraPackages ? [ ],
   ...
 }:
 
@@ -48,11 +46,9 @@ let
   moduleFiles = builtins.map (path: ./${path}) (lib.collect lib.isString moduleSet);
 in
 {
-  imports = extraModules ++ moduleFiles;
+  imports = moduleFiles;
 
   home = {
-    packages = extraPackages;
-
     username = "kfish";
     homeDirectory = "/home/kfish";
 

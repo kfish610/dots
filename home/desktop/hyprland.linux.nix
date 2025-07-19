@@ -9,6 +9,8 @@
   home = {
     packages = with pkgs; [
       hyprland-workspaces
+      iwmenu
+      quickshell
     ];
   };
 
