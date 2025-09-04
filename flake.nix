@@ -42,10 +42,33 @@
           system = system;
           modules = [
             ./modules/base.nix
+            ./modules/host.nix
             ./modules/klaptop.nix
 
             home-manager.nixosModules.home-manager
-            (mkHmModule [ "linux" ])
+            (mkHmModule [
+              "linux"
+              "laptop"
+            ])
+
+            {
+              home-manager.sharedModules = [ stylix.homeModules.stylix ];
+            }
+          ];
+        };
+
+        kdesktop = nixpkgs.lib.nixosSystem {
+          system = system;
+          modules = [
+            ./modules/base.nix
+            ./modules/host.nix
+            ./modules/kdesktop.nix
+
+            home-manager.nixosModules.home-manager
+            (mkHmModule [
+              "linux"
+              "desktop"
+            ])
 
             {
               home-manager.sharedModules = [ stylix.homeModules.stylix ];
@@ -63,7 +86,7 @@
             nixos-wsl.nixosModules.default
 
             home-manager.nixosModules.home-manager
-            (mkHmModule [ "linux" ])
+            (mkHmModule [ "wsl" ])
           ];
         };
       };

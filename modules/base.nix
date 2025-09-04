@@ -17,24 +17,11 @@
   };
 
   # Localization
-  time.timeZone = "America/Los_Angeles";
+  time.timeZone = "America/Chicago";
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "us";
 
-  # Required for sway. Also generally useful
-  security.polkit.enable = true;
-
-  # Use Pipewire for audio
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    pulse.enable = true;
-  };
-
-  # Misc. services
-  services.tlp.enable = true;
-  services.printing.enable = true;
+  # Enable SSH
   services.openssh.enable = true;
 
   # Needed for lots of compatibility things!
