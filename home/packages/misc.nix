@@ -79,7 +79,7 @@
     gh
     imagemagick
     jq
-    neofetch
+    fastfetch
     pandoc
     unzip
     xidel
