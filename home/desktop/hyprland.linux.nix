@@ -73,10 +73,6 @@
 
         debug.disable_logs = false;
 
-        monitor = [
-          ", preferred, auto, 1"
-        ];
-
         general = {
           gaps_out = 15;
         };
@@ -118,28 +114,27 @@
           ", XF86AudioMicMute, exec, ${swayosd}/swayosd-client --input-volume mute-toggle"
         ];
 
-        bind =
-          [
-            "${mod} SHIFT, Q, killactive"
-            "${mod}, Space, exec, ${menu}"
-            "${mod}, Return, exec, ${terminal}"
-            "${mod}, F, exec, ${fileManager}"
-            "${mod}, B, exec, ${browser}"
-            "${mod}, L, exec, ${lock}"
+        bind = [
+          "${mod} SHIFT, Q, killactive"
+          "${mod}, Space, exec, ${menu}"
+          "${mod}, Return, exec, ${terminal}"
+          "${mod}, F, exec, ${fileManager}"
+          "${mod}, B, exec, ${browser}"
+          "${mod}, L, exec, ${lock}"
 
-            "${mod} SHIFT, Space, togglefloating"
-            "${mod}, T, togglesplit"
-            "${mod}, G, togglegroup"
+          "${mod} SHIFT, Space, togglefloating"
+          "${mod}, T, togglesplit"
+          "${mod}, G, togglegroup"
 
-            "${mod}, bracketleft, changegroupactive, b"
-            "${mod}, bracketright, changegroupactive, f"
-          ]
-          ++ lib.map (x: "${mod}, ${x}, movefocus, ${lib.substring 0 1 x}") directions
-          ++ lib.map (x: "${mod} SHIFT, ${x}, movewindoworgroup, ${lib.substring 0 1 x}") directions
-          ++ lib.map (x: "${mod}, ${toString (lib.mod x 10)}, workspace, ${toString x}") workspaces
-          ++ lib.map (
-            x: "${mod} SHIFT, ${toString (lib.mod x 10)}, movetoworkspace, ${toString x}"
-          ) workspaces;
+          "${mod}, bracketleft, changegroupactive, b"
+          "${mod}, bracketright, changegroupactive, f"
+        ]
+        ++ lib.map (x: "${mod}, ${x}, movefocus, ${lib.substring 0 1 x}") directions
+        ++ lib.map (x: "${mod} SHIFT, ${x}, movewindoworgroup, ${lib.substring 0 1 x}") directions
+        ++ lib.map (x: "${mod}, ${toString (lib.mod x 10)}, workspace, ${toString x}") workspaces
+        ++ lib.map (
+          x: "${mod} SHIFT, ${toString (lib.mod x 10)}, movetoworkspace, ${toString x}"
+        ) workspaces;
 
         exec-once = [
           "${lock}; ${config.programs.eww.package}/bin/eww daemon && ${config.programs.eww.package}/bin/eww open bar"
