@@ -32,6 +32,7 @@
   ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
+  # boot.kernelParams = [ "i915.force_probe=8086:e20b" ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
