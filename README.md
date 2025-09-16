@@ -61,7 +61,7 @@ Flakes were created primarily to fix the following issues:
 - The proliferation of purpose-specific .nix files like `default.nix`,
   `shell.nix`, etc.
 - Composability and dependency management were somewhat ad-hoc.
-- Channels were difficult to use, especially if the package was not part of 
+- Channels were difficult to use, especially if the package was not part of
   `nixpkgs`.
 - Expressions could be impure, hindering reproducibility.
 
@@ -105,7 +105,7 @@ when I was first learning about flakes:
   want to use `flake-utils.lib.eachDefaultSystem`. This is because the structure
   of these attributes is `packages."<system>"."<name>"`, and you probably don't
   want to manually write a separate attribute for each system. You can also
-  [write your own version of this](https://zero-to-nix.com/concepts/flakes#system-specificity) 
+  [write your own version of this](https://zero-to-nix.com/concepts/flakes#system-specificity)
   pretty easily if you don't want to add another dependency.
 - Flakes need to be turned on. You can do this in your NixOS config as follows:
 
