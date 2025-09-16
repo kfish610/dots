@@ -9,8 +9,8 @@
   home = {
     packages = with pkgs; [
       hyprland-workspaces
-      # iwmenu
-      # quickshell
+      iwmenu
+      quickshell
     ];
   };
 
@@ -89,11 +89,13 @@
         };
 
         gestures = {
-          workspace_swipe = true;
-          workspace_swipe_min_fingers = true;
           workspace_swipe_forever = true;
           workspace_swipe_use_r = true;
         };
+
+        gesture = [
+          "3, horizontal, workspace"
+        ];
 
         group.groupbar.height = 0;
 
