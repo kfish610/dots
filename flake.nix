@@ -42,7 +42,7 @@
           system = system;
           modules = [
             ./modules/base.nix
-            ./modules/host.nix
+            ./modules/linux.nix
             ./modules/klaptop.nix
 
             home-manager.nixosModules.home-manager
@@ -61,7 +61,7 @@
           system = system;
           modules = [
             ./modules/base.nix
-            ./modules/host.nix
+            ./modules/linux.nix
             ./modules/kdesktop.nix
 
             home-manager.nixosModules.home-manager
