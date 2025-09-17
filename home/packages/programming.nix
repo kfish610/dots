@@ -63,10 +63,10 @@ in
     leiningen
     babashka
 
-    # Coq
-    coq
-    # coqPackages.vscoq-language-server
-    # coqPackages.coq-lsp
+    # Rocq
+    rocq-core
+    coqPackages.vscoq-language-server
+    coqPackages.coq-lsp
 
     # Exercism
     exercism
