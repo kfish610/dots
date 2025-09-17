@@ -71,6 +71,7 @@
 
     # Tools
     gh
+    git-crypt
     imagemagick
     jq
     fastfetch
