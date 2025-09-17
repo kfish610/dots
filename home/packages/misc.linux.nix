@@ -8,22 +8,17 @@
     [
       brightnessctl
       discord
+      gimp
+      godot_4
       gparted
-      # musescore
-      openconnect
+      obsidian
       remmina
+      rnote
       slack
       spotify
       sway-contrib.grimshot
       vscode
       zoom-us
-
-      godot_4
-      gimp
-
-      rnote
-
-      obsidian
 
       # Fonts
       dejavu_fonts
