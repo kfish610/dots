@@ -13,12 +13,10 @@
       openconnect
       remmina
       slack
+      spotify
       sway-contrib.grimshot
       vscode
       zoom-us
-      # postman
-      teams-for-linux
-      networkmanager-openconnect
 
       godot_4
       gimp
