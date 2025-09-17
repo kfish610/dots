@@ -1,8 +1,10 @@
 { pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.android_sdk.accept_license = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    android_sdk.accept_license = true;
+  };
 
   programs = {
     direnv = {
