@@ -53,14 +53,6 @@
           proxyCommand = "ssh unity './vscode.sh gpu-preempt'";
           extraOptions.StrictHostKeyChecking = "no";
         };
-        "south" = {
-          hostname = "south.ucsd.edu";
-          user = "ubuntu";
-          identityFile = "~/.ssh/ucsd";
-          identitiesOnly = true;
-          forwardAgent = true;
-          port = 17400;
-        };
       };
     };
 
