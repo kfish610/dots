@@ -17,6 +17,12 @@ Since this is a flake, we can no longer update our installation with
 have little use for channels, unless you want to use `nix-shell`. Instead,
 update by running `nix flake update` before rebuilding.
 
+There are some files encrypted with git-crypt in this repository (mainly a .deb
+file which is not free), so to unlock it, one needs to use the base64 encoded key,
+which is exported by `git-crypt export-key - | base64 | wl-copy`, and is used with
+`wl-paste | base64 -d | git-crypt unlock -`. The base64 encoding is only for easy
+storage and transport within, for example, a password manager.
+
 ## Architecture & Rationale
 
 Typically, NixOS configurations are set up with modules and submodules, which
