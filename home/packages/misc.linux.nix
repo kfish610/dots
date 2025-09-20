@@ -19,18 +19,16 @@
     wl-clipboard
     zoom-us
 
-    (wonderdraft.overrideAttrs (
-      final: prev: {
-        # Put back together the split .deb (it was too large for GitHub)
-        src = pkgs.stdenv.mkDerivation {
-          name = "wonderdraft.deb";
-          src = ../../secrets/wonderdraft;
-          buildPhase = ''
-            cat $src/* > $out
-          '';
-        };
-      }
-    ))
+    (wonderdraft.overrideAttrs (old: {
+      # Put back together the split .deb (it was too large for GitHub)
+      src = pkgs.stdenv.mkDerivation {
+        name = "wonderdraft.deb";
+        src = ../../secrets/wonderdraft;
+        buildPhase = ''
+          cat $src/* > $out
+        '';
+      };
+    }))
 
     # Fonts
     dejavu_fonts
