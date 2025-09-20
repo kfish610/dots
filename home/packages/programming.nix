@@ -90,7 +90,7 @@ in
     elan
 
     # Nix
-    nil
+    nixd
     nixfmt-rfc-style
     devenv
 
