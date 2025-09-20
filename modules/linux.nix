@@ -1,13 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 
 {
-  # Use iwd for networking
-  networking.wireless.iwd.enable = true;
+  # Use networkmanager for networking
+  networking.networkmanager.enable = true;
+  users.groups.networkmanager.members = [ "kfish" ];
 
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
