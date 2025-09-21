@@ -1,6 +1,8 @@
 { ... }:
 
 {
+  imports = [ ./base.nix ];
+
   networking.hostName = "wsl";
 
   wsl = {

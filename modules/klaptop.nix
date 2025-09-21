@@ -5,6 +5,8 @@
 }:
 
 {
+  imports = [ ./linux.nix ];
+
   networking.hostName = "klaptop";
 
   # Logitech/Solaar

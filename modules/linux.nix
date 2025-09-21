@@ -1,7 +1,10 @@
 { pkgs, ... }:
 
 {
-  imports = [ ./stylix ];
+  imports = [
+    ./stylix
+    ./base.nix
+  ];
 
   # Use networkmanager for networking
   networking.networkmanager.enable = true;

@@ -45,8 +45,6 @@
         klaptop = nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
-            ./modules/base.nix
-            ./modules/linux.nix
             ./modules/klaptop.nix
 
             home-manager.nixosModules.home-manager
@@ -63,8 +61,6 @@
         kdesktop = nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
-            ./modules/base.nix
-            ./modules/linux.nix
             ./modules/kdesktop.nix
 
             home-manager.nixosModules.home-manager
@@ -82,7 +78,6 @@
           system = system;
           specialArgs.nixos-wsl = nixos-wsl;
           modules = [
-            ./modules/base.nix
             ./modules/wsl.nix
 
             nixos-wsl.nixosModules.default
