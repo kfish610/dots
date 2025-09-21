@@ -12,6 +12,9 @@
 
     stylix.url = "github:nix-community/stylix";
     stylix.inputs.nixpkgs.follows = "nixpkgs";
+
+    niri-flake.url = "github:sodiboo/niri-flake";
+    niri-flake.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -20,6 +23,7 @@
       home-manager,
       nixos-wsl,
       stylix,
+      niri-flake,
       ...
     }:
     let
@@ -51,9 +55,8 @@
               "laptop"
             ])
 
-            {
-              home-manager.sharedModules = [ stylix.homeModules.stylix ];
-            }
+            stylix.nixosModules.stylix
+            niri-flake.nixosModules.niri
           ];
         };
 
@@ -70,9 +73,8 @@
               "desktop"
             ])
 
-            {
-              home-manager.sharedModules = [ stylix.homeModules.stylix ];
-            }
+            stylix.nixosModules.stylix
+            niri-flake.nixosModules.niri
           ];
         };
 

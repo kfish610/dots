@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  imports = [ ./stylix ];
+
   # Use networkmanager for networking
   networking.networkmanager.enable = true;
   users.groups.networkmanager.members = [ "kfish" ];
@@ -13,11 +15,11 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd}/bin/agreety --cmd Hyprland";
+        command = "${pkgs.greetd}/bin/agreety --cmd niri";
       };
       initial_session = {
         user = "kfish";
-        command = "Hyprland";
+        command = "niri";
       };
     };
   };
@@ -40,7 +42,7 @@
 
   # Programs that have to be enabled in the system config to work properly
   programs = {
-    hyprland.enable = true;
+    niri.enable = true;
 
     wireshark = {
       enable = true;
