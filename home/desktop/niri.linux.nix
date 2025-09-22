@@ -6,23 +6,22 @@
 }:
 
 {
-  home.packages = with pkgs; [ quickshell ];
-
   services = {
     mako.enable = true;
     wpaperd.enable = true;
   };
 
   programs = {
-    fuzzel = {
+    fuzzel.enable = true;
+
+    eww = {
       enable = true;
+      configDir = ./eww;
     };
 
     kitty = {
       enable = true;
-      settings = {
-        confirm_os_window_close = 0;
-      };
+      settings.confirm_os_window_close = 0;
     };
 
     swaylock = {
