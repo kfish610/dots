@@ -39,7 +39,7 @@ Scope {
                 id: rect
 
                 anchors.fill: parent
-                color: "#9912181c"
+                color: '#d012181c'
                 visible: false
             }
 
