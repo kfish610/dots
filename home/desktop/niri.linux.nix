@@ -39,6 +39,7 @@
       terminal = "${config.programs.kitty.package}/bin/kitty";
       menu = "${config.programs.fuzzel.package}/bin/fuzzel";
       lock = "${config.programs.swaylock.package}/bin/swaylock";
+      eww = "${config.programs.eww.package}/bin/eww";
       workspaces = lib.range 1 10;
     in
     {
@@ -84,7 +85,9 @@
       ];
 
       spawn-at-startup = [
-        { argv = [ lock ]; }
+        {
+          sh = "${lock}; ${eww} daemon && ${eww} open bar";
+        }
         { argv = [ "${swayosd}/swayosd-server" ]; }
         { argv = [ "${pkgs.discord}/bin/discord" ]; }
         {
