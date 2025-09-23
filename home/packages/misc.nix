@@ -33,7 +33,7 @@
           user = "kfisher_access-ci_org";
           forwardAgent = true;
         };
-        "*.unity.rc.umass.edu" = rec {
+        "*.unity.rc.umass.edu" = {
           user = "kfisher_access-ci_org";
           forwardAgent = true;
           proxyJump = "unity";
