@@ -52,16 +52,8 @@
         mod-key-nested = "Super";
       };
 
-      layout = rec {
+      layout = {
         gaps = 15;
-
-        preset-column-widths = [
-          { proportion = 1. / 3.; }
-          { proportion = 1. / 2.; }
-          { proportion = 2. / 3.; }
-        ];
-
-        preset-window-heights = preset-column-widths;
 
         border.enable = false;
         focus-ring = with config.lib.stylix.colors.withHashtag; {
@@ -130,8 +122,14 @@
           "Mod+Comma".action = consume-or-expel-window-left;
           "Mod+Period".action = consume-or-expel-window-right;
 
-          "Mod+D".action = switch-preset-column-width;
+          "Mod+A".action = set-column-width "${toString (1. / 3. * 100)}%";
+          "Mod+S".action = set-column-width "${toString (1. / 2. * 100)}%";
+          "Mod+D".action = set-column-width "${toString (2. / 3. * 100)}%";
           "Mod+F".action = maximize-column;
+
+          "Mod+Shift+A".action = set-window-height "${toString (1. / 3. * 100)}%";
+          "Mod+Shift+S".action = set-window-height "${toString (1. / 2. * 100)}%";
+          "Mod+Shift+D".action = set-window-height "${toString (2. / 3. * 100)}%";
           "Mod+Shift+F".action = fullscreen-window;
 
           "Mod+Minus".action = set-column-width "-10%";
@@ -148,7 +146,7 @@
           "Mod+Space".action = spawn menu;
           "Mod+Return".action = spawn terminal;
           "Mod+L".action = spawn lock;
-          "Mod+Shift+S".action = screenshot;
+          "Print".action = screenshot;
 
           "XF86AudioMute".action = spawn "${swayosd}/swayosd-client" "--output-volume" "mute-toggle";
           "XF86AudioMicMute".action = spawn "${swayosd}/swayosd-client" "--input-volume" "mute-toggle";
