@@ -4,7 +4,9 @@
   font-size: 22px;
 }
 
-.bar {
+.bar,
+.bar0,
+.bar1 {
   background-color: rgba(18, 24, 28, 0.6);
   border-radius: 10px;
 }
@@ -63,12 +65,13 @@ tooltip label {
   margin: 0 0 0 1em;
 }
 
-.workspace-base {
+.workspaces button {
   margin: 0 0.75em 0 0;
   color: #3e424f;
 }
 
-.workspace-button {
+button.workspace-active {
+  margin: 0 0.75em 0 0;
   color: #bfc9db;
 }
 

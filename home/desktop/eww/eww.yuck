@@ -15,31 +15,77 @@
   (centerbox
     :class "bar"
     :orientation "h"
-    (left)
+    (left :monitor "eDP-1")
     (center)
     (right)
   )
 )
 
-
-(defwidget left []
-  (workspaces)
+(defwindow bar0
+  :geometry (geometry
+    :x "0%"
+    :y "15px"
+    :width "2530px"
+    :height "45px"
+    :anchor "top center"
+  )
+  
+  :monitor 0
+  :stacking "fg"
+  :exclusive true
+  :focusable "none"
+  
+  (centerbox
+    :class "bar"
+    :orientation "h"
+    (left :monitor "DP-2")
+    (center)
+    (right)
+  )
 )
 
-(defwidget workspaces []
-  (eventbox :onscroll "hyprctl dispatch workspace `echo {} | sed 's/up/+/' | sed 's/down/-/'`1"
+(defwindow bar1
+  :geometry (geometry
+    :x "0%"
+    :y "15px"
+    :width "1050px"
+    :height "45px"
+    :anchor "top center"
+  )
+  
+  :monitor 1
+  :stacking "fg"
+  :exclusive true
+  :focusable "none"
+  
+  (centerbox
+    :class "bar"
+    :orientation "h"
+    (left :monitor "DP-4")
+    (box)
+    (right)
+  )
+)
+
+
+(defwidget left [?monitor]
+  (workspaces :monitor monitor)
+)
+
+(defwidget workspaces [?monitor]
+  (eventbox :onscroll "niri msg action focus-workspace-{}"
     (box :class "workspaces" :space-evenly false
       (for i in `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]`
         (button
-          :onclick "hyprctl dispatch workspace ${i}"
-          :class "workspace-base ${workspaces-json?.[i]?.class}"
-          {(workspaces-json?.[i]?.active ?: false) ? "" : ""}
+          :onclick "niri msg action focus-workspace ${i}"
+          :class {workspaces-json?.[monitor]?.[i]?.is_active ? "workspace-active" : ""}
+          {workspaces-json?.[monitor]?.[i]?.active_window_id != "null" ? "" : ""}
         )
       )
     )
   )
 )
-(deflisten workspaces-json "hyprland-workspaces ALL | jq --unbuffered -c \". | map({ (.id|tostring): . }) | add\"")
+(defpoll workspaces-json :interval "1s" "niri msg -j workspaces | jq 'group_by(.output) | map({key: .[0].output, value: (. | sort_by(.idx) | [null] + .)}) | from_entries'")
 
 
 (defwidget center []
