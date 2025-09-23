@@ -127,8 +127,8 @@
           "Mod+Shift+Ctrl+Up".action = move-column-to-workspace-up;
           "Mod+Shift+Ctrl+Down".action = move-column-to-workspace-down;
 
-          "Mod+Comma".action = consume-window-into-column;
-          "Mod+Period".action = expel-window-from-column;
+          "Mod+Comma".action = consume-or-expel-window-left;
+          "Mod+Period".action = consume-or-expel-window-right;
 
           "Mod+D".action = switch-preset-column-width;
           "Mod+F".action = maximize-column;
