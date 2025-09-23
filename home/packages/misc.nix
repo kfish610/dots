@@ -26,6 +26,7 @@
 
     ssh = {
       enable = true;
+      enableDefaultConfig = false; # Remove once this is deprecated
       matchBlocks = {
         "unity" = {
           hostname = "unity.rc.umass.edu";
