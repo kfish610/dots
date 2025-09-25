@@ -7,7 +7,10 @@
   ];
 
   # Use networkmanager for networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    plugins = [ pkgs.networkmanager-openconnect ];
+  };
   users.groups.networkmanager.members = [ "kfish" ];
 
   # Enable Bluetooth
