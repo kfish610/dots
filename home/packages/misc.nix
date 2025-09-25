@@ -28,6 +28,16 @@
       enable = true;
       enableDefaultConfig = false; # Remove once this is deprecated
       matchBlocks = {
+        "lambda" = {
+          user = "kfish";
+          hostname = "localhost";
+          port = 8888;
+          proxyJump = "alnilam";
+        };
+        "alnilam" = {
+          hostname = "150.136.100.250";
+          user = "pipe";
+        };
         "unity" = {
           hostname = "unity.rc.umass.edu";
           user = "kfisher_access-ci_org";
