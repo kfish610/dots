@@ -20,7 +20,13 @@
   hardware.enableRedistributableFirmware = true;
 
   # Use systemd-boot under UEFI
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot = {
+    enable = true;
+    windows."11" = {
+      efiDeviceHandle = "HD0b";
+      sortKey = "0_windows";
+    };
+  };
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.availableKernelModules = [
