@@ -99,7 +99,7 @@ in
 
     # Python
     python312
-    micromamba
+    uv
 
     # Qt
     qt6.qtdeclarative
