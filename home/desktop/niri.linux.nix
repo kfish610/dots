@@ -75,7 +75,7 @@
           lock = "${config.programs.swaylock.package}/bin/swaylock";
         in
         [
-          { sh = "${lock}; dms run"; }
+          { argv = [ lock ]; }
           { argv = [ "${swayosd}/swayosd-server" ]; }
           { argv = [ "${pkgs.discord}/bin/discord" ]; }
           {
@@ -88,6 +88,12 @@
             argv = [
               "wpaperd"
               "-d"
+            ];
+          }
+          {
+            argv = [
+              "dms"
+              "run"
             ];
           }
         ];
