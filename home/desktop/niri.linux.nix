@@ -12,6 +12,8 @@
   };
 
   programs = {
+    dankMaterialShell.enable = true;
+
     fuzzel.enable = true;
 
     eww = {
@@ -75,22 +77,27 @@
         }
       ];
 
-      spawn-at-startup = [
-        { argv = [ "${swayosd}/swayosd-server" ]; }
-        { argv = [ "${pkgs.discord}/bin/discord" ]; }
-        {
-          argv = [
-            "${pkgs.google-chrome}/bin/google-chrome-stable"
-            "--profile-directory=Default"
-          ];
-        }
-        {
-          argv = [
-            "wpaperd"
-            "-d"
-          ];
-        }
-      ];
+      spawn-at-startup =
+        let
+          lock = "${config.programs.swaylock.package}/bin/swaylock";
+        in
+        [
+          { sh = "${lock}; dms run"; }
+          { argv = [ "${swayosd}/swayosd-server" ]; }
+          { argv = [ "${pkgs.discord}/bin/discord" ]; }
+          {
+            argv = [
+              "${pkgs.google-chrome}/bin/google-chrome-stable"
+              "--profile-directory=Default"
+            ];
+          }
+          {
+            argv = [
+              "wpaperd"
+              "-d"
+            ];
+          }
+        ];
 
       binds =
         with config.lib.niri.actions;

@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 
 {
   programs.niri.settings = {
@@ -36,16 +36,5 @@
         open-on-output = "DP-4";
       }
     ];
-
-    spawn-at-startup =
-      let
-        lock = "${config.programs.swaylock.package}/bin/swaylock";
-        eww = "${config.programs.eww.package}/bin/eww";
-      in
-      [
-        {
-          sh = "${lock}; ${eww} daemon && ${eww} open-many bar0 bar1";
-        }
-      ];
   };
 }
