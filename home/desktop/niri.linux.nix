@@ -153,8 +153,8 @@
           "XF86AudioRaiseVolume".action = dms-ipc "audio" "increment" "3";
           "XF86AudioLowerVolume".action = dms-ipc "audio" "decrement" "3";
 
-          "XF86MonBrightnessUp".action = dms-ipc "brightness" "increment" "5";
-          "XF86MonBrightnessDown".action = dms-ipc "brightness" "decrement" "5";
+          "XF86MonBrightnessUp".action = dms-ipc "brightness" "increment" "5" "";
+          "XF86MonBrightnessDown".action = dms-ipc "brightness" "decrement" "5" "";
         }
         // lib.foldl' (
           acc: x:
