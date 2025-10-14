@@ -12,8 +12,6 @@
   };
 
   programs = {
-    fuzzel.enable = true;
-
     kitty = {
       enable = true;
       settings.confirm_os_window_close = 0;
@@ -30,9 +28,7 @@
 
   programs.niri.settings =
     let
-      swayosd = "${pkgs.swayosd}/bin";
       terminal = "${config.programs.kitty.package}/bin/kitty";
-      menu = "${config.programs.fuzzel.package}/bin/fuzzel";
       lock = "${config.programs.swaylock.package}/bin/swaylock";
       workspaces = lib.range 1 10;
     in
@@ -76,7 +72,6 @@
         in
         [
           { argv = [ lock ]; }
-          { argv = [ "${swayosd}/swayosd-server" ]; }
           { argv = [ "${pkgs.discord}/bin/discord" ]; }
           {
             argv = [
@@ -100,6 +95,9 @@
 
       binds =
         with config.lib.niri.actions;
+        let
+          dms-ipc = spawn "dms" "ipc";
+        in
         {
           "Mod+Left".action = focus-column-or-monitor-left;
           "Mod+Right".action = focus-column-or-monitor-right;
@@ -143,20 +141,20 @@
           "Mod+Shift+Space".action = toggle-window-floating;
 
           "Mod+Shift+Q".action = close-window;
-          "Mod+Shift+E".action = quit;
+          "Mod+Shift+E".action = dms-ipc "powermenu" "toggle"; # open power menu
 
-          "Mod+Space".action = spawn menu;
+          "Mod+Space".action = dms-ipc "spotlight" "toggle"; # open app menu
           "Mod+Return".action = spawn terminal;
           "Mod+L".action = spawn lock;
           "Print".action = screenshot;
 
-          "XF86AudioMute".action = spawn "${swayosd}/swayosd-client" "--output-volume" "mute-toggle";
-          "XF86AudioMicMute".action = spawn "${swayosd}/swayosd-client" "--input-volume" "mute-toggle";
-          "XF86AudioRaiseVolume".action = spawn "${swayosd}/swayosd-client" "--output-volume" "raise";
-          "XF86AudioLowerVolume".action = spawn "${swayosd}/swayosd-client" "--output-volume" "lower";
+          "XF86AudioMute".action = dms-ipc "audio" "mute";
+          "XF86AudioMicMute".action = dms-ipc "audio" "micmute";
+          "XF86AudioRaiseVolume".action = dms-ipc "audio" "increment" "3";
+          "XF86AudioLowerVolume".action = dms-ipc "audio" "decrement" "3";
 
-          "XF86MonBrightnessUp".action = spawn "${swayosd}/swayosd-client" "--brightness" "raise";
-          "XF86MonBrightnessDown".action = spawn "${swayosd}/swayosd-client" "--brightness" "lower";
+          "XF86MonBrightnessUp".action = dms-ipc "brightness" "increment" "5";
+          "XF86MonBrightnessDown".action = dms-ipc "brightness" "decrement" "5";
         }
         // lib.foldl' (
           acc: x:
