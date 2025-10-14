@@ -25,6 +25,9 @@
   # Use systemd-boot under UEFI
   boot.loader.systemd-boot = {
     enable = true;
+    extraInstallCommands = ''
+      echo "auto-entries false" >> /boot/loader/loader.conf
+    '';
     windows."11" = {
       efiDeviceHandle = "HD0b";
       sortKey = "0_windows";
