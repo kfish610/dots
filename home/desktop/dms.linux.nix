@@ -161,10 +161,6 @@
           enabled = true;
         }
         {
-          id = "vpn";
-          enabled = true;
-        }
-        {
           id = "controlCenterButton";
           enabled = true;
         }
