@@ -9,6 +9,9 @@
 
   networking.hostName = "klaptop";
 
+  # For dms battery status
+  services.upower.enable = true;
+
   # Logitech/Solaar
   hardware.logitech.wireless = {
     enable = true;

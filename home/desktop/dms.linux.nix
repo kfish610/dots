@@ -27,7 +27,7 @@
         {
           id = "brightnessSlider";
           enabled = true;
-          width = 10;
+          width = 100;
         }
         {
           id = "volumeSlider";
