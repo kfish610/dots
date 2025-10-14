@@ -16,11 +16,6 @@
 
     fuzzel.enable = true;
 
-    eww = {
-      enable = true;
-      configDir = ./eww;
-    };
-
     kitty = {
       enable = true;
       settings.confirm_os_window_close = 0;
