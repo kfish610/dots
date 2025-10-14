@@ -12,8 +12,6 @@
   };
 
   programs = {
-    dankMaterialShell.enable = true;
-
     fuzzel.enable = true;
 
     kitty = {
