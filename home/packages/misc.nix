@@ -86,6 +86,7 @@
     imagemagick
     jq
     fastfetch
+    nix-index
     pandoc
     unzip
     xidel
