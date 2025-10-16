@@ -6,10 +6,7 @@
 }:
 
 {
-  services = {
-    mako.enable = true;
-    wpaperd.enable = true;
-  };
+  services.wpaperd.enable = true;
 
   programs = {
     kitty = {
