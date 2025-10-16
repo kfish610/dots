@@ -6,6 +6,8 @@
     ./base.nix
   ];
 
+  time.hardwareClockInLocalTime = true;
+
   # Use networkmanager for networking
   networking.networkmanager = {
     enable = true;
