@@ -143,7 +143,7 @@
           "Mod+Space".action = dms-ipc "spotlight" "toggle"; # open app menu
           "Mod+Return".action = spawn terminal;
           "Mod+L".action = spawn lock;
-          "Print".action = screenshot;
+          "Print".action.screenshot = [ ];
 
           "XF86AudioMute".action = dms-ipc "audio" "mute";
           "XF86AudioMicMute".action = dms-ipc "audio" "micmute";

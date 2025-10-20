@@ -15,9 +15,9 @@
     git = {
       enable = true;
       lfs.enable = true;
-      userName = "Kevin Fisher";
-      userEmail = "kfish610@gmail.com";
-      extraConfig = {
+      settings = {
+        user.name = "Kevin Fisher";
+        user.email = "kfish610@gmail.com";
         pull.ff = "only";
         core.autocrlf = "false";
         init.defaultBranch = "main";
