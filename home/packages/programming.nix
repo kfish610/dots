@@ -13,6 +13,9 @@
       ]
     ))
 
+    # Android
+    android-studio
+
     # C/C++
     gnumake
     cmake
