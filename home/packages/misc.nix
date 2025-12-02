@@ -33,6 +33,7 @@
           hostname = "localhost";
           port = 8888;
           proxyJump = "alnilam";
+          forwardAgent = true;
         };
         "alnilam" = {
           hostname = "150.136.100.250";
