@@ -15,6 +15,7 @@
 
     # Android
     android-studio
+    android-tools
 
     # C/C++
     gnumake
@@ -50,7 +51,7 @@
 
     # Nix
     nixd
-    nixfmt-rfc-style
+    nixfmt
     devenv
 
     # Node

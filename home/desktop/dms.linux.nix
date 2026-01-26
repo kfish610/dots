@@ -1,9 +1,9 @@
 { ... }:
 
 {
-  programs.dankMaterialShell = {
+  programs.dank-material-shell = {
     enable = true;
-    default.settings = {
+    settings = {
       currentThemeName = "blue";
       dankBarTransparency = 0.95;
       dankBarWidgetTransparency = 1;

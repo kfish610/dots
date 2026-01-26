@@ -16,8 +16,8 @@
     niri-flake.url = "github:sodiboo/niri-flake";
     niri-flake.inputs.nixpkgs.follows = "nixpkgs";
 
-    dankMaterialShell.url = "github:AvengeMedia/DankMaterialShell";
-    dankMaterialShell.inputs.nixpkgs.follows = "nixpkgs";
+    dank-material-shell.url = "github:AvengeMedia/DankMaterialShell";
+    dank-material-shell.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -27,7 +27,7 @@
       nixos-wsl,
       stylix,
       niri-flake,
-      dankMaterialShell,
+      dank-material-shell,
       ...
     }:
     let
@@ -60,7 +60,7 @@
             stylix.nixosModules.stylix
             niri-flake.nixosModules.niri
 
-            { home-manager.sharedModules = [ dankMaterialShell.homeModules.dankMaterialShell.default ]; }
+            { home-manager.sharedModules = [ dank-material-shell.homeModules.dank-material-shell ]; }
           ];
         };
 
@@ -78,7 +78,7 @@
             stylix.nixosModules.stylix
             niri-flake.nixosModules.niri
 
-            { home-manager.sharedModules = [ dankMaterialShell.homeModules.dankMaterialShell.default ]; }
+            { home-manager.sharedModules = [ dank-material-shell.homeModules.dank-material-shell ]; }
           ];
         };
 

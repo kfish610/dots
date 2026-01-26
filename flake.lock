@@ -68,7 +68,7 @@
         "type": "github"
       }
     },
-    "dankMaterialShell": {
+    "dank-material-shell": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -336,7 +336,7 @@
     "quickshell": {
       "inputs": {
         "nixpkgs": [
-          "dankMaterialShell",
+          "dank-material-shell",
           "nixpkgs"
         ]
       },
@@ -357,7 +357,7 @@
     },
     "root": {
       "inputs": {
-        "dankMaterialShell": "dankMaterialShell",
+        "dank-material-shell": "dank-material-shell",
         "home-manager": "home-manager",
         "niri-flake": "niri-flake",
         "nixos-wsl": "nixos-wsl",
