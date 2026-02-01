@@ -63,5 +63,8 @@
 
     # Qt
     qt6.qtdeclarative
+
+    # Web
+    insomnia
   ];
 }
