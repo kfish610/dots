@@ -5,6 +5,8 @@
     QT_QPA_PLATFORM = "wayland;xcb";
   };
 
+  programs.opam.enable = true;
+
   home.packages = with pkgs; [
     # Agda
     (agda.withPackages (
@@ -30,7 +32,6 @@
     # Rocq
     rocq-core
     rocqPackages.vsrocq-language-server
-    rocqPackages.mathcomp-field
     coqPackages.coq-lsp
 
     # Exercism
