@@ -30,6 +30,7 @@
     # Rocq
     rocq-core
     rocqPackages.vsrocq-language-server
+    rocqPackages.mathcomp-field
     coqPackages.coq-lsp
 
     # Exercism
