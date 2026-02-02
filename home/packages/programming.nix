@@ -29,7 +29,7 @@
 
     # Rocq
     rocq-core
-    coqPackages.vscoq-language-server
+    rocqPackages.vsrocq-language-server
     coqPackages.coq-lsp
 
     # Exercism
