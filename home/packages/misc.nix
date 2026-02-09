@@ -84,6 +84,7 @@
     # Tools
     gh
     git-crypt
+    graphviz
     imagemagick
     jq
     fastfetch
