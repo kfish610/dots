@@ -5,6 +5,8 @@
     QT_QPA_PLATFORM = "wayland;xcb";
   };
 
+  programs.opam.enable = true;
+
   home.packages = with pkgs; [
     # Agda
     (agda.withPackages (
@@ -15,6 +17,7 @@
 
     # Android
     android-studio
+    android-tools
 
     # C/C++
     gnumake
@@ -28,7 +31,7 @@
 
     # Rocq
     rocq-core
-    coqPackages.vscoq-language-server
+    rocqPackages.vsrocq-language-server
     coqPackages.coq-lsp
 
     # Exercism
@@ -50,7 +53,7 @@
 
     # Nix
     nixd
-    nixfmt-rfc-style
+    nixfmt
     devenv
 
     # Node
@@ -62,5 +65,8 @@
 
     # Qt
     qt6.qtdeclarative
+
+    # Web
+    insomnia
   ];
 }

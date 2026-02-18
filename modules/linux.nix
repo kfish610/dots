@@ -50,7 +50,6 @@
 
   # Programs that have to be enabled in the system config to work properly
   programs = {
-    adb.enable = true;
 
     niri.enable = true;
 

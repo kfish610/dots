@@ -1,5 +1,5 @@
 { ... }:
 
 {
-  programs.dankMaterialShell.default.settings.screenPreferences.dankBar = [ "DP-2" ];
+  programs.dank-material-shell.settings.screenPreferences.dankBar = [ "DP-2" ];
 }
