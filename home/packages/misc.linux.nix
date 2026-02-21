@@ -41,6 +41,5 @@
     material-design-icons
     font-awesome
     noto-fonts
-    noto-fonts-extra
   ];
 }
