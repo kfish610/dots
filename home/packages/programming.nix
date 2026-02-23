@@ -59,6 +59,9 @@
     # Node
     nodejs_latest
 
+    # OCaml
+    dune
+
     # Python
     python312
     uv
