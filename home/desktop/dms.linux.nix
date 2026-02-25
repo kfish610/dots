@@ -3,12 +3,13 @@
 {
   programs.dank-material-shell = {
     enable = true;
+
+    # khal current doesn't build, and I don't use this anyway.
+    enableCalendarEvents = false;
+
     settings = {
-      currentThemeName = "blue";
       dankBarTransparency = 0.95;
       dankBarWidgetTransparency = 1;
-      popupTransparency = 1;
-      dockTransparency = 1;
 
       use24HourClock = false;
       useFahrenheit = true;
@@ -170,8 +171,6 @@
 
       networkPreference = "auto";
 
-      fontFamily = "Inter Variable";
-      monoFontFamily = "Fira Code";
       fontWeight = 400;
       fontScale = 1;
       dankBarFontScale = 1;

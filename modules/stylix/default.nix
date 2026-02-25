@@ -26,9 +26,15 @@
 
     image = ./CelesteCh8.png;
 
-    fonts.monospace = {
-      package = pkgs.nerd-fonts.fira-code;
-      name = "FiraCode Nerd Font Mono";
+    fonts = {
+      sansSerif = {
+        package = pkgs.inter;
+        name = "Inter Variable";
+      };
+      monospace = {
+        package = pkgs.nerd-fonts.fira-code;
+        name = "FiraCode Nerd Font Mono";
+      };
     };
 
     opacity.terminal = 0.8;
