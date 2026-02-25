@@ -67,7 +67,6 @@
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      intel-ocl
       intel-compute-runtime
       intel-compute-runtime.drivers
       intel-media-driver
