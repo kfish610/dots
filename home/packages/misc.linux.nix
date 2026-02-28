@@ -9,6 +9,7 @@
     gimp
     godot_4
     gparted
+    loupe
     networkmanagerapplet
     obsidian
     remmina
