@@ -19,6 +19,7 @@
         user.name = "Kevin Fisher";
         user.email = "kfish610@gmail.com";
         pull.ff = "only";
+        push.autoSetupRemote = true;
         core.autocrlf = "false";
         init.defaultBranch = "main";
       };
