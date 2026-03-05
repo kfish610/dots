@@ -20,7 +20,9 @@
     termius
     vscode
     wl-clipboard
-    zoom-us
+
+    # I'd like to get this working again, but I'll need to read through https://github.com/NixOS/nixpkgs/issues/9415 and https://github.com/NixOS/nixpkgs/issues/267663
+    # zoom-us
 
     (wonderdraft.overrideAttrs (old: {
       # Put back together the split .deb (it was too large for GitHub)
