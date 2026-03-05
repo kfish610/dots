@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   systemInfo,
   ...
@@ -43,7 +42,7 @@ let
     filterBySystem (readDirRec ./.)
   );
 
-  moduleFiles = builtins.map (path: ./${path}) (lib.collect lib.isString moduleSet);
+  moduleFiles = map (path: ./${path}) (lib.collect lib.isString moduleSet);
 in
 {
   imports = moduleFiles;
