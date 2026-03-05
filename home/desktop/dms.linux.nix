@@ -1,106 +1,49 @@
-{ ... }:
+{
+  lib,
+  config,
+  systemInfo,
+  ...
+}:
 
 {
-  programs.dank-material-shell = {
+  options.programs.dank-material-shell = {
+    bars = lib.mkOption {
+      type = lib.types.attrsOf (lib.types.attrsOf lib.types.anything);
+      default = { };
+      description = "Better format for bars that gets compiled into the actual expected representation.";
+    };
+
+    barStyle = lib.mkOption {
+      type = lib.types.attrsOf lib.types.anything;
+      default = { };
+      description = "Bar styling";
+    };
+  };
+
+  config.programs.dank-material-shell = {
     enable = true;
 
-    # khal current doesn't build, and I don't use this anyway.
+    # khal currently doesn't build, and I don't use this anyway.
     enableCalendarEvents = false;
 
-    settings = {
-      dankBarTransparency = 0.95;
-      dankBarWidgetTransparency = 1;
+    barStyle = {
+      autoHide = false;
+      openOnOverview = false;
+      transparency = 0.95;
+      widgetTransparency = 1;
+      spacing = 0;
+      bottomGap = 0;
+      innerPadding = 10;
+      squareCorners = true;
+      noBackground = false;
+      gothCornersEnabled = true;
+      position = 0;
+    };
 
-      use24HourClock = false;
-      useFahrenheit = true;
-      nightModeEnabled = false;
-
-      useAutoLocation = true;
-      weatherEnabled = true;
-
-      selectedGpuIndex = 0;
-      enabledGpuPciIds = [ ];
-
-      controlCenterShowNetworkIcon = true;
-      controlCenterShowBluetoothIcon = true;
-      controlCenterShowAudioIcon = true;
-      controlCenterWidgets = [
-        {
-          id = "brightnessSlider";
-          enabled = true;
-          width = 100;
-        }
-        {
-          id = "volumeSlider";
-          enabled = true;
-          width = 50;
-        }
-        {
-          id = "inputVolumeSlider";
-          enabled = true;
-          width = 50;
-        }
-        {
-          id = "audioOutput";
-          enabled = true;
-          width = 50;
-        }
-        {
-          id = "audioInput";
-          enabled = true;
-          width = 50;
-        }
-        {
-          id = "wifi";
-          enabled = true;
-          width = 50;
-        }
-        {
-          id = "bluetooth";
-          enabled = true;
-          width = 50;
-        }
-        {
-          id = "builtin_vpn";
-          enabled = true;
-          width = 50;
-        }
-        {
-          id = "battery";
-          enabled = true;
-          width = 50;
-        }
-        {
-          id = "doNotDisturb";
-          enabled = true;
-          width = 25;
-        }
-        {
-          id = "idleInhibitor";
-          enabled = true;
-          width = 25;
-        }
-        {
-          id = "darkMode";
-          enabled = true;
-          width = 25;
-        }
-        {
-          id = "nightMode";
-          enabled = true;
-          width = 25;
-        }
-      ];
-
-      showWorkspaceIndex = true;
-      showWorkspacePadding = false;
-      workspacesPerMonitor = true;
-
-      waveProgressEnabled = true;
-
-      clockDateFormat = "ddd MMM d";
-
-      dankBarLeftWidgets = [
+    bars.default = {
+      name = "Main Bar";
+      screenPreferences = [ "all" ];
+      leftWidgets = [
         {
           id = "workspaceSwitcher";
           enabled = true;
@@ -110,7 +53,7 @@
           enabled = true;
         }
       ];
-      dankBarCenterWidgets = [
+      centerWidgets = [
         {
           id = "music";
           enabled = true;
@@ -124,9 +67,9 @@
           enabled = true;
         }
       ];
-      dankBarRightWidgets = [
+      rightWidgets = [
         {
-          id = "systemTray";
+          id = "colorPicker";
           enabled = true;
         }
         {
@@ -137,10 +80,19 @@
           id = "notificationButton";
           enabled = true;
         }
-        {
-          id = "battery";
-          enabled = true;
-        }
+      ]
+      ++ (
+        if builtins.elem "laptop" systemInfo then
+          [
+            {
+              id = "battery";
+              enabled = true;
+            }
+          ]
+        else
+          [ ]
+      )
+      ++ [
         {
           id = "cpuUsage";
           enabled = true;
@@ -149,6 +101,20 @@
           id = "memUsage";
           enabled = true;
         }
+      ]
+      ++ (
+        if builtins.elem "desktop" systemInfo then
+          [
+            {
+              id = "gpuTemp";
+              enabled = true;
+              selectedGpuIndex = 1;
+            }
+          ]
+        else
+          [ ]
+      )
+      ++ [
         {
           id = "cpuTemp";
           enabled = true;
@@ -162,54 +128,157 @@
           enabled = true;
         }
         {
+          id = "systemTray";
+          enabled = true;
+        }
+        {
           id = "controlCenterButton";
           enabled = true;
         }
       ];
+    };
 
-      appLauncherViewMode = "list";
-
-      networkPreference = "auto";
-
-      fontWeight = 400;
-      fontScale = 1;
-      dankBarFontScale = 1;
-
+    settings = {
+      # Disable unwanted features
+      runUserMatugenTemplates = false;
+      runDmsMatugenTemplates = false;
+      nightModeEnabled = false;
       showDock = false;
-
-      cornerRadius = 16;
-
-      dankBarAutoHide = false;
-      dankBarOpenOnOverview = false;
-      dankBarVisible = true;
-
-      dankBarSpacing = 0;
-      dankBarBottomGap = 0;
-      dankBarInnerPadding = 10;
-      dankBarSquareCorners = true;
-      dankBarNoBackground = false;
-      dankBarGothCornersEnabled = true;
-      dankBarBorderEnabled = false;
-      dankBarBorderColor = "surfaceText";
-      dankBarBorderOpacity = 1;
-      dankBarBorderThickness = 1;
-      dankBarPosition = 0;
-
-      widgetBackgroundColor = "sth";
-      surfaceBase = "sc";
-
-      notificationTimeoutLow = 5000;
-      notificationTimeoutNormal = 5000;
-      notificationTimeoutCritical = 0;
-      notificationPopupPosition = 0;
-
-      osdAlwaysShowValue = true;
-
       screenPreferences = {
         wallpaper = [ ];
         notepad = [ ];
         dock = [ ];
       };
+
+      # Styling
+      fontWeight = 400;
+      fontScale = 1;
+      cornerRadius = 16;
+      surfaceBase = "sc";
+      osdAlwaysShowValue = true;
+      widgetBackgroundColor = "sth";
+
+      # Notifications
+      notificationTimeoutLow = 5000;
+      notificationTimeoutNormal = 5000;
+      notificationTimeoutCritical = 0;
+      notificationPopupPosition = 0;
+
+      # Launcher
+      appLauncherViewMode = "list";
+
+      # Generate bars
+      barConfigs = lib.mapAttrsToList (
+        id: conf:
+        conf
+        // config.programs.dank-material-shell.barStyle
+        // {
+          id = id;
+          enabled = true;
+        }
+      ) config.programs.dank-material-shell.bars;
+
+      # Workspace settings
+      showWorkspaceIndex = true;
+      showWorkspacePadding = false;
+      workspacesPerMonitor = true;
+
+      # Music settings
+      audioScrollMode = "song";
+      waveProgressEnabled = true;
+
+      # Clock settings
+      use24HourClock = false;
+      clockDateFormat = "ddd MMM d";
+
+      # Weather settings
+      weatherEnabled = true;
+      useAutoLocation = true;
+      useFahrenheit = true;
+
+      # Performance monitoring settings
+      selectedGpuIndex = 1;
+
+      # Control Center settings
+      networkPreference = "auto";
+      controlCenterShowNetworkIcon = true;
+      controlCenterShowBluetoothIcon = true;
+      controlCenterShowAudioIcon = true;
+      controlCenterWidgets =
+        (
+          if builtins.elem "laptop" systemInfo then
+            [
+              {
+                id = "brightnessSlider";
+                enabled = true;
+                width = 100;
+              }
+            ]
+          else
+            [ ]
+        )
+        ++ [
+          {
+            id = "volumeSlider";
+            enabled = true;
+            width = 50;
+          }
+          {
+            id = "inputVolumeSlider";
+            enabled = true;
+            width = 50;
+          }
+          {
+            id = "audioOutput";
+            enabled = true;
+            width = 50;
+          }
+          {
+            id = "audioInput";
+            enabled = true;
+            width = 50;
+          }
+          {
+            id = "wifi";
+            enabled = true;
+            width = 50;
+          }
+          {
+            id = "bluetooth";
+            enabled = true;
+            width = 50;
+          }
+          {
+            id = "builtin_vpn";
+            enabled = true;
+            width = 50;
+          }
+          {
+            id = "battery";
+            enabled = true;
+            width = 50;
+          }
+          {
+            id = "doNotDisturb";
+            enabled = true;
+            width = 25;
+          }
+          {
+            id = "idleInhibitor";
+            enabled = true;
+            width = 25;
+          }
+          {
+            id = "darkMode";
+            enabled = true;
+            width = 25;
+          }
+          {
+            id = "nightMode";
+            enabled = true;
+            width = 25;
+          }
+        ];
     };
   };
 }
