@@ -77,12 +77,13 @@
     nautilus
 
     # Tools
+    fastfetch
     gh
     git-crypt
     graphviz
     imagemagick
     jq
-    fastfetch
+    ncdu
     nix-index
     pandoc
     unzip
