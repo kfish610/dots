@@ -12,7 +12,6 @@
     loupe
     networkmanagerapplet
     obsidian
-    remmina
     rnote
     slack
     spotify
