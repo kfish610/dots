@@ -69,6 +69,9 @@
     # Qt
     qt6.qtdeclarative
 
+    # TypeScript
+    typescript
+
     # Web
     insomnia
   ];
