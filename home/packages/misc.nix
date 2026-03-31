@@ -30,7 +30,7 @@
       enableDefaultConfig = false; # Remove once this is deprecated
       matchBlocks = {
         "lambda" = {
-          hostname = "130.126.136.146";
+          hostname = "lambda.cs.illinois.edu";
           user = "kfish";
           forwardAgent = true;
         };
