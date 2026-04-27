@@ -144,6 +144,7 @@
           "Mod+Return".action = spawn terminal;
           "Mod+L".action = spawn lock;
           "Print".action.screenshot = [ ];
+          "Alt+Print".action.screenshot-window = [ ];
 
           "XF86AudioMute".action = dms-ipc "audio" "mute";
           "XF86AudioMicMute".action = dms-ipc "audio" "micmute";
