@@ -6,6 +6,8 @@
     android_sdk.accept_license = true;
   };
 
+  gtk.gtk4.theme = null; # Change in 26.05
+
   programs = {
     direnv = {
       enable = true;
@@ -15,6 +17,7 @@
     git = {
       enable = true;
       lfs.enable = true;
+      signing.format = "ssh";
       settings = {
         user.name = "Kevin Fisher";
         user.email = "kfish610@gmail.com";
