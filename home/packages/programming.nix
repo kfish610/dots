@@ -29,6 +29,9 @@
     leiningen
     babashka
 
+    # Dafny
+    dafny
+
     # Rocq
     rocq-core
     rocqPackages.vsrocq-language-server
