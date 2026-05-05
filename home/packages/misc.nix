@@ -78,6 +78,7 @@
     # Applications
     google-chrome
     nautilus
+    ollama
 
     # Tools
     fastfetch
