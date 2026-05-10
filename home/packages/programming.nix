@@ -72,6 +72,9 @@
     # Qt
     qt6.qtdeclarative
 
+    # SPIN
+    spin
+
     # TypeScript
     typescript
 
