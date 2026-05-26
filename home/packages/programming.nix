@@ -12,6 +12,7 @@
     (agda.withPackages (
       p: with p; [
         standard-library
+        agda-categories
       ]
     ))
 
