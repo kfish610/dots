@@ -37,6 +37,13 @@
           user = "kfish";
           forwardAgent = true;
         };
+        "icc" = {
+          hostname = "cc-login.campuscluster.illinois.edu";
+          user = "kf23";
+          controlMaster = "auto";
+          controlPath = "~/.ssh/control-%r@%h:%p";
+          controlPersist = "10m";
+        };
         "unity" = {
           hostname = "unity.rc.umass.edu";
           user = "kfisher_access-ci_org";
