@@ -31,46 +31,46 @@
     ssh = {
       enable = true;
       enableDefaultConfig = false; # Remove once this is deprecated
-      matchBlocks = {
+      settings = {
         "lambda" = {
-          hostname = "lambda.cs.illinois.edu";
-          user = "kfish";
-          forwardAgent = true;
+          HostName = "lambda.cs.illinois.edu";
+          User = "kfish";
+          ForwardAgent = true;
         };
         "icc" = {
-          hostname = "cc-login.campuscluster.illinois.edu";
-          user = "kf23";
-          controlMaster = "auto";
-          controlPath = "~/.ssh/control-%r@%h:%p";
-          controlPersist = "10m";
+          HostName = "cc-login.campuscluster.illinois.edu";
+          User = "kf23";
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/control-%r@%h:%p";
+          ControlPersist = "10m";
         };
         "unity" = {
-          hostname = "unity.rc.umass.edu";
-          user = "kfisher_access-ci_org";
-          forwardAgent = true;
+          HostName = "unity.rc.umass.edu";
+          User = "kfisher_access-ci_org";
+          ForwardAgent = true;
         };
         "*.unity.rc.umass.edu" = {
-          user = "kfisher_access-ci_org";
-          forwardAgent = true;
-          proxyJump = "unity";
+          User = "kfisher_access-ci_org";
+          ForwardAgent = true;
+          ProxyJump = "unity";
         };
         "unity-cpu" = {
-          user = "kfisher_access-ci_org";
-          forwardAgent = true;
-          proxyCommand = "ssh unity './vscode.sh cpu'";
-          extraOptions.StrictHostKeyChecking = "no";
+          User = "kfisher_access-ci_org";
+          ForwardAgent = true;
+          ProxyCommand = "ssh unity './vscode.sh cpu'";
+          StrictHostKeyChecking = "no";
         };
         "unity-gpu" = {
-          user = "kfisher_access-ci_org";
-          forwardAgent = true;
-          proxyCommand = "ssh unity './vscode.sh gpu'";
-          extraOptions.StrictHostKeyChecking = "no";
+          User = "kfisher_access-ci_org";
+          ForwardAgent = true;
+          ProxyCommand = "ssh unity './vscode.sh gpu'";
+          StrictHostKeyChecking = "no";
         };
         "unity-gpu-preempt" = {
-          user = "kfisher_access-ci_org";
-          forwardAgent = true;
-          proxyCommand = "ssh unity './vscode.sh gpu-preempt'";
-          extraOptions.StrictHostKeyChecking = "no";
+          User = "kfisher_access-ci_org";
+          ForwardAgent = true;
+          ProxyCommand = "ssh unity './vscode.sh gpu-preempt'";
+          StrictHostKeyChecking = "no";
         };
       };
     };
