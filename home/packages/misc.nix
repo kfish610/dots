@@ -40,6 +40,7 @@
         "icc" = {
           HostName = "cc-login.campuscluster.illinois.edu";
           User = "kf23";
+          ForwardAgent = true;
           ControlMaster = "auto";
           ControlPath = "~/.ssh/control-%r@%h:%p";
           ControlPersist = "10m";
