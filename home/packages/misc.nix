@@ -45,6 +45,26 @@
           ControlPath = "~/.ssh/control-%r@%h:%p";
           ControlPersist = "10m";
         };
+        "icc-cpu" = {
+          HostName = "cc-login.campuscluster.illinois.edu";
+          User = "kf23";
+          ForwardAgent = true;
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/control-%r@%h:%p";
+          ControlPersist = "10m";
+          RemoteCommand = "./vscode.sh cpu";
+          RequestTTY = true;
+        };
+        "icc-gpu" = {
+          HostName = "cc-login.campuscluster.illinois.edu";
+          User = "kf23";
+          ForwardAgent = true;
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/control-%r@%h:%p";
+          ControlPersist = "10m";
+          RemoteCommand = "./vscode.sh gpu";
+          RequestTTY = true;
+        };
         "unity" = {
           HostName = "unity.rc.umass.edu";
           User = "kfisher_access-ci_org";
