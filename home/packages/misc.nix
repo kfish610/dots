@@ -1,12 +1,12 @@
 { pkgs, ... }:
 
 {
+  home.pointerCursor.enable = true; # TODO: Delete this when Stylix (presumably) updates
+
   nixpkgs.config = {
     allowUnfree = true;
     android_sdk.accept_license = true;
   };
-
-  gtk.gtk4.theme = null; # Change in 26.05
 
   programs = {
     direnv = {

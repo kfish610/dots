@@ -50,7 +50,7 @@
     sbt
 
     # LaTeX
-    texlive.combined.scheme-full
+    (texlive.withPackages (p: [ p.scheme-full ]))
 
     # Lean
     elan
