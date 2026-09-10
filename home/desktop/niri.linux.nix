@@ -29,13 +29,6 @@ in
   services.swayidle = {
     enable = true;
 
-    timeouts = [
-      {
-        timeout = 600;
-        command = lock;
-      }
-    ];
-
     events = {
       before-sleep = lock;
       lock = lock;

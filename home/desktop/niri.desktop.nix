@@ -1,6 +1,24 @@
-{ ... }:
+{ config, ... }:
 
+let
+  lock = "${config.programs.swaylock.package}/bin/swaylock";
+  niri = "${config.wayland.windowManager.niri.package}/bin/niri";
+in
 {
+  # Unchanged from before the split. No idle suspend here on purpose: the
+  # desktop accepts ssh and shouldn't drop off the network when unattended.
+  services.swayidle.timeouts = [
+    {
+      timeout = 600;
+      command = lock;
+    }
+    {
+      timeout = 660;
+      command = "${niri} msg action power-off-monitors";
+      resumeCommand = "${niri} msg action power-on-monitors";
+    }
+  ];
+
   wayland.windowManager.niri.settings._children = [
     {
       output = {
