@@ -5,14 +5,18 @@
 }:
 
 let
-  lock = "${config.programs.swaylock.package}/bin/swaylock -f";
-  niri = "${config.wayland.windowManager.niri.package}/bin/niri";
+  inherit (config.lib.niri)
+    lock
+    niri
+    outputs
+    spawnAtStartup
+    ;
 in
 {
   services.swayidle.timeouts = [
     {
       timeout = 300;
-      command = lock;
+      command = "${lock} -f";
     }
     {
       timeout = 330;
@@ -25,16 +29,6 @@ in
     }
   ];
 
-  wayland.windowManager.niri.settings._children = [
-    {
-      output = {
-        _args = [ "eDP-1" ];
-        scale = 1;
-      };
-    }
-
-    {
-      spawn-at-startup._args = [ "${pkgs.rot8}/bin/rot8" ];
-    }
-  ];
+  wayland.windowManager.niri.settings._children =
+    outputs { "eDP-1".scale = 1; } ++ spawnAtStartup [ [ "${pkgs.rot8}/bin/rot8" ] ];
 }

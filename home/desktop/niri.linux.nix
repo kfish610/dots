@@ -6,9 +6,48 @@
 }:
 
 let
-  lock = "${config.programs.swaylock.package}/bin/swaylock";
+  util = {
+    lock = "${config.programs.swaylock.package}/bin/swaylock";
+    niri = "${config.wayland.windowManager.niri.package}/bin/niri";
+
+    outputs = lib.mapAttrsToList (
+      name: out: {
+        output = out // {
+          _args = [ name ];
+        };
+      }
+    );
+    windowRules = map (rule: {
+      window-rule = rule;
+    });
+    matches = map (m: {
+      match._props = m;
+    });
+    spawnAtStartup = map (argv: {
+      spawn-at-startup._args = argv;
+    });
+
+    dms-ipc = args: {
+      spawn = [
+        "dms"
+        "ipc"
+      ]
+      ++ args;
+    };
+    ignoreLocked = bind: bind // { _props.allow-when-locked = true; };
+  };
+
+  inherit (util)
+    lock
+    windowRules
+    spawnAtStartup
+    dms-ipc
+    ignoreLocked
+    ;
 in
 {
+  lib.niri = util;
+
   services.wpaperd.enable = true;
 
   programs = {
@@ -65,26 +104,24 @@ in
         };
       };
 
-      _children = [
-        {
-          window-rule = {
+      _children =
+        windowRules [
+          {
             clip-to-geometry = true;
             geometry-corner-radius = 10.0;
-          };
-        }
-      ]
-
-      ++ map (argv: { spawn-at-startup._args = argv; }) [
-        [
-          lock
-          "-f"
+          }
         ]
-        [ "${pkgs.discord}/bin/discord" ]
-        [
-          "${pkgs.google-chrome}/bin/google-chrome-stable"
-          "--profile-directory=Default"
-        ]
-      ];
+        ++ spawnAtStartup [
+          [
+            lock
+            "-f"
+          ]
+          [ "${pkgs.discord}/bin/discord" ]
+          [
+            "${pkgs.google-chrome}/bin/google-chrome-stable"
+            "--profile-directory=Default"
+          ]
+        ];
 
       binds = {
         "Mod+Left".focus-column-or-monitor-left = { };
@@ -129,19 +166,15 @@ in
         "Mod+Shift+Space".toggle-window-floating = { };
 
         "Mod+Shift+Q".close-window = { };
-        "Mod+Shift+E".spawn = [
-          "dms"
-          "ipc"
+        "Mod+Shift+E" = dms-ipc [
           "powermenu"
           "toggle"
         ];
 
-        "Mod+Space".spawn = [
-          "dms"
-          "ipc"
+        "Mod+Space" = dms-ipc [
           "spotlight"
           "toggle"
-        ]; # open app menu
+        ];
         "Mod+Return".spawn = [ terminal ];
         "Mod+L".spawn = [
           lock
@@ -150,67 +183,37 @@ in
         "Print".screenshot = { };
         "Alt+Print".screenshot-window = { };
 
-        "XF86AudioMute" = {
-          _props.allow-when-locked = true;
-          spawn = [
-            "dms"
-            "ipc"
-            "audio"
-            "mute"
-          ];
-        };
-        "XF86AudioMicMute" = {
-          _props.allow-when-locked = true;
-          spawn = [
-            "dms"
-            "ipc"
-            "audio"
-            "micmute"
-          ];
-        };
-        "XF86AudioRaiseVolume" = {
-          _props.allow-when-locked = true;
-          spawn = [
-            "dms"
-            "ipc"
-            "audio"
-            "increment"
-            "3"
-          ];
-        };
-        "XF86AudioLowerVolume" = {
-          _props.allow-when-locked = true;
-          spawn = [
-            "dms"
-            "ipc"
-            "audio"
-            "decrement"
-            "3"
-          ];
-        };
+        "XF86AudioMute" = ignoreLocked (dms-ipc [
+          "audio"
+          "mute"
+        ]);
+        "XF86AudioMicMute" = ignoreLocked (dms-ipc [
+          "audio"
+          "micmute"
+        ]);
+        "XF86AudioRaiseVolume" = ignoreLocked (dms-ipc [
+          "audio"
+          "increment"
+          "3"
+        ]);
+        "XF86AudioLowerVolume" = ignoreLocked (dms-ipc [
+          "audio"
+          "decrement"
+          "3"
+        ]);
 
-        "XF86MonBrightnessUp" = {
-          _props.allow-when-locked = true;
-          spawn = [
-            "dms"
-            "ipc"
-            "brightness"
-            "increment"
-            "5"
-            ""
-          ];
-        };
-        "XF86MonBrightnessDown" = {
-          _props.allow-when-locked = true;
-          spawn = [
-            "dms"
-            "ipc"
-            "brightness"
-            "decrement"
-            "5"
-            ""
-          ];
-        };
+        "XF86MonBrightnessUp" = ignoreLocked (dms-ipc [
+          "brightness"
+          "increment"
+          "5"
+          ""
+        ]);
+        "XF86MonBrightnessDown" = ignoreLocked (dms-ipc [
+          "brightness"
+          "decrement"
+          "5"
+          ""
+        ]);
       }
       // lib.foldl' (
         acc: x:
