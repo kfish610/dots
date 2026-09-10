@@ -15,7 +15,6 @@
     rnote
     slack
     spotify
-    sway-contrib.grimshot
     termius
     vscode
     wl-clipboard

@@ -5,6 +5,9 @@
   ...
 }:
 
+let
+  lock = "${config.programs.swaylock.package}/bin/swaylock";
+in
 {
   services.wpaperd.enable = true;
 
@@ -23,12 +26,24 @@
     };
   };
 
-  wayland.windowManager.niri = {
+  services.swayidle = {
     enable = true;
 
-    # Session plumbing (units, portals, xwayland-satellite) is owned by the
-    # NixOS `programs.niri` module; this module only writes config.kdl.
-    # `package` stays set so the config is still validated at build time.
+    timeouts = [
+      {
+        timeout = 600;
+        command = lock;
+      }
+    ];
+
+    events = {
+      before-sleep = lock;
+      lock = lock;
+    };
+  };
+
+  wayland.windowManager.niri = {
+    enable = true;
     systemd.enable = false;
     portalPackage = null;
     xwaylandSatellitePackage = null;
@@ -37,7 +52,6 @@
   wayland.windowManager.niri.settings =
     let
       terminal = "${config.programs.kitty.package}/bin/kitty";
-      lock = "${config.programs.swaylock.package}/bin/swaylock";
       workspaces = lib.range 1 10;
     in
     {
@@ -60,8 +74,6 @@
         };
       };
 
-      # `window-rule`/`spawn-at-startup` are repeated KDL nodes, so they have to
-      # go through `_children` rather than being plain lists.
       _children = [
         {
           window-rule = {
@@ -70,20 +82,13 @@
           };
         }
       ]
+
       ++ map (argv: { spawn-at-startup._args = argv; }) [
         [ lock ]
         [ "${pkgs.discord}/bin/discord" ]
         [
           "${pkgs.google-chrome}/bin/google-chrome-stable"
           "--profile-directory=Default"
-        ]
-        [
-          "wpaperd"
-          "-d"
-        ]
-        [
-          "dms"
-          "run"
         ]
       ];
 
@@ -148,49 +153,67 @@
         "Print".screenshot = { };
         "Alt+Print".screenshot-window = { };
 
-        "XF86AudioMute".spawn = [
-          "dms"
-          "ipc"
-          "audio"
-          "mute"
-        ];
-        "XF86AudioMicMute".spawn = [
-          "dms"
-          "ipc"
-          "audio"
-          "micmute"
-        ];
-        "XF86AudioRaiseVolume".spawn = [
-          "dms"
-          "ipc"
-          "audio"
-          "increment"
-          "3"
-        ];
-        "XF86AudioLowerVolume".spawn = [
-          "dms"
-          "ipc"
-          "audio"
-          "decrement"
-          "3"
-        ];
+        "XF86AudioMute" = {
+          _props.allow-when-locked = true;
+          spawn = [
+            "dms"
+            "ipc"
+            "audio"
+            "mute"
+          ];
+        };
+        "XF86AudioMicMute" = {
+          _props.allow-when-locked = true;
+          spawn = [
+            "dms"
+            "ipc"
+            "audio"
+            "micmute"
+          ];
+        };
+        "XF86AudioRaiseVolume" = {
+          _props.allow-when-locked = true;
+          spawn = [
+            "dms"
+            "ipc"
+            "audio"
+            "increment"
+            "3"
+          ];
+        };
+        "XF86AudioLowerVolume" = {
+          _props.allow-when-locked = true;
+          spawn = [
+            "dms"
+            "ipc"
+            "audio"
+            "decrement"
+            "3"
+          ];
+        };
 
-        "XF86MonBrightnessUp".spawn = [
-          "dms"
-          "ipc"
-          "brightness"
-          "increment"
-          "5"
-          ""
-        ];
-        "XF86MonBrightnessDown".spawn = [
-          "dms"
-          "ipc"
-          "brightness"
-          "decrement"
-          "5"
-          ""
-        ];
+        "XF86MonBrightnessUp" = {
+          _props.allow-when-locked = true;
+          spawn = [
+            "dms"
+            "ipc"
+            "brightness"
+            "increment"
+            "5"
+            ""
+          ];
+        };
+        "XF86MonBrightnessDown" = {
+          _props.allow-when-locked = true;
+          spawn = [
+            "dms"
+            "ipc"
+            "brightness"
+            "decrement"
+            "5"
+            ""
+          ];
+        };
       }
       // lib.foldl' (
         acc: x:

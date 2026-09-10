@@ -10,10 +10,7 @@
     }
 
     {
-      spawn-at-startup._args = [
-        "${pkgs.rot8}/bin/rot8"
-        "-k"
-      ];
+      spawn-at-startup._args = [ "${pkgs.rot8}/bin/rot8" ];
     }
   ];
 }
