@@ -66,9 +66,6 @@
 
   # Programs that have to be enabled in the system config to work properly
   programs = {
-
-    niri.enable = true;
-
     wireshark = {
       enable = true;
       package = pkgs.wireshark; # Default module has an incorrect package name

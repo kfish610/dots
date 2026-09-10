@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  programs.niri.settings = {
+  wayland.windowManager.niri.settings = {
     outputs = {
       "eDP-1".scale = 1;
     };

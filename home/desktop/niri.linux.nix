@@ -23,7 +23,8 @@
     };
   };
 
-  programs.niri.settings =
+  wayland.windowManager.niri.enable = true;
+  wayland.windowManager.niri.settings =
     let
       terminal = "${config.programs.kitty.package}/bin/kitty";
       lock = "${config.programs.swaylock.package}/bin/swaylock";

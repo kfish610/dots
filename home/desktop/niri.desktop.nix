@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  programs.niri.settings = {
+  wayland.windowManager.niri.settings = {
     outputs = {
       "DP-2".mode = {
         width = 2560;
