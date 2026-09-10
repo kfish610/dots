@@ -59,6 +59,7 @@ in
 
       layout = {
         gaps = 15;
+        default-column-width.proportion = 1.0;
 
         border.off = { };
         focus-ring = with config.lib.stylix.colors.withHashtag; {
