@@ -66,13 +66,16 @@
 
   # Programs that have to be enabled in the system config to work properly
   programs = {
+    # Session-level plumbing: niri-session for greetd, xdg portals, polkit,
+    # dconf, pam.services.swaylock, gnome-keyring, XDG autostart.
+    # Actual niri configuration lives in home/desktop/niri.linux.nix.
+    niri.enable = true;
+
     wireshark = {
       enable = true;
       package = pkgs.wireshark; # Default module has an incorrect package name
     };
   };
-
-  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
   users.groups.adbusers.members = [ "kfish" ];
 
