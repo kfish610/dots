@@ -31,7 +31,6 @@
       workspaces = lib.range 1 10;
     in
     {
-      xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
       hotkey-overlay.skip-at-startup = true;
       prefer-no-csd = true;
 
@@ -91,75 +90,70 @@
           }
         ];
 
-      binds =
-        with config.lib.niri.actions;
-        let
-          dms-ipc = spawn "dms" "ipc";
-        in
-        {
-          "Mod+Left".action = focus-column-or-monitor-left;
-          "Mod+Right".action = focus-column-or-monitor-right;
-          "Mod+Up".action = focus-window-or-workspace-up;
-          "Mod+Down".action = focus-window-or-workspace-down;
+      binds = {
+          "Mod+Left".focus-column-or-monitor-left = {};
+          "Mod+Right".focus-column-or-monitor-right = {};
+          "Mod+Up".focus-window-or-workspace-up = {};
+          "Mod+Down".focus-window-or-workspace-down = {};
 
-          "Mod+Shift+Left".action = move-column-left-or-to-monitor-left;
-          "Mod+Shift+Right".action = move-column-right-or-to-monitor-right;
-          "Mod+Shift+Up".action = move-window-up-or-to-workspace-up;
-          "Mod+Shift+Down".action = move-window-down-or-to-workspace-down;
+          "Mod+Shift+Left".move-column-left-or-to-monitor-left = {};
+          "Mod+Shift+Right".move-column-right-or-to-monitor-right = {};
+          "Mod+Shift+Up".move-window-up-or-to-workspace-up = {};
+          "Mod+Shift+Down".move-window-down-or-to-workspace-down = {};
 
-          "Mod+Ctrl+Left".action = focus-monitor-left;
-          "Mod+Ctrl+Right".action = focus-monitor-right;
-          "Mod+Ctrl+Up".action = focus-workspace-up;
-          "Mod+Ctrl+Down".action = focus-workspace-down;
+          "Mod+Ctrl+Left".focus-monitor-left = {};
+          "Mod+Ctrl+Right".focus-monitor-right = {};
+          "Mod+Ctrl+Up".focus-workspace-up = {};
+          "Mod+Ctrl+Down".focus-workspace-down = {};
 
-          "Mod+Shift+Ctrl+Left".action = move-column-to-monitor-left;
-          "Mod+Shift+Ctrl+Right".action = move-column-to-monitor-right;
-          "Mod+Shift+Ctrl+Up".action = move-column-to-workspace-up;
-          "Mod+Shift+Ctrl+Down".action = move-column-to-workspace-down;
+          "Mod+Shift+Ctrl+Left".move-column-to-monitor-left = {};
+          "Mod+Shift+Ctrl+Right".move-column-to-monitor-right = {};
+          "Mod+Shift+Ctrl+Up".move-column-to-workspace-up = {};
+          "Mod+Shift+Ctrl+Down".move-column-to-workspace-down = {};
 
-          "Mod+Comma".action = consume-or-expel-window-left;
-          "Mod+Period".action = consume-or-expel-window-right;
+          "Mod+Comma".consume-or-expel-window-left = {};
+          "Mod+Period".consume-or-expel-window-right = {};
 
-          "Mod+A".action = set-column-width "${toString (1. / 3. * 100)}%";
-          "Mod+S".action = set-column-width "${toString (1. / 2. * 100)}%";
-          "Mod+D".action = set-column-width "${toString (2. / 3. * 100)}%";
-          "Mod+F".action = maximize-column;
+          "Mod+A".set-column-width = "${toString (1. / 3. * 100)}%";
+          "Mod+S".set-column-width = "${toString (1. / 2. * 100)}%";
+          "Mod+D".set-column-width = "${toString (2. / 3. * 100)}%";
+          "Mod+F".maximize-column = {};
 
-          "Mod+Shift+A".action = set-window-height "${toString (1. / 3. * 100)}%";
-          "Mod+Shift+S".action = set-window-height "${toString (1. / 2. * 100)}%";
-          "Mod+Shift+D".action = set-window-height "${toString (2. / 3. * 100)}%";
-          "Mod+Shift+F".action = fullscreen-window;
+          "Mod+Shift+A".set-window-height = "${toString (1. / 3. * 100)}%";
+          "Mod+Shift+S".set-window-height = "${toString (1. / 2. * 100)}%";
+          "Mod+Shift+D".set-window-height = "${toString (2. / 3. * 100)}%";
+          "Mod+Shift+F".fullscreen-window = {};
 
-          "Mod+Minus".action = set-column-width "-10%";
-          "Mod+Equal".action = set-column-width "+10%";
-          "Mod+Shift+Minus".action = set-window-height "-10%";
-          "Mod+Shift+Equal".action = set-window-height "+10%";
+          "Mod+Minus".set-column-width = "-10%";
+          "Mod+Equal".set-column-width = "+10%";
+          "Mod+Shift+Minus".set-window-height = "-10%";
+          "Mod+Shift+Equal".set-window-height = "+10%";
 
-          "Mod+Tab".action = toggle-overview;
-          "Mod+Shift+Space".action = toggle-window-floating;
+          "Mod+Tab".toggle-overview = {};
+          "Mod+Shift+Space".toggle-window-floating = {};
 
-          "Mod+Shift+Q".action = close-window;
-          "Mod+Shift+E".action = dms-ipc "powermenu" "toggle"; # open power menu
+          "Mod+Shift+Q".close-window = {};
+          "Mod+Shift+E".spawn = [ "dms" "ipc" "powermenu" "toggle" ]; # open power menu
 
-          "Mod+Space".action = dms-ipc "spotlight" "toggle"; # open app menu
-          "Mod+Return".action = spawn terminal;
-          "Mod+L".action = spawn lock;
-          "Print".action.screenshot = [ ];
-          "Alt+Print".action.screenshot-window = [ ];
+          "Mod+Space".spawn = [ "dms" "ipc" "spotlight" "toggle" ]; # open app menu
+          "Mod+Return".spawn = ["terminal"];
+          "Mod+L".spawn = [ lock ];
+          "Print".screenshot = [ ];
+          "Alt+Print".screenshot-window = [ ];
 
-          "XF86AudioMute".action = dms-ipc "audio" "mute";
-          "XF86AudioMicMute".action = dms-ipc "audio" "micmute";
-          "XF86AudioRaiseVolume".action = dms-ipc "audio" "increment" "3";
-          "XF86AudioLowerVolume".action = dms-ipc "audio" "decrement" "3";
+          "XF86AudioMute".spawn = [ "dms" "ipc" "audio" "mute" ];
+          "XF86AudioMicMute".spawn = [ "dms" "ipc" "audio" "micmute" ];
+          "XF86AudioRaiseVolume".spawn = [ "dms" "ipc" "audio" "increment" "3" ];
+          "XF86AudioLowerVolume".spawn = [ "dms" "ipc" "audio" "decrement" "3" ];
 
-          "XF86MonBrightnessUp".action = dms-ipc "brightness" "increment" "5" "";
-          "XF86MonBrightnessDown".action = dms-ipc "brightness" "decrement" "5" "";
+          "XF86MonBrightnessUp".spawn = [ "dms" "ipc" "brightness" "increment" "5" "" ];
+          "XF86MonBrightnessDown".spawn = [ "dms" "ipc" "brightness" "decrement" "5" ""];
         }
         // lib.foldl' (
           acc: x:
           {
-            "Mod+${toString (lib.mod x 10)}".action.focus-workspace = x;
-            "Mod+Shift+${toString (lib.mod x 10)}".action.move-column-to-workspace = x;
+            "Mod+${toString (lib.mod x 10)}".focus-workspace = x;
+            "Mod+Shift+${toString (lib.mod x 10)}".move-column-to-workspace = x;
           }
           // acc
         ) { } workspaces;

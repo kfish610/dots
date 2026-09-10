@@ -72,6 +72,8 @@
     };
   };
 
+  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
+
   users.groups.adbusers.members = [ "kfish" ];
 
   # Docker setup
