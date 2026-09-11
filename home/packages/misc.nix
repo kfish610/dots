@@ -1,8 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.pointerCursor.enable = true; # TODO: Delete this when Stylix (presumably) updates
-
   nixpkgs.config = {
     allowUnfree = true;
     android_sdk.accept_license = true;
