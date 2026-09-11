@@ -7,6 +7,13 @@
 
   programs.opam.enable = true;
 
+  programs.npm = {
+    enable = true;
+    package = pkgs.nodejs_latest;
+    # Set NPM global in the user directory so it doesn't clash with Nix
+    settings.prefix = "\${HOME}/.npm-global";
+  };
+
   home.packages = with pkgs; [
     # Agda
     (agda.withPackages (
@@ -59,9 +66,6 @@
     nixd
     nixfmt
     devenv
-
-    # Node
-    nodejs_latest
 
     # OCaml
     dune

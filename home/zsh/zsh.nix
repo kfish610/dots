@@ -3,6 +3,11 @@
 {
   home.file.".p10k.zsh".source = ./.p10k.zsh;
 
+  home.sessionPath = [
+    "$HOME/.npm-global/bin"
+    "$HOME/.cargo/bin"
+  ];
+
   programs.zsh = {
     enable = true;
     autocd = true;
@@ -10,8 +15,6 @@
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     sessionVariables = {
-      PATH = "$PATH:~/.npm-global/bin:~/.cargo/bin";
-      WLR_DRM_NO_MODIFIERS = 1;
       CHROME_EXECUTABLE = "${pkgs.google-chrome}/bin/google-chrome-stable";
       MAMBA_ROOT_PREFIX = "/home/kfish/micromamba";
     };
@@ -32,9 +35,6 @@
 
       # Turn off extended glob, it is mostly useless and clashes with flakes
       unsetopt EXTENDED_GLOB
-
-      # Set NPM global in the user directory so it doesn't clash with Nix
-      npm set prefix ~/.npm-global
     '';
   };
 }
