@@ -40,45 +40,39 @@
           systemInfo = info;
         };
       };
+
+      mkLinuxSystem =
+        module: info:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [
+            module
+
+            home-manager.nixosModules.home-manager
+            (mkHmModule info)
+
+            stylix.nixosModules.stylix
+
+            { home-manager.sharedModules = [ dank-material-shell.homeModules.dank-material-shell ]; }
+          ];
+        };
     in
     {
+      formatter.${system} = nixpkgs.legacyPackages.${system}.nixfmt;
+
       nixosConfigurations = {
-        klaptop = nixpkgs.lib.nixosSystem {
-          system = system;
-          modules = [
-            ./modules/klaptop.nix
+        klaptop = mkLinuxSystem ./modules/klaptop.nix [
+          "linux"
+          "laptop"
+        ];
 
-            home-manager.nixosModules.home-manager
-            (mkHmModule [
-              "linux"
-              "laptop"
-            ])
-
-            stylix.nixosModules.stylix
-
-            { home-manager.sharedModules = [ dank-material-shell.homeModules.dank-material-shell ]; }
-          ];
-        };
-
-        kdesktop = nixpkgs.lib.nixosSystem {
-          system = system;
-          modules = [
-            ./modules/kdesktop.nix
-
-            home-manager.nixosModules.home-manager
-            (mkHmModule [
-              "linux"
-              "desktop"
-            ])
-
-            stylix.nixosModules.stylix
-
-            { home-manager.sharedModules = [ dank-material-shell.homeModules.dank-material-shell ]; }
-          ];
-        };
+        kdesktop = mkLinuxSystem ./modules/kdesktop.nix [
+          "linux"
+          "desktop"
+        ];
 
         wsl = nixpkgs.lib.nixosSystem {
-          system = system;
+          inherit system;
           specialArgs.nixos-wsl = nixos-wsl;
           modules = [
             ./modules/wsl.nix
