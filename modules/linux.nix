@@ -58,6 +58,11 @@
 
   zramSwap.enable = true;
 
+  systemd.oomd = {
+    enableRootSlice = true;
+    enableUserSlices = true;
+  };
+
   # Misc. services
   services.printing.enable = true;
 
