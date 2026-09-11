@@ -24,13 +24,14 @@
 
     (wonderdraft.overrideAttrs (old: {
       # Put back together the split .deb (it was too large for GitHub)
-      src = pkgs.stdenv.mkDerivation {
-        name = "wonderdraft.deb";
-        src = ../../secrets/wonderdraft;
-        buildPhase = ''
-          cat $src/* > $out
-        '';
-      };
+      src = pkgs.runCommand "wonderdraft.deb" { } ''
+        cat ${../../secrets/wonderdraft}/* > $out
+
+        head -c 8 $out | grep -q '^!<arch>$' || {
+          echo "secrets/ is still git-crypt locked; see the README" >&2
+          exit 1
+        }
+      '';
     }))
 
     # Fonts
