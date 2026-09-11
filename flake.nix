@@ -31,6 +31,7 @@
       mkHmModule = info: {
         home-manager.useUserPackages = true;
         home-manager.useGlobalPkgs = true;
+        home-manager.backupFileExtension = "hm-bak";
 
         # Loads default.nix, which then recursively
         # loads the contents of the home folder

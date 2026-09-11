@@ -12,8 +12,8 @@
   # For dms battery status
   services.upower.enable = true;
 
-  # Laptop power management
   services.tlp.enable = true;
+  zramSwap.enable = true;
 
   # Logitech/Solaar
   hardware.logitech.wireless.enable = true;

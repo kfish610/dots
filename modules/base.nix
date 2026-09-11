@@ -7,16 +7,25 @@
   };
 
   # Enable flakes
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
+  nix = {
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
 
-    trusted-users = [
-      "root"
-      "kfish"
-    ];
+      trusted-users = [
+        "root"
+        "kfish"
+      ];
+    };
+
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
+    };
+    optimise.automatic = true;
   };
 
   # Localization
