@@ -14,7 +14,6 @@
     plugins = [ pkgs.networkmanager-openconnect ];
     dns = "systemd-resolved";
   };
-  users.groups.networkmanager.members = [ "kfish" ];
 
   # Use systemd-resolved for DNS resolution
   networking.nameservers = [
@@ -58,11 +57,7 @@
   };
 
   # Misc. services
-  services.tlp.enable = true;
   services.printing.enable = true;
-
-  # Sometimes needed for permission elevation
-  security.polkit.enable = true;
 
   # Programs that have to be enabled in the system config to work properly
   programs = {
@@ -73,13 +68,16 @@
 
     wireshark = {
       enable = true;
-      package = pkgs.wireshark; # Default module has an incorrect package name
+      package = pkgs.wireshark; # Default is wireshark-cli, we want the GUI
     };
   };
 
-  users.groups.adbusers.members = [ "kfish" ];
-
   # Docker setup
   virtualisation.docker.enable = true;
-  users.groups.docker.members = [ "kfish" ];
+
+  users.users.kfish.extraGroups = [
+    "networkmanager"
+    "docker"
+    "wireshark"
+  ];
 }

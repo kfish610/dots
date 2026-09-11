@@ -4,13 +4,13 @@
   nixpkgs.config.allowUnfree = true;
 
   # Enable flakes
-  nix = {
-    package = pkgs.nix;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
-    settings.trusted-users = [
+    trusted-users = [
       "root"
       "kfish"
     ];
@@ -61,10 +61,7 @@
     isNormalUser = true;
     uid = 1000;
     home = "/home/kfish";
-    extraGroups = [
-      "wheel"
-      "wireshark"
-    ];
+    extraGroups = [ "wheel" ];
     shell = pkgs.zsh;
   };
 

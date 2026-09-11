@@ -12,6 +12,9 @@
   # For dms battery status
   services.upower.enable = true;
 
+  # Laptop power management
+  services.tlp.enable = true;
+
   # Logitech/Solaar
   hardware.logitech.wireless.enable = true;
   programs.solaar.enable = true;
@@ -41,9 +44,7 @@
     "sd_mod"
     "rtsx_pci_sdmmc"
   ];
-  boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/f43c5b92-f6fb-4f10-a6ce-c8cc6bac5792";
@@ -54,8 +55,6 @@
     device = "/dev/disk/by-uuid/0C25-528B";
     fsType = "vfat";
   };
-
-  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
