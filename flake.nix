@@ -30,6 +30,7 @@
       system = "x86_64-linux";
       mkHmModule = info: {
         home-manager.useUserPackages = true;
+        home-manager.useGlobalPkgs = true;
 
         # Loads default.nix, which then recursively
         # loads the contents of the home folder
