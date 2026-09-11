@@ -13,7 +13,8 @@
   services.upower.enable = true;
 
   services.tlp.enable = true;
-  zramSwap.enable = true;
+
+  boot.kernel.sysctl."vm.swappiness" = 180;
 
   # Logitech/Solaar
   hardware.logitech.wireless.enable = true;

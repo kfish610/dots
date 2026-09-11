@@ -56,6 +56,8 @@
     pulse.enable = true;
   };
 
+  zramSwap.enable = true;
+
   # Misc. services
   services.printing.enable = true;
 
