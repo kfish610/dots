@@ -32,9 +32,6 @@
   };
   console.keyMap = "us";
 
-  # Enable SSH
-  services.openssh.enable = true;
-
   # Needed for lots of compatibility things!
   # Namely conda/mamba/poetry
   programs.nix-ld = {
