@@ -19,10 +19,7 @@ in
 
     swaylock = {
       enable = true;
-      settings = {
-        daemonize = true;
-        ignore-empty-password = true;
-      };
+      settings.ignore-empty-password = true;
     };
   };
 
@@ -31,7 +28,7 @@ in
 
     events = {
       before-sleep = lock;
-      lock = lock;
+      lock = "${lock} -f";
     };
   };
 
@@ -78,7 +75,10 @@ in
       ]
 
       ++ map (argv: { spawn-at-startup._args = argv; }) [
-        [ lock ]
+        [
+          lock
+          "-f"
+        ]
         [ "${pkgs.discord}/bin/discord" ]
         [
           "${pkgs.google-chrome}/bin/google-chrome-stable"
@@ -143,7 +143,10 @@ in
           "toggle"
         ]; # open app menu
         "Mod+Return".spawn = [ terminal ];
-        "Mod+L".spawn = [ lock ];
+        "Mod+L".spawn = [
+          lock
+          "-f"
+        ];
         "Print".screenshot = { };
         "Alt+Print".screenshot-window = { };
 

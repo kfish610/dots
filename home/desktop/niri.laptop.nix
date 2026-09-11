@@ -5,7 +5,7 @@
 }:
 
 let
-  lock = "${config.programs.swaylock.package}/bin/swaylock";
+  lock = "${config.programs.swaylock.package}/bin/swaylock -f";
   niri = "${config.wayland.windowManager.niri.package}/bin/niri";
 in
 {
