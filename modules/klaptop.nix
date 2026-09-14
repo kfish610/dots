@@ -12,7 +12,10 @@
   # For dms battery status
   services.upower.enable = true;
 
-  services.tlp.enable = true;
+  services.tlp = {
+    enable = true;
+    pd.enable = true;
+  };
 
   boot.kernel.sysctl."vm.swappiness" = 180;
 
