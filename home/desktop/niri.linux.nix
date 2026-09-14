@@ -71,6 +71,15 @@ in
     };
   };
 
+  autostart = {
+    discord.command = [ "${pkgs.discord}/bin/discord" ];
+
+    google-chrome.command = [
+      "${pkgs.google-chrome}/bin/google-chrome-stable"
+      "--profile-directory=Default"
+    ];
+  };
+
   wayland.windowManager.niri = {
     enable = true;
     systemd.enable = false;
@@ -115,11 +124,6 @@ in
           [
             lock
             "-f"
-          ]
-          [ "${pkgs.discord}/bin/discord" ]
-          [
-            "${pkgs.google-chrome}/bin/google-chrome-stable"
-            "--profile-directory=Default"
           ]
         ];
 

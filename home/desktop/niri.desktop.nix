@@ -1,4 +1,9 @@
-{ config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 let
   inherit (config.lib.niri)
@@ -8,6 +13,32 @@ let
     windowRules
     matches
     ;
+
+  stack-side-monitor = pkgs.writeShellApplication {
+    name = "stack-side-monitor";
+
+    runtimeInputs = [
+      config.wayland.windowManager.niri.package
+      pkgs.jq
+    ];
+
+    text = ''
+      win() { niri msg --json windows | jq -r "first(.[] | select($1) | .id) // empty"; }
+
+      discord='.app_id == "discord" and .title != "Discord Updater"'
+      chrome='.app_id == "google-chrome"'
+
+      until [[ $(win "$discord") && $(win "$chrome") ]]; do sleep 1; done
+
+      # Pulling Discord's column to the front first means the consume behaves the
+      # same whichever of the two mapped earlier.
+      niri msg action focus-window --id "$(win "$discord")"
+      niri msg action move-column-to-first
+
+      # Pull Chrome into discord
+      niri msg action consume-window-into-column
+    '';
+  };
 in
 {
   services.swayidle.timeouts = [
@@ -35,11 +66,11 @@ in
       {
         _children = matches [
           {
-            app-id = "Google-chrome";
+            app-id = "^google-chrome$";
             at-startup = true;
           }
           {
-            app-id = "discord";
+            app-id = "^discord$";
             at-startup = true;
           }
         ];
@@ -48,4 +79,18 @@ in
         open-on-output = "DP-4";
       }
     ];
+
+  home.packages = [ stack-side-monitor ];
+
+  autostart.stack-side-monitor = {
+    description = "Stack Discord above Chrome on the side monitor";
+    command = [ (lib.getExe stack-side-monitor) ];
+
+    after = [
+      "discord"
+      "google-chrome"
+    ];
+
+    timeout = 120;
+  };
 }
