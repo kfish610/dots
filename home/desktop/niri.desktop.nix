@@ -14,12 +14,16 @@ let
     matches
     ;
 
+  main-monitor = "Microstep G274QPF E2 CC2HS85620494";
+  side-monitor = "Microstep MSI G273 CA7A491819346";
+
   stack-side-monitor = pkgs.writeShellApplication {
     name = "stack-side-monitor";
 
     runtimeInputs = [
       config.wayland.windowManager.niri.package
       pkgs.jq
+      pkgs.procps
     ];
 
     text = ''
@@ -30,12 +34,16 @@ let
 
       until [[ $(win "$discord") && $(win "$chrome") ]]; do sleep 1; done
 
-      # Pulling Discord's column to the front first means the consume behaves the
-      # same whichever of the two mapped earlier.
-      niri msg action focus-window --id "$(win "$discord")"
-      niri msg action move-column-to-first
+      while pgrep swaylock >/dev/null; do sleep 1; done
 
-      # Pull Chrome into discord
+      d=$(win "$discord")
+      c=$(win "$chrome")
+
+      niri msg action focus-window --id "$d"
+      niri msg action move-column-to-first
+      niri msg action focus-window --id "$c"
+      niri msg action move-column-to-index 2
+      niri msg action focus-window --id "$d"
       niri msg action consume-window-into-column
     '';
   };
@@ -55,8 +63,8 @@ in
 
   wayland.windowManager.niri.settings._children =
     outputs {
-      "DP-2".mode = "2560x1440@180.000";
-      "DP-4" = {
+      ${main-monitor}.mode = "2560x1440@180.000";
+      ${side-monitor} = {
         mode = "1920x1080@165.003";
         transform = "270";
         variable-refresh-rate = { };
@@ -76,7 +84,7 @@ in
         ];
 
         open-maximized = true;
-        open-on-output = "DP-4";
+        open-on-output = side-monitor;
       }
     ];
 
@@ -90,7 +98,5 @@ in
       "discord"
       "google-chrome"
     ];
-
-    timeout = 120;
   };
 }

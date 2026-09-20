@@ -40,10 +40,18 @@ let
   inherit (util)
     lock
     windowRules
+    matches
     spawnAtStartup
     dms-ipc
     ignoreLocked
     ;
+
+  wait-for-tray = pkgs.writeShellApplication {
+    name = "wait-for-tray";
+    runtimeInputs = [ pkgs.glib ];
+
+    text = "gdbus wait --session --timeout 30 org.kde.StatusNotifierWatcher";
+  };
 in
 {
   lib.niri = util;
@@ -72,7 +80,18 @@ in
   };
 
   autostart = {
-    discord.command = [ "${pkgs.discord}/bin/discord" ];
+    wait-for-tray = {
+      description = "Wait for the system tray to accept registrations";
+      command = [ (lib.getExe wait-for-tray) ];
+
+      after = [ "dms" ];
+      timeout = 35;
+    };
+
+    discord = {
+      command = [ "${pkgs.discord}/bin/discord" ];
+      after = [ "wait-for-tray" ];
+    };
 
     google-chrome.command = [
       "${pkgs.google-chrome}/bin/google-chrome-stable"
@@ -118,6 +137,14 @@ in
           {
             clip-to-geometry = true;
             geometry-corner-radius = 10.0;
+          }
+          {
+            # Catch Chrome popups, which aren't detectable as popups otherwise
+            _children = matches [ { app-id = "^chrome-.*-Default$"; } ];
+
+            open-floating = true;
+            default-column-width = { };
+            default-window-height = { };
           }
         ]
         ++ spawnAtStartup [
