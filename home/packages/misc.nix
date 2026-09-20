@@ -38,36 +38,6 @@
           ControlPath = "~/.ssh/control-%r@%h:%p";
           ControlPersist = "10m";
         };
-        "icc-cpu" = {
-          HostName = "cc-login.campuscluster.illinois.edu";
-          User = "kf23";
-          ForwardAgent = true;
-          ControlMaster = "auto";
-          ControlPath = "~/.ssh/control-%r@%h:%p";
-          ControlPersist = "10m";
-          RemoteCommand = "./vscode.sh cpu";
-          RequestTTY = true;
-        };
-        "icc-gpu" = {
-          HostName = "cc-login.campuscluster.illinois.edu";
-          User = "kf23";
-          ForwardAgent = true;
-          ControlMaster = "auto";
-          ControlPath = "~/.ssh/control-%r@%h:%p";
-          ControlPersist = "10m";
-          RemoteCommand = "./vscode.sh gpu";
-          RequestTTY = true;
-        };
-        "icc-gpu-preempt" = {
-          HostName = "cc-login.campuscluster.illinois.edu";
-          User = "kf23";
-          ForwardAgent = true;
-          ControlMaster = "auto";
-          ControlPath = "~/.ssh/control-%r@%h:%p";
-          ControlPersist = "10m";
-          RemoteCommand = "./vscode.sh gpu-preempt";
-          RequestTTY = true;
-        };
         "unity" = {
           HostName = "unity.rc.umass.edu";
           User = "kfisher_access-ci_org";
@@ -131,5 +101,12 @@
     traceroute
     tcptraceroute
     wget
+
+    # Helper to start VSCode on ICC via SSH tunnel
+    (pkgs.writeShellApplication {
+      name = "icc-vscode";
+      runtimeInputs = [ pkgs.openssh ];
+      text = "exec ssh icc ./vscode.sh \"$@\"";
+    })
   ];
 }
