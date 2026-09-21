@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
   vscode-workspaces = pkgs.writeShellApplication {
@@ -70,10 +70,21 @@ let
     '';
   };
 
+  icc-askpass = pkgs.writeShellScript "icc-askpass" ''
+    prompt="''${1:-Password:}"
+    case $prompt in *"asscode or option"*) printf '1\n'; exit 0 ;; esac
+    prompt="''${prompt##*$'\n'}"
+    case $prompt in "("*") "*) prompt="''${prompt#*") "}" ;; esac
+    exec ${config.programs.fuzzel.package}/bin/fuzzel \
+      --dmenu --password --width=50 --prompt-only="$prompt"
+  '';
+
   icc-code = pkgs.writeShellApplication {
     name = "icc-code";
     runtimeInputs = [ pkgs.openssh ];
     text = ''
+      export SSH_ASKPASS=${icc-askpass}
+
       ssh icc ./vscode.sh cpu
 
       code "$@"
@@ -85,6 +96,8 @@ in
     icc-code
     vscode-workspaces
   ];
+
+  programs.fuzzel.enable = true;
 
   # workspaceStorage changes as you use VS Code, so refresh on a timer.
   systemd.user.services.vscode-workspaces = {
