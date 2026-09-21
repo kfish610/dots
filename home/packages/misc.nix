@@ -101,12 +101,5 @@
     traceroute
     tcptraceroute
     wget
-
-    # Helper to start VSCode on ICC via SSH tunnel
-    (pkgs.writeShellApplication {
-      name = "icc-vscode";
-      runtimeInputs = [ pkgs.openssh ];
-      text = "exec ssh icc ./vscode.sh \"$@\"";
-    })
   ];
 }
