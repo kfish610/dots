@@ -1,12 +1,19 @@
-{ lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 
+let
+  inherit (config.lib.monitors) dmsName;
+in
 {
   programs.dank-material-shell.bars = {
-    default.screenPreferences = lib.mkForce [ "DP-2" ];
+    default.screenPreferences = lib.mkForce [ (dmsName config.monitors.main) ];
 
     secondary = {
       name = "Secondary Bar";
-      screenPreferences = [ "DP-4" ];
+      screenPreferences = [ (dmsName config.monitors.side) ];
       leftWidgets = [
         {
           id = "workspaceSwitcher";

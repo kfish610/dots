@@ -14,8 +14,10 @@ let
     matches
     ;
 
-  main-monitor = "Microstep G274QPF E2 CC2HS85620494";
-  side-monitor = "Microstep MSI G273 CA7A491819346";
+  inherit (config.lib.monitors) niriName;
+
+  main-monitor = niriName config.monitors.main;
+  side-monitor = niriName config.monitors.side;
 
   stack-side-monitor = pkgs.writeShellApplication {
     name = "stack-side-monitor";
