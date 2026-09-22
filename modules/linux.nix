@@ -6,6 +6,8 @@
     ./base.nix
   ];
 
+  # Use chrony for time synchronization (instead of systemd-timesyncd)
+  services.chrony.enable = true;
   time.hardwareClockInLocalTime = true;
 
   # Use networkmanager for networking
