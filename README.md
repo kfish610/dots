@@ -7,10 +7,11 @@ my laptop.
 
 This is implemented as a flake, which is soft-linked as `/etc/nixos`,
 then run with `sudo nixos-rebuild switch`. If the hostname of the computer does
-not match exactly either `wsl` or `klaptop`, the first run must be in this
-folder with `sudo nixos-rebuild switch --flake .#hostname` with whichever
-hostname is desired, after which it will detect the correct configuration by
-hostname as usual, since both of those configurations set the relevant hostname.
+not match exactly either `wsl`, `klaptop`, or `kdesktop`, the first run must be
+in this folder with `sudo nixos-rebuild switch --flake .#hostname` with
+whichever hostname is desired, after which it will detect the correct
+configuration by hostname as usual, since both of those configurations set the
+relevant hostname.
 
 Since this is a flake, we can no longer update our installation with
 `sudo nix-channel --update` or `sudo nixos-rebuild switch --upgrade`; indeed we

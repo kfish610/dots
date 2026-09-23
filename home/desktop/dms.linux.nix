@@ -24,9 +24,6 @@
     enable = true;
     systemd.enable = true;
 
-    # khal currently doesn't build, and I don't use this anyway.
-    enableCalendarEvents = false;
-
     barStyle = {
       autoHide = false;
       openOnOverview = false;
