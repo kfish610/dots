@@ -152,7 +152,9 @@
       fontWeight = 400;
       fontScale = 1;
       cornerRadius = 16;
-      surfaceBase = "sc";
+      hostSurfaceColor = "sc";
+      cardSurfaceColor = "sch";
+      chipSurfaceColor = "sch";
       osdAlwaysShowValue = true;
       widgetBackgroundColor = "sth";
 
