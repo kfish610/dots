@@ -13,6 +13,9 @@
     spotify
     termius
 
+    # Tools
+    pciutils
+
     # I'd like to get this working again, but I'll need to read through https://github.com/NixOS/nixpkgs/issues/9415 and https://github.com/NixOS/nixpkgs/issues/267663
     # zoom-us
 

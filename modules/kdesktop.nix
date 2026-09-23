@@ -77,4 +77,14 @@
       vpl-gpu-rt
     ];
   };
+
+  # Lets pip/uv wheels (e.g. PyTorch XPU) use the Arc GPU through nix-ld.
+  # The wheels don't ship the Level Zero loader or Intel's shader compiler.
+  programs.nix-ld.libraries = with pkgs; [
+    level-zero
+    intel-graphics-compiler
+  ];
+  # The loader finds drivers by scanning LD_LIBRARY_PATH and system lib dirs
+  # itself, so it never sees nix-ld's path; point it at the driver directly.
+  environment.sessionVariables.ZE_ENABLE_ALT_DRIVERS = "${pkgs.intel-compute-runtime}/lib/libze_intel_gpu.so.1";
 }
