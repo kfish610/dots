@@ -1,11 +1,10 @@
-{ pkgs, lib, ... }:
+{ lib, ... }:
 
 {
   home.file.".p10k.zsh".source = ./.p10k.zsh;
 
   home.sessionPath = [
     "$HOME/.npm-global/bin"
-    "$HOME/.cargo/bin"
   ];
 
   programs.zsh = {
@@ -14,10 +13,6 @@
     autosuggestion.enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
-    sessionVariables = {
-      CHROME_EXECUTABLE = "${pkgs.google-chrome}/bin/google-chrome-stable";
-      MAMBA_ROOT_PREFIX = "/home/kfish/micromamba";
-    };
     antidote = {
       enable = true;
       plugins = [

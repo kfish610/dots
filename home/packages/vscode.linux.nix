@@ -93,6 +93,7 @@ let
 in
 {
   home.packages = [
+    pkgs.vscode
     icc-code
     vscode-workspaces
   ];

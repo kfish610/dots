@@ -1,8 +1,9 @@
 { pkgs, ... }:
 
 {
-  programs.zsh.sessionVariables = {
-    QT_QPA_PLATFORM = "wayland;xcb";
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 
   programs.opam.enable = true;

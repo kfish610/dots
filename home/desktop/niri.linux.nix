@@ -6,8 +6,9 @@
 }:
 
 let
+  inherit (config.lib.session) lock;
+
   util = {
-    lock = "${config.programs.swaylock.package}/bin/swaylock";
     niri = "${config.wayland.windowManager.niri.package}/bin/niri";
 
     outputs = lib.mapAttrsToList (
@@ -38,65 +39,20 @@ let
   };
 
   inherit (util)
-    lock
     windowRules
     matches
     spawnAtStartup
     dms-ipc
     ignoreLocked
     ;
-
-  wait-for-tray = pkgs.writeShellApplication {
-    name = "wait-for-tray";
-    runtimeInputs = [ pkgs.glib ];
-
-    text = "gdbus wait --session --timeout 30 org.kde.StatusNotifierWatcher";
-  };
 in
 {
   lib.niri = util;
 
-  services.wpaperd.enable = true;
-
-  programs = {
-    kitty = {
-      enable = true;
-      settings.confirm_os_window_close = 0;
-    };
-
-    swaylock = {
-      enable = true;
-      settings.ignore-empty-password = true;
-    };
-  };
-
-  services.swayidle = {
-    enable = true;
-
-    events = {
-      before-sleep = lock;
-      lock = "${lock} -f";
-    };
-  };
-
-  autostart = {
-    wait-for-tray = {
-      description = "Wait for the system tray to accept registrations";
-      command = [ (lib.getExe wait-for-tray) ];
-
-      after = [ "dms" ];
-      timeout = 35;
-    };
-
-    discord = {
-      command = [ "${pkgs.discord}/bin/discord" ];
-      after = [ "wait-for-tray" ];
-    };
-
-    google-chrome.command = [
-      "${pkgs.google-chrome}/bin/google-chrome-stable"
-      "--profile-directory=Default"
-    ];
+  # How the session's idle timeouts turn monitors off and back on
+  lib.session.monitors = {
+    off = "${util.niri} msg action power-off-monitors";
+    on = "${util.niri} msg action power-on-monitors";
   };
 
   wayland.windowManager.niri = {

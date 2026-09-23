@@ -7,8 +7,6 @@
 
 let
   inherit (config.lib.niri)
-    lock
-    niri
     outputs
     windowRules
     matches
@@ -51,18 +49,6 @@ let
   };
 in
 {
-  services.swayidle.timeouts = [
-    {
-      timeout = 600;
-      command = "${lock} -f";
-    }
-    {
-      timeout = 660;
-      command = "${niri} msg action power-off-monitors";
-      resumeCommand = "${niri} msg action power-on-monitors";
-    }
-  ];
-
   wayland.windowManager.niri.settings._children =
     outputs {
       ${main-monitor}.mode = "2560x1440@180.000";

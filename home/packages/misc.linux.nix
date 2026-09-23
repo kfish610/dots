@@ -1,23 +1,17 @@
 { pkgs, ... }:
 
 {
-  fonts.fontconfig.enable = true;
-
   home.packages = with pkgs; [
-    brightnessctl
     discord
     gimp
     godot_4
     gparted
     loupe
-    networkmanagerapplet
     obsidian
     rnote
     slack
     spotify
     termius
-    vscode
-    wl-clipboard
 
     # I'd like to get this working again, but I'll need to read through https://github.com/NixOS/nixpkgs/issues/9415 and https://github.com/NixOS/nixpkgs/issues/267663
     # zoom-us
@@ -33,15 +27,5 @@
         }
       '';
     }))
-
-    # Fonts
-    dejavu_fonts
-    nerd-fonts.fira-code
-    nerd-fonts.fira-mono
-    nerd-fonts.sauce-code-pro
-    source-code-pro
-    material-design-icons
-    font-awesome
-    noto-fonts
   ];
 }
