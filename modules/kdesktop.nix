@@ -73,7 +73,6 @@
     enable = true;
     extraPackages = with pkgs; [
       intel-compute-runtime
-      intel-compute-runtime.drivers
       intel-media-driver
       vpl-gpu-rt
     ];
