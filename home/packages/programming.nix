@@ -73,7 +73,6 @@
 
     # Python
     python312
-    python3Packages.huggingface-hub
     uv
 
     # Qt

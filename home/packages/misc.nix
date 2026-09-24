@@ -6,6 +6,7 @@
     google-chrome
     nautilus
     ollama
+    llama-cpp-vulkan
 
     # Tools
     fastfetch
