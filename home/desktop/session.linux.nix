@@ -7,6 +7,7 @@
 
 let
   lock = "${config.programs.swaylock.package}/bin/swaylock";
+  chrome = "${pkgs.google-chrome}/bin/google-chrome-stable";
 
   wait-for-tray = pkgs.writeShellApplication {
     name = "wait-for-tray";
@@ -61,12 +62,31 @@ in
 
     discord = {
       command = [ "${pkgs.discord}/bin/discord" ];
+      window = ''.app_id == "discord" and .title != "Discord Updater"'';
       after = [ "wait-for-tray" ];
     };
 
-    google-chrome.command = [
-      "${pkgs.google-chrome}/bin/google-chrome-stable"
-      "--profile-directory=Default"
-    ];
+    slack = {
+      command = [ "${pkgs.slack}/bin/slack" ];
+      window = ''.app_id == "slack"'';
+      after = [ "wait-for-tray" ];
+    };
+
+    google-chrome = {
+      command = [
+        chrome
+        "--profile-directory=Default"
+      ];
+      window = ''.app_id == "google-chrome"'';
+    };
+
+    google-chrome-work = {
+      command = [
+        chrome
+        "--profile-directory=Profile 1"
+      ];
+      window = ''.app_id == "google-chrome"'';
+      after = [ "google-chrome" ];
+    };
   };
 }
