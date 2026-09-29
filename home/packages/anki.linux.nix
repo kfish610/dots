@@ -12,5 +12,13 @@
     addons = with pkgs.ankiAddons; [
       review-heatmap
     ];
+
+    profiles.Kevin = {
+      default = true;
+      sync = {
+        username = "kfish610@gmail.com";
+        keyFile = ../../secrets/anki.key;
+      };
+    };
   };
 }
