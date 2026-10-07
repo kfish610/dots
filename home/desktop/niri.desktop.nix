@@ -13,11 +13,13 @@ let
 in
 {
   wayland.windowManager.niri.settings._children = outputs {
-    ${main-monitor}.mode = "2560x1440@180.000";
-    ${side-monitor} = {
-      mode = "1920x1080@165.003";
-      transform = "270";
+    ${main-monitor} = {
+      mode = "2560x1440@180.000";
       variable-refresh-rate = { };
+    };
+    ${side-monitor} = {
+      mode = "1920x1080@120.000";
+      transform = "270";
     };
   };
 
