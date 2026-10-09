@@ -17,7 +17,7 @@ let
   };
 in
 {
-  lib.session = { inherit lock; };
+  lib.session = { inherit lock chrome; };
 
   # Prefer Wayland for Qt apps, falling back to X11 for ones without the plugin (e.g. the Android emulator)
   programs.zsh.sessionVariables.QT_QPA_PLATFORM = "wayland;xcb";

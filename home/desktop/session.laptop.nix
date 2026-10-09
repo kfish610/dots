@@ -1,7 +1,12 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
 
 let
-  inherit (config.lib.session) lock monitors;
+  inherit (config.lib.session) lock monitors chrome;
 in
 {
   services.swayidle.timeouts = [
@@ -25,4 +30,9 @@ in
     command = [ "${pkgs.rot8}/bin/rot8" ];
     restart = true;
   };
+
+  autostart.google-chrome-work.command = lib.mkForce [
+    chrome
+    "--profile-directory=Profile 5"
+  ];
 }
