@@ -47,6 +47,23 @@
           ProxyCommand = "ssh unity './vscode.sh gpu-preempt'";
           StrictHostKeyChecking = "no";
         };
+        "ilab" = {
+          HostName = "ilab.cs.rutgers.edu";
+          User = "kf685";
+          ForwardAgent = true;
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/control-%r@%h:%p";
+          ControlPersist = "10m";
+        };
+        "first" = {
+          HostName = "first";
+          User = "kf685";
+          ForwardAgent = true;
+          ProxyJump = "ilab";
+          ControlMaster = "auto";
+          ControlPath = "~/.ssh/control-%r@%h:%p";
+          ControlPersist = "10m";
+        };
       };
     };
   };
