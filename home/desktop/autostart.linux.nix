@@ -59,6 +59,20 @@ let
       esac
     '';
   };
+
+  # Chromium and Electron apps move their main process into a scope of their own, so on
+  # shutdown both units SIGTERM it, and the second signal kills it mid graceful shutdown.
+  # Stopping that scope from here joins its stop job instead of signalling twice.
+  autostart-stop = pkgs.writeShellApplication {
+    name = "autostart-stop";
+    runtimeInputs = [ pkgs.systemd ];
+
+    text = ''
+      [[ ''${MAINPID-} ]] || exit 0
+      unit=$(systemctl --user whoami "$MAINPID") || exit 0
+      [[ $unit == "$1.service" ]] || systemctl --user stop "$unit"
+    '';
+  };
 in
 {
   options.autostart = mkOption {
@@ -140,6 +154,7 @@ in
     // lib.optionalAttrs (entry.window != null) {
       ExecStartPre = "${lib.getExe autostart-window} snapshot ${name}";
       ExecStartPost = "${lib.getExe autostart-window} wait ${name} ${pkgs.writeText "${name}-window.jq" entry.window}";
+      ExecStop = "-${lib.getExe autostart-stop} ${name}";
 
       # The wait gives up on its own, where systemd timing out would take the app down too
       TimeoutStartSec = "infinity";
