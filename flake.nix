@@ -15,6 +15,9 @@
 
     dank-material-shell.url = "github:AvengeMedia/DankMaterialShell";
     dank-material-shell.inputs.nixpkgs.follows = "nixpkgs";
+
+    winapps.url = "github:winapps-org/winapps";
+    winapps.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -24,6 +27,7 @@
       nixos-wsl,
       stylix,
       dank-material-shell,
+      winapps,
       ...
     }:
     let
@@ -39,6 +43,7 @@
 
         home-manager.extraSpecialArgs = {
           systemInfo = info;
+          inherit winapps;
         };
       };
 

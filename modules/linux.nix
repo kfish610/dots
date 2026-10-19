@@ -83,6 +83,12 @@
   # Docker setup
   virtualisation.docker.enable = true;
 
+  # The WinApps Windows VM container needs these for folder sharing with the host
+  boot.kernelModules = [
+    "ip_tables"
+    "iptable_nat"
+  ];
+
   users.users.kfish.extraGroups = [
     "networkmanager"
     "docker"
