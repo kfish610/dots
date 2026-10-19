@@ -44,7 +44,7 @@
     # Rocq
     rocq-core
     rocqPackages.vsrocq-language-server
-    coqPackages.coq-lsp
+    rocqPackages.coq-lsp
 
     # Exercism
     exercism
