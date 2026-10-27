@@ -34,6 +34,16 @@
   # Enable Bluetooth
   hardware.bluetooth.enable = true;
 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      vpl-gpu-rt
+    ];
+  };
+
+  programs.nix-ld.libraries = with pkgs; [ vulkan-loader ];
+
   # Autologin with greetd
   services.greetd = {
     enable = true;

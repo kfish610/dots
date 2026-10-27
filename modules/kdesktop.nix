@@ -69,14 +69,7 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-compute-runtime
-      intel-media-driver
-      vpl-gpu-rt
-    ];
-  };
+  hardware.graphics.extraPackages = with pkgs; [ intel-compute-runtime ];
 
   # Lets pip/uv wheels (e.g. PyTorch XPU) use the Arc GPU through nix-ld.
   # The wheels don't ship the Level Zero loader or Intel's shader compiler.
