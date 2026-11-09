@@ -28,6 +28,9 @@
     android-studio
     android-tools
 
+    # AWS
+    awscli2
+
     # C/C++
     gnumake
     cmake
