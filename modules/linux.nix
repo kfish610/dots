@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   imports = [
@@ -89,6 +89,47 @@
       package = pkgs.wireshark; # Default is wireshark-cli, we want the GUI
     };
   };
+
+  # System-wide since polkit only loads Bitwarden's unlock policy from here
+  environment.systemPackages = [ pkgs.bitwarden-desktop ];
+
+  # Synchronized unlock (browser follows the desktop app) needs 2026.11
+  nixpkgs.overlays = [
+    (final: prev: {
+      bitwarden-desktop =
+        lib.warnIfNot (lib.versionOlder prev.bitwarden-desktop.version "2026.11.0")
+          "nixpkgs has bitwarden-desktop ${prev.bitwarden-desktop.version}; drop the override in modules/linux.nix"
+          prev.bitwarden-desktop.overrideAttrs
+          (
+            finalAttrs: old: {
+              version = "2026.11.0";
+              src = old.src.override {
+                tag = "desktop-v${finalAttrs.version}";
+                hash = "sha256-l/YdVJveeQC0dNCCzeM5ns19QKyOcSohUgA2RNP/VMU=";
+              };
+              # buildNpmPackage and the package bake these from their own args
+              npmDeps = final.fetchNpmDeps {
+                inherit (finalAttrs) src patches postPatch;
+                name = "${finalAttrs.pname}-${finalAttrs.version}-npm-deps";
+                hash = "sha256-I+8QA5r2cDhmGg8YxNmVurhyVU8vCwU4qXTDg4VelRQ=";
+                fetcherVersion = 2;
+              };
+              cargoDeps = final.rustPlatform.fetchCargoVendor {
+                inherit (finalAttrs)
+                  pname
+                  version
+                  src
+                  cargoRoot
+                  patches
+                  ;
+                hash = "sha256-fUMCzkAUCiCdH0FdiyEQZIvcHJUGPv1YASwLOHEwN4E=";
+              };
+              # nixpkgs' zbus test skip, after upstream renamed password::password
+              checkFlags = old.checkFlags ++ [ "--skip=password::os::tests" ];
+            }
+          );
+    })
+  ];
 
   # Docker setup
   virtualisation.docker.enable = true;

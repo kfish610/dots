@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   vscode-workspaces = pkgs.writeShellApplication {
@@ -48,11 +48,9 @@ let
           *)          label="$label [''${kind^}: $host]" ;;
         esac
 
-        if [[ $authd == tunnel+icc ]]; then cmd=${icc-code}/bin/icc-code; else cmd=code; fi
-
         case "$uri" in
-          *.code-workspace) if [[ -z $auth ]]; then ex="$cmd $dpath"; else ex="$cmd --file-uri $uri"; fi ;;
-          *)                ex="$cmd --folder-uri $uri" ;;
+          *.code-workspace) if [[ -z $auth ]]; then ex="code $dpath"; else ex="code --file-uri $uri"; fi ;;
+          *)                ex="code --folder-uri $uri" ;;
         esac
         ex=''${ex//%/%%}  # a % left in Exec= is a field code
 
@@ -70,35 +68,52 @@ let
     '';
   };
 
-  icc-askpass = pkgs.writeShellScript "icc-askpass" ''
-    prompt="''${1:-Password:}"
-    case $prompt in *"asscode or option"*) printf '1\n'; exit 0 ;; esac
-    prompt="''${prompt##*$'\n'}"
-    case $prompt in "("*") "*) prompt="''${prompt#*") "}" ;; esac
-    exec ${config.programs.fuzzel.package}/bin/fuzzel \
-      --dmenu --password --width=50 --prompt-only="$prompt"
-  '';
+  # Run an `ssh` command to launch/wake a tunnel that needs to be started remotely.
+  tunnels = {
+    icc = [
+      "icc"
+      "./vscode.sh"
+      "cpu"
+    ];
+  };
+  tunnel-wake = pkgs.linkFarm "tunnel-wake" {
+    "package.json" = pkgs.writeText "package.json" (
+      builtins.toJSON {
+        name = "tunnel-wake";
+        publisher = "local";
+        version = "0.0.1";
+        engines.vscode = "^1.80.0";
+        main = "./extension.js";
+        activationEvents = [ "onResolveRemoteAuthority:tunnel" ];
+        extensionKind = [ "ui" ];
+      }
+    );
+    "extension.js" = pkgs.writeText "extension.js" ''
+      const vscode = require("vscode");
+      const { execFile } = require("child_process");
 
-  icc-code = pkgs.writeShellApplication {
-    name = "icc-code";
-    runtimeInputs = [ pkgs.openssh ];
-    text = ''
-      export SSH_ASKPASS=${icc-askpass}
+      const tunnels = ${builtins.toJSON tunnels};
 
-      ssh icc ./vscode.sh cpu
+      exports.activate = () => {
+        const { workspaceFolders = [], workspaceFile } = vscode.workspace;
+        const uris = [...workspaceFolders.map((f) => f.uri), workspaceFile];
+        const name = uris.find((u) => u?.authority.startsWith("tunnel+"))?.authority.slice(7);
+        if (!Object.hasOwn(tunnels, name)) return;
 
-      code "$@"
+        execFile("${pkgs.openssh}/bin/ssh", tunnels[name], (err, _out, stderr) => {
+          if (err) vscode.window.showErrorMessage(name + " tunnel: " + (stderr || err.message));
+        });
+      };
     '';
   };
 in
 {
   home.packages = [
     pkgs.vscode
-    icc-code
     vscode-workspaces
   ];
 
-  programs.fuzzel.enable = true;
+  home.file.".vscode/extensions/local.tunnel-wake-0.0.1".source = tunnel-wake;
 
   # workspaceStorage changes as you use VS Code, so refresh on a timer.
   systemd.user.services.vscode-workspaces = {
