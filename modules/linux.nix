@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -88,7 +93,15 @@
       enable = true;
       package = pkgs.wireshark; # Default is wireshark-cli, we want the GUI
     };
+
+    ssh = {
+      enableAskPassword = true;
+      askPassword = lib.getExe config.home-manager.users.kfish.lib.bitwarden.askpass;
+    };
   };
+
+  # Use askpass even when ssh has a terminal, so Bitwarden fills in passwords
+  environment.variables.SSH_ASKPASS_REQUIRE = "prefer";
 
   # System-wide since polkit only loads Bitwarden's unlock policy from here
   environment.systemPackages = [ pkgs.bitwarden-desktop ];

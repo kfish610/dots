@@ -6,16 +6,49 @@
 }:
 
 let
+  # Desktop (polkit/fingerprint) unlock is in bw, but gated by the server flag
+  # biometrics-sdk-ipc, which is rolled out per account and still off for mine.
+  # Drop the patch once this prints true (after `bw sync`):
+  #   jq '[.. | .featureStates? // empty | .["biometrics-sdk-ipc"]] | unique' ~/.config/Bitwarden\ CLI/data.json
+  bitwarden-cli = pkgs.bitwarden-cli.overrideAttrs (old: {
+    postPatch = old.postPatch + ''
+      substituteInPlace \
+        apps/cli/src/key-management/cli-biometrics-service.ts \
+        apps/cli/src/service-container/service-container.ts \
+        --replace-fail "getFeatureFlag(FeatureFlag.BiometricsSDKIPC)" \
+          "getFeatureFlag(FeatureFlag.BiometricsSDKIPC).then(() => true)"
+    '';
+    # bw only looks for the desktop's proxy in FHS paths like /opt/Bitwarden
+    nativeBuildInputs = old.nativeBuildInputs ++ [ pkgs.makeWrapper ];
+    postFixup = (old.postFixup or "") + ''
+      wrapProgram $out/bin/bw --set-default BITWARDEN_DESKTOP_PROXY_PATH \
+        ${pkgs.bitwarden-desktop}/libexec/desktop_proxy
+    '';
+  });
+
   # Automatically load SSH passwords from Bitwarden for the hosts without key-based auth
+  # By item ID, since names like "illinois.edu" match several items
   passwords = {
-    "cc-login.campuscluster.illinois.edu" = "illinois.edu";
-    "ilab.cs.rutgers.edu" = "rutgers.edu";
-    "first" = "rutgers.edu";
+    "cc-login.campuscluster.illinois.edu" = "65d2cb90-d1fa-4a08-b8d6-b2af00ed397f"; # illinois.edu (NetID)
+    "ilab.cs.rutgers.edu" = "e8eff8d1-b7c2-4ba9-9166-b4c7012b643a"; # rutgers.edu
+    "first" = "e8eff8d1-b7c2-4ba9-9166-b4c7012b643a"; # rutgers.edu
   };
-  askpass = pkgs.writeShellApplication {
+in
+{
+  home.packages = [ bitwarden-cli ];
+
+  programs.fuzzel.enable = true;
+
+  autostart.bitwarden = {
+    command = [ (lib.getExe pkgs.bitwarden-desktop) ];
+    after = [ "wait-for-tray" ];
+  };
+
+  # Set as SSH_ASKPASS by programs.ssh.askPassword in modules/linux.nix
+  lib.bitwarden.askpass = pkgs.writeShellApplication {
     name = "bw-askpass";
     runtimeInputs = [
-      pkgs.bitwarden-cli
+      bitwarden-cli
       pkgs.coreutils
       pkgs.util-linux
       config.programs.fuzzel.package
@@ -51,7 +84,7 @@ let
         get && { refresh; exit; }
         # Unlocks through the desktop app (polkit/fingerprint). The timeout
         # guards against bw hanging after printing the session (bitwarden/clients#24446).
-        (umask 077; timeout 30 bw unlock --raw </dev/null >"$session") || true
+        (umask 077; timeout 90 bw unlock --raw </dev/null >"$session") || true
         get && { refresh; exit; }
       fi
 
@@ -59,20 +92,5 @@ let
       case $prompt in "("*") "*) prompt=''${prompt#*") "} ;; esac
       exec fuzzel --dmenu --password --width=50 --prompt-only="$prompt"
     '';
-  };
-in
-{
-  home.packages = [ pkgs.bitwarden-cli ];
-
-  programs.fuzzel.enable = true;
-
-  autostart.bitwarden = {
-    command = [ (lib.getExe pkgs.bitwarden-desktop) ];
-    after = [ "wait-for-tray" ];
-  };
-
-  systemd.user.sessionVariables = {
-    SSH_ASKPASS = lib.getExe askpass;
-    SSH_ASKPASS_REQUIRE = "prefer";
   };
 }
