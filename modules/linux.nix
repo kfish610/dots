@@ -49,7 +49,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd}/bin/agreety --cmd niri-session";
+        command = "${lib.getExe' pkgs.greetd "agreety"} --cmd niri-session";
       };
       initial_session = {
         user = "kfish";

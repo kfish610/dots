@@ -9,7 +9,7 @@ let
   inherit (config.lib.session) lock;
 
   util = {
-    niri = "${config.wayland.windowManager.niri.package}/bin/niri";
+    niri = lib.getExe config.wayland.windowManager.niri.package;
 
     outputs = lib.mapAttrsToList (
       name: out: {
@@ -64,7 +64,7 @@ in
 
   wayland.windowManager.niri.settings =
     let
-      terminal = "${config.programs.kitty.package}/bin/kitty";
+      terminal = lib.getExe config.programs.kitty.package;
       workspaces = lib.range 1 10;
     in
     {

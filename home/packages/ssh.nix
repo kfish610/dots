@@ -1,5 +1,13 @@
 { ... }:
 
+let
+  # Share one connection per host, so a password (and Duo) is only needed once
+  multiplex = {
+    ControlMaster = "auto";
+    ControlPath = "~/.ssh/control-%r@%h:%p";
+    ControlPersist = "10m";
+  };
+in
 {
   programs = {
     ssh = {
@@ -15,10 +23,8 @@
           HostName = "cc-login.campuscluster.illinois.edu";
           User = "kf23";
           ForwardAgent = true;
-          ControlMaster = "auto";
-          ControlPath = "~/.ssh/control-%r@%h:%p";
-          ControlPersist = "10m";
-        };
+        }
+        // multiplex;
         "unity" = {
           HostName = "unity.rc.umass.edu";
           User = "kfisher_access-ci_org";
@@ -51,19 +57,15 @@
           HostName = "ilab.cs.rutgers.edu";
           User = "kf685";
           ForwardAgent = true;
-          ControlMaster = "auto";
-          ControlPath = "~/.ssh/control-%r@%h:%p";
-          ControlPersist = "10m";
-        };
+        }
+        // multiplex;
         "first" = {
           HostName = "first";
           User = "kf685";
           ForwardAgent = true;
           ProxyJump = "ilab";
-          ControlMaster = "auto";
-          ControlPath = "~/.ssh/control-%r@%h:%p";
-          ControlPersist = "10m";
-        };
+        }
+        // multiplex;
       };
     };
   };

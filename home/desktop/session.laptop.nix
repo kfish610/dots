@@ -21,13 +21,13 @@ in
     }
     {
       timeout = 1800;
-      command = "${pkgs.systemd}/bin/systemctl suspend";
+      command = "${lib.getExe' pkgs.systemd "systemctl"} suspend";
     }
   ];
 
   autostart.rot8 = {
     description = "Screen rotation daemon";
-    command = [ "${pkgs.rot8}/bin/rot8" ];
+    command = [ (lib.getExe pkgs.rot8) ];
     restart = true;
   };
 

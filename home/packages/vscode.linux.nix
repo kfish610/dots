@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 let
   vscode-workspaces = pkgs.writeShellApplication {
@@ -100,7 +100,7 @@ let
         const name = uris.find((u) => u?.authority.startsWith("tunnel+"))?.authority.slice(7);
         if (!Object.hasOwn(tunnels, name)) return;
 
-        execFile("${pkgs.openssh}/bin/ssh", tunnels[name], (err, _out, stderr) => {
+        execFile("${lib.getExe pkgs.openssh}", tunnels[name], (err, _out, stderr) => {
           if (err) vscode.window.showErrorMessage(name + " tunnel: " + (stderr || err.message));
         });
       };
@@ -120,7 +120,7 @@ in
     Unit.Description = "Refresh VS Code workspace launcher actions";
     Service = {
       Type = "oneshot";
-      ExecStart = "${vscode-workspaces}/bin/vscode-workspaces";
+      ExecStart = lib.getExe vscode-workspaces;
     };
   };
   systemd.user.timers.vscode-workspaces = {

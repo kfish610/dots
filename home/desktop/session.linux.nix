@@ -6,8 +6,8 @@
 }:
 
 let
-  lock = "${config.programs.swaylock.package}/bin/swaylock";
-  chrome = "${pkgs.google-chrome}/bin/google-chrome-stable";
+  lock = lib.getExe config.programs.swaylock.package;
+  chrome = lib.getExe pkgs.google-chrome;
 
   wait-for-tray = pkgs.writeShellApplication {
     name = "wait-for-tray";
@@ -20,7 +20,7 @@ in
   lib.session = { inherit lock chrome; };
 
   # Prefer Wayland for Qt apps, falling back to X11 for ones without the plugin (e.g. the Android emulator)
-  programs.zsh.sessionVariables.QT_QPA_PLATFORM = "wayland;xcb";
+  systemd.user.sessionVariables.QT_QPA_PLATFORM = "wayland;xcb";
 
   home.packages = with pkgs; [
     brightnessctl
@@ -61,13 +61,13 @@ in
     };
 
     discord = {
-      command = [ "${pkgs.discord}/bin/discord" ];
+      command = [ (lib.getExe pkgs.discord) ];
       window = ''.app_id == "discord" and .title != "Discord Updater"'';
       after = [ "wait-for-tray" ];
     };
 
     slack = {
-      command = [ "${pkgs.slack}/bin/slack" ];
+      command = [ (lib.getExe pkgs.slack) ];
       window = ''.app_id == "slack"'';
       after = [ "wait-for-tray" ];
     };
