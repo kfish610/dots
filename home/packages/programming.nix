@@ -53,7 +53,6 @@
     exercism
 
     # Haskell
-    stack
     haskell-language-server
 
     # Java/Scala
